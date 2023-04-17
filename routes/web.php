@@ -13,6 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/test-db-connection', function () {
+    try {
+        \Illuminate\Support\Facades\DB::connection()->getPdo();
+        return "Підключення до бази даних успішне!";
+    } catch (\Exception $e) {
+        return "Помилка підключення до бази даних: " . $e->getMessage();
+    }
+});
+
+

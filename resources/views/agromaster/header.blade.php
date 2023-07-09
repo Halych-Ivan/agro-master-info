@@ -1,11 +1,20 @@
+@php
+    $nav[0][0] = ['href' => 'home', 'title' => 'Головна'];
+    $nav[1][0] = ['href' => '#', 'title' => 'Навчання'];
+        $nav[1][1] = ['href' => 'schedule', 'title' => 'Розклад занять'];
+        $nav[1][2] = ['href' => 'session', 'title' => 'Розклад іспитів'];
+    $nav[2][0] = ['href' => '#', 'title' => 'Наука'];
+    $nav[3][0] = ['href' => 'contact', 'title' => 'Контакти'];
+@endphp
+
 <header class="header-area">
-    
+
     <div class="header-top">
         <div class="container">
             <div class="header-top-wrapper d-flex flex-wrap justify-content-sm-between">
                 <div class="header-top-left">
                     <ul class="header-meta">
-                        <li><a href="mailto://infoedumate@example.com">infoedumate@example.com</a></li>
+                        <li><a href="mailto://agromaster.info@ukr.net">agromaster.info@ukr.net</a></li>
                     </ul>
                 </div>
                 <div class="header-top-right">
@@ -24,87 +33,26 @@
             <div class="row align-items-center">
                 <div class="col-lg-3">
                     <div class="header-logo">
-                        <a href="index.html"><img src="assets/images/logo.webp" width="135" height="88" alt="Logo"></a>
+                        <a href="{{route('home')}}"><img src="{{asset('/images/logo.jpg')}}" height="50" alt="Logo"></a>
                     </div>
                 </div>
                 <div class="col-lg-7 position-static">
                     <div class="nav-toggle"></div>
                     <nav class="nav-menus-wrapper">
                         <ul class="nav-menu">
+@foreach($nav as $key => $value)
                             <li>
-                                <a class="active" href="#">Home</a>
+                                <a class="" href="#">{{$value[0]['title']}}</a>
+@if(isset($value[1]))
                                 <ul class="nav-dropdown nav-submenu">
-                                    <li><a class="active" href="index.html">Home 01</a></li>
-                                    <li><a href="index-2.html">Home 02</a></li>
-                                    <li><a href="index-3.html">Home 03</a></li>
+@foreach($value as $key => $item)
+@continue($key == 0)
+                                    <li><a class="" href="{{$item['href']}}">{{$item['title']}}</a></li>
+@endforeach
                                 </ul>
+@endif
                             </li>
-                            <li>
-                                <a href="#">Courses</a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li>
-                                        <a href="#">Courses Grid</a>
-                                        <ul class="nav-dropdown nav-submenu">
-                                            <li><a href="our-courses.html">Courses 01</a></li>
-                                            <li><a href="our-courses-2.html">Courses 02</a></li>
-                                            <li><a href="our-courses-3.html">Courses 03</a></li>
-                                            <li><a href="our-courses-left-sidebar.html">Courses Left Sidebar</a></li>
-                                            <li><a href="our-courses-right-sidebar.html">Courses Right Sidebar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Courses</a>
-                                        <ul class="nav-dropdown nav-submenu">
-                                            <li><a href="our-courses-list.html">Courses List</a></li>
-                                            <li><a href="our-courses-list-left-sidebar.html">Courses List Left Sidebar </a></li>
-                                            <li><a href="our-courses-list-right-sidebar.html">Courses List Right Sidebar</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="courses-details.html">Courses Details</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Events</a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="event.html">Event 01</a></li>
-                                    <li><a href="event-2.html">Event 02</a></li>
-                                    <li><a href="event-details.html">Event Details</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Pages</a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="about-us.html">About</a></li>
-                                    <li><a href="teachers.html">Teachers</a></li>
-                                    <li><a href="teacher-details.html">Teachers Details</a></li>
-                                    <li><a href="gallery.html">Gallery</a></li>
-                                    <li><a href="gallery-masonry.html">Gallery Masonry</a></li>
-                                    <li><a href="testimonial.html">Testimonial</a></li>
-                                    <li><a href="faq.html">FAQ'S</a></li>
-                                    <li><a href="notice.html">Notice</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Shop</a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="shop.html">Shop </a></li>
-                                    <li><a href="shop-left-sidebar.html">Shop Left Sidebar</a></li>
-                                    <li><a href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
-                                    <li><a href="product-details.html">Shop Details</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Blog</a>
-                                <ul class="nav-dropdown nav-submenu">
-                                    <li><a href="blog.html">Blog </a></li>
-                                    <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                    <li><a href="blog-right-sideba.html">Blog Right Sidebar</a></li>
-                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact.html">Contact</a></li>
+@endforeach
                         </ul>
                     </nav>
                 </div>

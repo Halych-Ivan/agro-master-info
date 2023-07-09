@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-link mt-45">
-                        <h4 class="footer-title">Our Campus</h4>
+                        <h4 class="footer-title">Про Університет</h4>
                         <ul class="link-list">
                             <li><a href="about-us.html">About us</a></li>
                             <li><a href="#">Campus map</a></li>
@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-link mt-45">
-                        <h4 class="footer-title">Information</h4>
+                        <h4 class="footer-title">Інформація</h4>
                         <ul class="link-list">
                             <li><a href="#">Admission</a></li>
                             <li><a href="#">Tuition fee</a></li>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-link mt-45">
-                        <h4 class="footer-title">Useful Link</h4>
+                        <h4 class="footer-title">Корисні посилання</h4>
                         <ul class="link-list">
                             <li><a href="our-courses-left-sidebar.html">All Courses</a></li>
                             <li><a href="teachers.html">Our Teachers</a></li>
@@ -40,18 +40,18 @@
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-link mt-45">
-                        <h4 class="footer-title">Contact Info</h4>
+                        <h4 class="footer-title">Контакти</h4>
                         <ul class="link-list">
                             <li>
-                                <p>245, New Town, Marklen Street North City, New York, USA</p>
+                                <p>проспект Героїв Харкова, 45. <br>м. Харків. УКРАЇНА, 61050</p>
                             </li>
                             <li>
-                                <p><a href="tel:+01254659874">+01254 659 874 </a></p>
-                                <p><a href="tel:+32145857458">+32145 857 458</a></p>
+                                <p><a href="tel:+380577328640">+38 (057) 732 86 40</a></p>
+                                <p><a href="tel:+380978503682">+38 (097) 850 36 82</a></p>
                             </li>
                             <li>
-                                <p><a href="mailto://info@example.com">info@example.com</a></p>
-                                <p><a href="#">www.example.com</a></p>
+                                <p><a href="mailto://agromaster.info@ukr.net">agromaster.info@ukr.net</a></p>
+                                <p><a href="https://agromaster.info">www.agromaster.info</a></p>
                             </li>
                         </ul>
                     </div>
@@ -62,7 +62,7 @@
     <div class="footer-copyright">
         <div class="container">
             <div class="copyright text-center">
-                <p>&copy; 2023 <span> AgroMaster Edumate </span> Made with <i class="fa fa-tractor"></i> by <a href="#">Halych Ivan</a></p>
+                <p>&copy; 2023 <span> AgroMaster <i class="fa fa-tractor"></i> Edumate</span>. Made by <a href="#">Halych Ivan</a></p>
             </div>
         </div>
     </div>

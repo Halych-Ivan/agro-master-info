@@ -27,7 +27,6 @@
                         <a href="{{$specialty->file}}">Переглянути</a>{{$specialty->file}}
                     @endif
                 </th>
-
             </tr>
             <tr>
                 <td>Примітки</td>

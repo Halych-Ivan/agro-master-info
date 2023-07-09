@@ -16,8 +16,8 @@ class SpecialtiesRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'title' => 'string|max:255',
             'code' => 'nullable|string|max:255',
-            'title' => 'nullable|string|max:255',
             'info' => 'nullable|string|max:255',
 
             'image' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp|max:2048',

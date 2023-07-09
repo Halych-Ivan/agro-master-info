@@ -53,8 +53,7 @@ class LevelsController extends Controller
     public function destroy(Level $level)
     {
         $level->delete();
-        return redirect()->route('admin.levels.index')
-            ->with('alert', 'Дія виконана успішно!');
+        return redirect()->route('admin.levels.index')->with('alert', 'Дія виконана успішно!');
     }
 
 

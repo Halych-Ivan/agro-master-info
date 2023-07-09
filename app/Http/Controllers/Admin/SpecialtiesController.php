@@ -17,16 +17,15 @@ class SpecialtiesController extends Controller
     }
 
 
-    public function create()
+    public function create(Specialty $specialty)
     {
-        return view('admin.specialties.create');
+        return view('admin.specialties.form', compact('specialty'));
     }
 
 
-    public function store(SpecialtiesRequest $request)
+    public function store(SpecialtiesRequest $request, Specialty $specialty)
     {
         $data = $request->validated();
-        $specialty = new Specialty();
         $this->save($data, $specialty, 'specialties');
         return view('admin.specialties.show', compact('specialty'))->with('alert', 'Дія виконана успішно!');
     }
@@ -40,7 +39,7 @@ class SpecialtiesController extends Controller
 
     public function edit(Specialty $specialty)
     {
-        return view('admin.specialties.edit', compact('specialty'));
+        return view('admin.specialties.form', compact('specialty'));
     }
 
 
@@ -54,7 +53,8 @@ class SpecialtiesController extends Controller
 
     public function destroy(Specialty $specialty)
     {
-        return redirect()->route('admin.specialties.index')->with('danger', 'Функція видалення не реалізована!!!');
+        $specialty->delete();
+        return redirect()->route('admin.specialties.index')->with('alert', 'Дія виконана успішно!');
     }
 
     private function save($request, $model, $folder)

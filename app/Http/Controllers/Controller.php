@@ -107,7 +107,8 @@ class Controller extends BaseController
         }
 
         if(isset($request['image'])){
-            $url = $request['image']->storePublicly($folder.'/'.$model->id, 'public');
+//            $url = $request['image']->storePublicly($folder.'/'.$model->id, 'public');
+            $url = $request['image']->storeAs('images', 'my_image.jpg', 'public');
             $model->image = Storage::url($url);
         }
 

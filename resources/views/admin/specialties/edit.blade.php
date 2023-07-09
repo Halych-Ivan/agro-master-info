@@ -12,7 +12,7 @@
             <x-form.text name="title" value="{{$specialty->title}}" placeholder="Назва"></x-form.text>
             <x-form.file src="{{$specialty->file}}" name="file" title="Виберіть файл"></x-form.file>
             <x-form.file src="{{$specialty->image}}" name="image" title="Виберіть картинку" type="img"></x-form.file>
-            <x-form.textarea rows="3" name="Примітки" value="{{$specialty->info??'Анотація'}}"></x-form.textarea>
+            <x-form.textarea rows="3" name="info" value="{{$specialty->info??'Анотація'}}"></x-form.textarea>
             <x-form.botton></x-form.botton>
         </form>
     </div>

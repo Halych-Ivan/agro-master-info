@@ -85,7 +85,7 @@ class ProgramsController extends Controller
             $file = $request['file'];
             $name = $request['title'].'-'.$request['year'].'-'.$request['level_id'].'-'.$request['specialty_id'].'-file.'.$file->getClientOriginalExtension();
             $path = $file->storeAs('public/'.$folder, $name);
-            $model->image = Storage::url($path);
+            $model->file = Storage::url($path);
         }
 
         $model->save();

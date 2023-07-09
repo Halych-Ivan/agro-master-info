@@ -3,8 +3,8 @@
 @section('title', 'Спеціальності - всі записи')
 
 @section('content')
+    <x-admin.action-icons resource="specialties" id=""></x-admin.action-icons>
     <div class="">
-        <x-admin.action-icons resource="specialties" id=""></x-admin.action-icons>
         <table class="table table-bordered">
             <thead>
                 <tr>

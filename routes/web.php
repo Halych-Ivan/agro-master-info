@@ -32,10 +32,10 @@ Route::prefix('admin')->name('admin.')->group(function (){
 
     Route::resource('levels', App\Http\Controllers\Admin\LevelsController::class);
     Route::resource('specialties', App\Http\Controllers\Admin\SpecialtiesController::class);
+    Route::resource('programs', App\Http\Controllers\Admin\ProgramsController::class);
 
 
 
-//    Route::resource('programs', App\Http\Controllers\Admin\ProgramsController::class);
 //
 //
 //    Route::resource('cathedras', App\Http\Controllers\Admin\CathedrasController::class);

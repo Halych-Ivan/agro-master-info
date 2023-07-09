@@ -72,8 +72,8 @@ class SpecialtiesController extends Controller
             $model->image = Storage::url($path);
         }
 
-        if(isset($request['image'])){
-            $file = $request['image'];
+        if(isset($request['file'])){
+            $file = $request['file'];
             $name = $request['title'].'-file.'.$file->getClientOriginalExtension();
             $path = $file->storeAs('public/'.$folder, $name);
             $model->image = Storage::url($path);

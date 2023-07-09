@@ -37,7 +37,7 @@
 {{--                <h6 class="collapse-header">Освітня програма:</h6>--}}
                 <a class="collapse-item" href="{{route('admin.levels.index')}}">Рівні освіти</a>
                 <a class="collapse-item" href="{{route('admin.specialties.index')}}">Спеціальності</a>
-{{--                <a class="collapse-item" href="{{route('admin.programs.index')}}">Освітні програми</a>--}}
+                <a class="collapse-item" href="{{route('admin.programs.index')}}">Освітні програми</a>
 {{--                <a class="collapse-item" href="register.html">Register</a>--}}
 {{--                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>--}}
 {{--                <div class="collapse-divider"></div>--}}

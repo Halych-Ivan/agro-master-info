@@ -24,7 +24,8 @@ class AdminRequest extends FormRequest
     public function rules()
     {
         return [
-            'year' => 'nullable|string|max:5',
+            'year' => 'required|integer|between:2015,'.date('Y'),
+//            'year' => 'nullable|int|max:5',
             'code' => 'nullable|string|max:5',
             'term' => 'nullable|string|max:4',
             'entry' => 'nullable|string|max:4',
@@ -66,10 +67,6 @@ class AdminRequest extends FormRequest
             'school_document_mark' => 'nullable|string|max:255',
             'mentor' => 'nullable|string|max:255',
             'search' => 'nullable|string|max:255',
-
-
-
-
 
 
             'abbr' => 'nullable|string|max:255',

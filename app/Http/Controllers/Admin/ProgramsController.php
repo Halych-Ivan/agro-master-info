@@ -75,9 +75,9 @@ class ProgramsController extends Controller
         if(isset($request['specialty_id'])){ $model->specialty_id = $request['specialty_id']; }
 
         if(isset($request['image'])){
-            $file = $request['image'];
-            $name = $request['title'].'-'.$request['year'].'-'.$request['level_id'].'-'.$request['specialty_id'].'-image.'.$file->getClientOriginalExtension();
-            $path = $file->storeAs('public/'.$folder, $name);
+            $image = $request['image'];
+            $name = $request['title'].'-'.$request['year'].'-'.$request['level_id'].'-'.$request['specialty_id'].'-image.'.$image->getClientOriginalExtension();
+            $path = $image->storeAs('public/'.$folder, $name);
             $model->image = Storage::url($path);
         }
 

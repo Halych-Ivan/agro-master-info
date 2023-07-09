@@ -19,18 +19,17 @@ class ProgramsController extends Controller
     }
 
 
-    public function create()
+    public function create(Program $program)
     {
-        $specialties = Specialty::query()->select('id', 'title')->get();
+        $specialties = Specialty::query()->select('id', 'title')->orderBy('code', 'asc')->get();
         $levels = Level::query()->select('id', 'title')->get();
-        return view('admin.programs.create', compact('specialties', 'levels'));
+        return view('admin.programs.form', compact('program','specialties', 'levels'));
     }
 
 
-    public function store(ProgramsRequest $request)
+    public function store(ProgramsRequest $request, Program $program)
     {
         $data = $request->validated();
-        $program = new Program();
         $this->save($data, $program, 'programs');
         return view('admin.programs.show', compact('program'))->with('alert', 'Дія виконана успішно!');
     }
@@ -44,9 +43,9 @@ class ProgramsController extends Controller
 
     public function edit(Program $program)
     {
-        $specialties = Specialty::all();
-        $levels = Level::all();
-        return view('admin.programs.edit', compact('program', 'specialties', 'levels'));
+        $specialties = Specialty::query()->select('id', 'title')->orderBy('code', 'asc')->get();
+        $levels = Level::query()->select('id', 'title')->get();
+        return view('admin.programs.form', compact('program', 'specialties', 'levels'));
     }
 
 
@@ -60,7 +59,8 @@ class ProgramsController extends Controller
 
     public function destroy(Program $program)
     {
-        return redirect()->route('admin.programs.index')->with('danger', 'Функція видалення не реалізована!!!');
+        $program->delete();
+        return redirect()->route('admin.programs.index')->with('alert', 'Дія виконана успішно!');
     }
 
 
@@ -76,15 +76,13 @@ class ProgramsController extends Controller
 
         if(isset($request['image'])){
             $image = $request['image'];
-            $name = $request['title'].'-'.$request['year'].'-'.$request['level_id'].'-'.$request['specialty_id'].'-image.'.$image->getClientOriginalExtension();
-            $path = $image->storeAs('public/'.$folder, $name);
+            $path = $image->store('public/'.$folder);
             $model->image = Storage::url($path);
         }
 
         if(isset($request['file'])){
             $file = $request['file'];
-            $name = $request['title'].'-'.$request['year'].'-'.$request['level_id'].'-'.$request['specialty_id'].'-file.'.$file->getClientOriginalExtension();
-            $path = $file->storeAs('public/'.$folder, $name);
+            $path = $file->store('public/'.$folder);
             $model->file = Storage::url($path);
         }
 

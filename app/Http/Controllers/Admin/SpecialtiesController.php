@@ -12,7 +12,7 @@ class SpecialtiesController extends Controller
 
     public function index()
     {
-        $specialties = Specialty::all();
+        $specialties = Specialty::orderBy('code', 'asc')->get();;
         return view('admin.specialties.index', compact('specialties'));
     }
 
@@ -66,15 +66,13 @@ class SpecialtiesController extends Controller
 
         if(isset($request['image'])){
             $image = $request['image'];
-            $name = $request['title'].'-image.'.$image->getClientOriginalExtension();
-            $path = $image->storeAs('public/'.$folder, $name);
+            $path = $image->store('public/'.$folder);
             $model->image = Storage::url($path);
         }
 
         if(isset($request['file'])){
             $file = $request['file'];
-            $name = $request['title'].'-file.'.$file->getClientOriginalExtension();
-            $path = $file->storeAs('public/'.$folder, $name);
+            $path = $file->store('public/'.$folder);
             $model->file = Storage::url($path);
         }
 

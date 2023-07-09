@@ -9,7 +9,7 @@
     |
     <span class="pl-1" title="Видалити даний запис"><button type="submit" form="del{{$id}}" class="text-danger border"><i class="fas fa-cut"></i></button></span>
 
-    <form id="del{{$id}}" method="POST" action="{{route('admin.'.$resource.'.destroy', $id)}}" class="">
+    <form id="del{{$id}}" method="POST" action="{{route('admin.'.$resource.'.destroy', $id)}}" class="" onsubmit="return confirm('Підтверджуєте видалення об\'єкту?')">
         @method('DELETE')
         @csrf
     </form>

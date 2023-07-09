@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminRequest;
+use App\Http\Requests\Admin\LevelsRequest;
 use App\Models\Level;
 
 class LevelsController extends Controller
@@ -16,17 +16,16 @@ class LevelsController extends Controller
     }
 
 
-    public function create()
+    public function create(Level $level)
     {
-        return view('admin.levels.create');
+        return view('admin.levels.form', compact('level'));
     }
 
 
-    public function store(AdminRequest $request)
+    public function store(LevelsRequest $request, Level $level)
     {
         $data = $request->validated();
-        $level = new Level();
-        $this->saveData($data, $level, 'levels'); // protected in Controller
+        $this->save($data, $level, 'levels');
         return view('admin.levels.show', compact('level'))->with('alert', 'Дія виконана успішно!');
     }
 
@@ -39,20 +38,33 @@ class LevelsController extends Controller
 
     public function edit(Level $level)
     {
-        return view('admin.levels.edit', compact('level'));
+        return view('admin.levels.form', compact('level'));
     }
 
 
-    public function update(AdminRequest $request, Level $level)
+    public function update(LevelsRequest $request, Level $level)
     {
         $data = $request->validated();
-        $this->saveData($data, $level, 'levels'); // protected in Controller
+        $this->save($data, $level, 'levels');
         return redirect()->route('admin.levels.index')->with('alert', 'Дія виконана успішно!');
     }
 
 
     public function destroy(Level $level)
     {
-       return redirect()->route('admin.levels.index')->with('danger', 'Функція видалення не реалізована!!!');
+        $level->delete();
+        return redirect()->route('admin.levels.index')
+            ->with('alert', 'Дія виконана успішно!');
+    }
+
+
+    private function save($request, $model, $folder)
+    {
+//        dd($request);
+        if(isset($request['title'])){ $model->title = $request['title']; }
+        if(isset($request['name'])){ $model->name = $request['name']; }
+        if(isset($request['info'])){ $model->info = $request['info']; }
+
+        $model->save();
     }
 }

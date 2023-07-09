@@ -3,7 +3,7 @@
 @section('title', 'Рівні освіти - всі записи')
 
 @section('content')
-    <x-admin.action-icons resource="levels" id=""></x-admin.action-icons>
+    <x-admin.action-icons resource="levels" id="{{$level->id ?? ''}}"></x-admin.action-icons>
     <div class="">
         <table class="table table-bordered">
             <thead>

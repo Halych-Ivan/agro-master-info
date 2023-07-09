@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminRequest;
+use App\Http\Requests\Admin\SpecialtiesRequest;
 use App\Models\Specialty;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,12 +23,11 @@ class SpecialtiesController extends Controller
     }
 
 
-    public function store(AdminRequest $request)
+    public function store(SpecialtiesRequest $request)
     {
         $data = $request->validated();
         $specialty = new Specialty();
         $this->save($data, $specialty, 'specialties');
-//        $this->saveData($data, $specialty, 'specialties'); // protected in Controller
         return view('admin.specialties.show', compact('specialty'))->with('alert', 'Дія виконана успішно!');
     }
 
@@ -45,11 +44,10 @@ class SpecialtiesController extends Controller
     }
 
 
-    public function update(AdminRequest $request, Specialty $specialty)
+    public function update(SpecialtiesRequest $request, Specialty $specialty)
     {
         $data = $request->validated();
         $this->save($data, $specialty, 'specialties');
-//        $this->saveData($data, $specialty, 'specialties'); // protected in Controller
         return redirect()->route('admin.specialties.index')->with('alert', 'Дія виконана успішно!');
     }
 
@@ -61,14 +59,15 @@ class SpecialtiesController extends Controller
 
     private function save($request, $model, $folder)
     {
+//        dd($request);
         if(isset($request['code'])){ $model->code = $request['code']; }
         if(isset($request['title'])){ $model->title = $request['title']; }
         if(isset($request['info'])){ $model->info = $request['info']; }
 
         if(isset($request['image'])){
-            $file = $request['image'];
-            $name = $request['title'].'-image.'.$file->getClientOriginalExtension();
-            $path = $file->storeAs('public/'.$folder, $name);
+            $image = $request['image'];
+            $name = $request['title'].'-image.'.$image->getClientOriginalExtension();
+            $path = $image->storeAs('public/'.$folder, $name);
             $model->image = Storage::url($path);
         }
 
@@ -76,7 +75,7 @@ class SpecialtiesController extends Controller
             $file = $request['file'];
             $name = $request['title'].'-file.'.$file->getClientOriginalExtension();
             $path = $file->storeAs('public/'.$folder, $name);
-            $model->image = Storage::url($path);
+            $model->file = Storage::url($path);
         }
 
         $model->save();

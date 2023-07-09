@@ -39,4 +39,5 @@
             <x-form.botton></x-form.botton>
         </form>
     </div>
+    <x-admin.errors></x-admin.errors>
 @endsection

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminRequest;
+use App\Http\Requests\Admin\ProgramsRequest;
 use App\Models\Level;
 use App\Models\Program;
 use App\Models\Specialty;
@@ -27,7 +27,7 @@ class ProgramsController extends Controller
     }
 
 
-    public function store(AdminRequest $request)
+    public function store(ProgramsRequest $request)
     {
         $data = $request->validated();
         $program = new Program();
@@ -50,7 +50,7 @@ class ProgramsController extends Controller
     }
 
 
-    public function update(AdminRequest $request, Program $program)
+    public function update(ProgramsRequest $request, Program $program)
     {
         $data = $request->validated();
         $this->save($data, $program, 'programs');

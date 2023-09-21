@@ -7,4 +7,5 @@
 <div class="{{ ($img) ? 'col-sm-6' : 'col-sm-8'}}">
     <input id="{{ $id }}" name="{{ $name }}" {{ $attributes->class(['form-control'])->merge(['type' => 'text',]) }}>
 </div>
+
 @error($name)<div>{{$message}}</div>@enderror

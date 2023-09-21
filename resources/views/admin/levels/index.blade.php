@@ -3,8 +3,11 @@
 @section('title', 'Рівні освіти - всі записи')
 
 @section('content')
-    <x-admin.action-icons resource="levels" id="{{$level->id ?? ''}}"></x-admin.action-icons>
+
+    <x-__i.admin-icons resource="levels" id="{{$level->id ?? ''}}"></x-__i.admin-icons>
+
     <div class="">
+
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -18,13 +21,16 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td><b>{{$level->title}}</b></td>
-                    <td class="text-center"><x-admin.action-icons resource="levels" id="{{$level->id}}"></x-admin.action-icons></td>
+                    <td class="text-center"><x-__i.admin-icons resource="levels" id="{{$level->id}}"></x-__i.admin-icons></td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+
         <div class="d-flex justify-content-center">
 {{--        {{ $levels->links('admin.pagination') }}--}}
         </div>
+
     </div>
+
 @endsection

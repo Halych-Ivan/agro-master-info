@@ -3,8 +3,11 @@
 @section('title', 'Спеціальності - редагування')
 
 @section('content')
-    <x-admin.action-icons resource="specialties" id="{{$specialty->id ?? ''}}"></x-admin.action-icons>
+
+    <x-__i.admin-icons resource="specialties" id="{{$specialty->id ?? ''}}"></x-__i.admin-icons>
+
     <div class="mt-3">
+
         <form action="{{$specialty->exists ? route('admin.specialties.update', $specialty->id) : route('admin.specialties.store')}}"
               method="POST" enctype="multipart/form-data">
 
@@ -18,6 +21,9 @@
             <x-form.textarea rows="3" name="info" value="{{ old('info', $specialty->info) }}"></x-form.textarea>
             <x-form.botton></x-form.botton>
         </form>
+
     </div>
-    <x-admin.errors></x-admin.errors>
+
+    <x-__i.admin-errors></x-__i.admin-errors>
+
 @endsection

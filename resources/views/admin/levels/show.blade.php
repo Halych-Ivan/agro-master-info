@@ -3,7 +3,9 @@
 @section('title', 'Рівні освіти - перегляд')
 
 @section('content')
-    <x-admin.action-icons resource="levels" id="{{$level->id ?? ''}}"></x-admin.action-icons>
+
+    <x-__i.admin-icons resource="levels" id="{{$level->id ?? ''}}"></x-__i.admin-icons>
+
     <div class="">
         <table class="table table-bordered">
             <tr>
@@ -19,4 +21,5 @@
             </tr>
         </table>
     </div>
+
 @endsection

@@ -7,7 +7,7 @@ use App\Http\Requests\Admin\ProgramsRequest;
 use App\Models\Level;
 use App\Models\Program;
 use App\Models\Specialty;
-use Illuminate\Support\Facades\Storage;
+
 
 class ProgramsController extends Controller
 {
@@ -59,6 +59,8 @@ class ProgramsController extends Controller
 
     public function destroy(Program $program)
     {
+        $this->deleteFile($program->image, 'images/programs');
+        $this->deleteFile($program->file, 'uploads/programs');
         $program->delete();
         return redirect()->route('admin.programs.index')->with('alert', 'Дія виконана успішно!');
     }
@@ -66,7 +68,6 @@ class ProgramsController extends Controller
 
     private function save($request, $model, $folder)
     {
-//        dd($request);
         if(isset($request['title'])){ $model->title = $request['title']; }
         if(isset($request['year'])){ $model->year = $request['year']; }
         if(isset($request['info'])){ $model->info = $request['info']; }
@@ -74,17 +75,8 @@ class ProgramsController extends Controller
         if(isset($request['level_id'])){ $model->level_id = $request['level_id']; }
         if(isset($request['specialty_id'])){ $model->specialty_id = $request['specialty_id']; }
 
-        if(isset($request['image'])){
-            $image = $request['image'];
-            $path = $image->store('public/'.$folder);
-            $model->image = Storage::url($path);
-        }
-
-        if(isset($request['file'])){
-            $file = $request['file'];
-            $path = $file->store('public/'.$folder);
-            $model->file = Storage::url($path);
-        }
+        if(isset($request['image'])){ $model->image = $this->saveFile($request['image'], 'images/'.$folder, $model->image); }
+        if(isset($request['file'])){ $model->file = $this->saveFile($request['file'], 'uploads/'.$folder); }
 
         $model->save();
     }

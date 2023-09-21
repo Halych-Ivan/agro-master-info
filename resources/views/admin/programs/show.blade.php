@@ -40,7 +40,8 @@
                 <td>Примітки</td>
                 <th>{{$program->info??'.....'}}</th>
             </tr>
-            <x-admin.action-icons resource="programs" id="{{$program->id}}"></x-admin.action-icons>
+            <x-__i.admin-icons resource="programs" id="{{$program->id}}"></x-__i.admin-icons>
         </table>
     </div>
+
 @endsection

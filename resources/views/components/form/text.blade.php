@@ -1,5 +1,4 @@
 @props(['name' => '', 'value' => '', 'placeholder' => '', 'required' => ''])
-
 <div class="mb-3">
     <div class="input-group m-3">
         <span class="input-group-text w-25" id="{{$name}}">{{$placeholder}}</span>

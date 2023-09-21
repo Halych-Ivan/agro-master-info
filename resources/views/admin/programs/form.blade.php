@@ -3,11 +3,8 @@
 @section('title', 'Освітні програми - редагування')
 
 @section('content')
-
-    <x-__i.admin-icons resource="programs" id="{{$program->id ?? ''}}"></x-__i.admin-icons>
-
+    <x-admin.action-icons resource="programs" id="{{$program->id ?? ''}}"></x-admin.action-icons>
     <div class="">
-
         <form action="{{$program->exists ? route('admin.programs.update', $program->id) : route('admin.programs.store')}}"
                   method="POST" enctype="multipart/form-data">
 
@@ -46,8 +43,6 @@
             <x-form.textarea rows="3" name="info" value="{{ old('info', $program->info) }}"></x-form.textarea>
             <x-form.botton></x-form.botton>
         </form>
-
     </div>
-
-    <x-__i.admin-errors></x-__i.admin-errors>
+    <x-admin.errors></x-admin.errors>
 @endsection

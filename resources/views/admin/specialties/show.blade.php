@@ -32,10 +32,7 @@
                 <td>Примітки</td>
                 <th>{{$specialty->info??'.....'}}</th>
             </tr>
-
-            <x-__i.admin-icons resource="specialties" id="{{$specialty->id}}"></x-__i.admin-icons>
-
+            <x-admin.action-icons resource="specialties" id="{{$specialty->id}}"></x-admin.action-icons>
         </table>
     </div>
-
 @endsection

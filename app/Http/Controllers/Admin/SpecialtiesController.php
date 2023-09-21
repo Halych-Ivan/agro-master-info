@@ -53,21 +53,28 @@ class SpecialtiesController extends Controller
 
     public function destroy(Specialty $specialty)
     {
-        $this->deleteFile($program->image, 'images/specialties');
-        $this->deleteFile($program->file, 'uploads/specialties');
         $specialty->delete();
         return redirect()->route('admin.specialties.index')->with('alert', 'Дія виконана успішно!');
     }
 
-
     private function save($request, $model, $folder)
     {
+//        dd($request);
         if(isset($request['code'])){ $model->code = $request['code']; }
         if(isset($request['title'])){ $model->title = $request['title']; }
         if(isset($request['info'])){ $model->info = $request['info']; }
 
-        if(isset($request['image'])){ $model->image = $this->saveFile($request['image'], 'images/'.$folder, $model->image); }
-        if(isset($request['file'])){ $model->file = $this->saveFile($request['file'], 'uploads/'.$folder); }
+        if(isset($request['image'])){
+            $image = $request['image'];
+            $path = $image->store('public/'.$folder);
+            $model->image = Storage::url($path);
+        }
+
+        if(isset($request['file'])){
+            $file = $request['file'];
+            $path = $file->store('public/'.$folder);
+            $model->file = Storage::url($path);
+        }
 
         $model->save();
     }

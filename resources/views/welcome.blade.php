@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Технічний прогрес в АПВ 2023</title>
+        <title>--Технічний прогрес в АПВ 2023 </title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

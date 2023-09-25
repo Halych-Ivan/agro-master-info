@@ -1,10 +1,10 @@
 @php
     $nav[0][0] = ['href' => 'home', 'title' => 'Головна'];
-    $nav[1][0] = ['href' => '#', 'title' => 'Навчання'];
+    $nav[1][0] = ['href' => 'home', 'title' => 'Навчання'];
         $nav[1][1] = ['href' => 'schedule', 'title' => 'Розклад занять'];
         $nav[1][2] = ['href' => 'session', 'title' => 'Розклад іспитів'];
-    $nav[2][0] = ['href' => '#', 'title' => 'Наука'];
-    $nav[3][0] = ['href' => 'contact', 'title' => 'Контакти'];
+    $nav[2][0] = ['href' => 'home', 'title' => 'Наука'];
+    $nav[3][0] = ['href' => 'home', 'title' => 'Контакти'];
 @endphp
 
 <header class="header-area">
@@ -33,7 +33,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3">
                     <div class="header-logo">
-                        <a href="{{route('home')}}"><img src="{{asset('/images/logo.jpg')}}" height="50" alt="Logo"></a>
+                        <a href="{{route('home')}}"><img src="{{asset('/images/logo.svg')}}" height="50" alt="Logo"></a>
                     </div>
                 </div>
                 <div class="col-lg-7 position-static">
@@ -42,7 +42,7 @@
                         <ul class="nav-menu">
 @foreach($nav as $key => $value)
                             <li>
-                                <a class="" href="#">{{$value[0]['title']}}</a>
+                                <a class="" href="{{route($value[0]['href'])??'#'}}">{{$value[0]['title']}}</a>
 @if(isset($value[1]))
                                 <ul class="nav-dropdown nav-submenu">
 @foreach($value as $key => $item)

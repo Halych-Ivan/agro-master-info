@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('agromaster.layout');
 //    return view('agromaster.layout');
 })->name('home');
 

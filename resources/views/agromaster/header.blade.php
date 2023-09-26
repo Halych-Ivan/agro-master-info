@@ -4,7 +4,7 @@
         $nav[1][1] = ['href' => 'schedule', 'title' => 'Розклад занять'];
         $nav[1][2] = ['href' => 'session', 'title' => 'Розклад іспитів'];
     $nav[2][0] = ['href' => 'home', 'title' => 'Наука'];
-    $nav[3][0] = ['href' => 'home', 'title' => 'Контакти'];
+    $nav[3][0] = ['href' => 'contact', 'title' => 'Контакти'];
 @endphp
 
 <header class="header-area">

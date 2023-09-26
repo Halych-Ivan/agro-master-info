@@ -14,10 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::view('/contact','agromaster.contact')->name('contact');
+
 Route::get('/', function () {
     return view('agromaster.layout');
 //    return view('agromaster.layout');
 })->name('home');
+
+
 
 
 

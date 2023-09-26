@@ -24,10 +24,10 @@
 </head>
     <body>
     <!--====== Header Start ======-->
-        @include('agromaster.header')
+{{--        @include('agromaster.header')--}}
     <!--====== Header Ends ======-->
 
-
+123
 
     <!--====== Footer Start ======-->
         @include('agromaster.footer')

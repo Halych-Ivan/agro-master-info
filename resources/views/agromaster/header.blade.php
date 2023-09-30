@@ -20,8 +20,8 @@
                 <div class="header-top-right">
                     <div class="header-link">
                         <a class="notice" href="notice.html">Notice</a>
-                        <a class="login" href="login.html">Login</a>
-                        <a class="register" href="register.html">Register</a>
+                        <a class="login" href="login">Login</a>
+                        <a class="register" href="register">Register</a>
                     </div>
                 </div>
             </div>

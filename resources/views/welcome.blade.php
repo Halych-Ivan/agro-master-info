@@ -22,15 +22,15 @@
     <body class="notice-area">
     <div class="container">
 
-{{--        <h1>--}}
-{{--            <a href="{{ asset('uploads/conference/Технічний прогрес в АПВ. Програма конференції 2023.pdf') }}" target="_blank">Технічний прогрес в АПВ. Програма конференції</a>--}}
-{{--        </h1>--}}
-{{--        <h1>--}}
-{{--            <a href="{{ asset('uploads/conference/Технічний прогрес в АПВ. Матеріали конференції. ДБТУ 2023.pdf') }}" target="_blank">Технічний прогрес в АПВ. Матеріали конференції</a>--}}
-{{--        </h1>--}}
+        <h1>
+            <a href="{{ asset('uploads/conference/Технічний прогрес в АПВ. Програма конференції 2023.pdf') }}" target="_blank">Технічний прогрес в АПВ. Програма конференції</a>
+        </h1>
+        <h1>
+            <a href="{{ asset('uploads/conference/Технічний прогрес в АПВ. Матеріали конференції. ДБТУ 2023.pdf') }}" target="_blank">Технічний прогрес в АПВ. Матеріали конференції</a>
+        </h1>
 
-{{--        <img src="{{asset('images/1.jpg')}}" alt="">--}}
-{{--        <img src="{{asset('images/2.jpg')}}" alt="">--}}
+        <img src="{{asset('images/1.jpg')}}" alt="">
+        <img src="{{asset('images/2.jpg')}}" alt="">
 
     </div>
 

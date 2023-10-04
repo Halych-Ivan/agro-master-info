@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/contact','agromaster.contact')->name('contact');
 Route::view('/science','welcome')->name('science');
+Route::view('/schedule','agromaster.schedule')->name('schedule');
+
+
+
 
 Route::get('/', function () {
     return view('agromaster.layout');

@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="newsletter-form mt-5">
-                        <form action="/newsletter" method="post">
+                        <form action="{{route('newsletter')}}" method="post">
                             @csrf
                             <input type="text" name="phone" placeholder="Ваш номер телефону або email">
                             <button class="main-btn main-btn-2">Відправити</button>

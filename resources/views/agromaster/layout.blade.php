@@ -45,8 +45,10 @@
         <!--====== All Plugins js ======-->
         <script src="{{ asset('/js/plugins/popper.min.js') }}"></script>
         <script src="{{ asset('/js/plugins/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('/js/plugins/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('/js/plugins/slick.min.js') }}"></script>
         <script src="{{ asset('/js/plugins/jquery.magnific-popup.min.js') }}"></script>
+        <script src="{{ asset('/js/plugins/jquery.jquery.appear.min.js') }}"></script>
         <script src="{{ asset('/js/plugins/imagesloaded.pkgd.min.js') }}"></script>
         <script src="{{ asset('/js/plugins/isotope.pkgd.min.js') }}"></script>
         <script src="{{ asset('/js/plugins/wow.min.js') }}"></script>

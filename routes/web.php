@@ -23,7 +23,7 @@ Route::view('/schedule','agromaster.schedule')->name('schedule');
 
 
 Route::get('/', function () {
-    return view('agromaster.layout');
+    return view('agromaster.main');
 //    return view('agromaster.layout');
 })->name('home');
 

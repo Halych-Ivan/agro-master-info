@@ -28,6 +28,12 @@ Route::get('/', function () {
 })->name('home');
 
 
+// php artisan config:clear
+Route::get('/clear-config', function() {
+    $exitCode = Artisan::call('config:clear');
+    return 'Конфігурацію очищено!'; // або англійською: 'Config cache cleared!'
+});
+
 
 
 

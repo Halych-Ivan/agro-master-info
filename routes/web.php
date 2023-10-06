@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+//ddvdedv
 Route::view('/contact','agromaster.contact')->name('contact');
 Route::view('/science','welcome')->name('science');
 Route::view('/schedule','agromaster.schedule')->name('schedule');

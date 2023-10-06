@@ -55,9 +55,9 @@ class MailController extends Controller
         );
 
 
-        Mail::to('galich_iv@ukr.net')->send(new SendEmail());
+        Mail::to('galich_iv@ukr.net')->send(new SendEmail($data));
 
-//        Mail::send(['text'=>'mails.newsletter'], $data, function($message) {
+//        Mail::send(['text'=>'emails.test'], $data, function($message) {
 //            $message->to('galich_iv@ukr.net');
 //            $message->subject('Запитання з сайту https://agromaster.info');
 //            $message->from('info@agromaster.info');

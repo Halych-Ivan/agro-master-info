@@ -63,10 +63,10 @@ class MailController extends Controller
 //            $message->from('info@agromaster.info');
 //        });
 //
-        dd($data);
+//        dd($data);
 
 //        toast('Ваше запитання відправлено!','success');
-//        return redirect()->back();
+        return redirect()->back();
 //        return route('home');
     }
 

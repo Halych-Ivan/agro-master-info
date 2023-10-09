@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/newsletter','\App\Http\Controllers\MailController@newsletter')->name('newsletter');
 Route::view('/contact','agromaster.contact')->name('contact');
 Route::view('/science','welcome')->name('science');
-Route::view('/schedule','agromaster.schedule')->name('schedule');
+
+Route::view('/schedule','agromaster.schedule')->name('schedule'); // Розклад ззанять
+Route::view('/lists','agromaster.lists')->name('lists'); // Списки груп
 
 
 

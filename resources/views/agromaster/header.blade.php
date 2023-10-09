@@ -2,7 +2,8 @@
     $nav[0][0] = ['href' => 'home', 'title' => 'Головна'];
     $nav[1][0] = ['href' => 'home', 'title' => 'Навчання'];
         $nav[1][1] = ['href' => 'schedule', 'title' => 'Розклад занять'];
-        $nav[1][2] = ['href' => 'session', 'title' => 'Розклад іспитів'];
+       //$nav[1][2] = ['href' => 'session', 'title' => 'Розклад іспитів'];
+        $nav[1][3] = ['href' => 'lists', 'title' => 'Списки груп'];
     $nav[2][0] = ['href' => 'science', 'title' => 'Наука'];
     $nav[3][0] = ['href' => 'contact', 'title' => 'Контакти'];
 @endphp

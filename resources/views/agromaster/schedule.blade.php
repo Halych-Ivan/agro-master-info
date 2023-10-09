@@ -81,6 +81,18 @@
 
     <section class="container">
         <div class=" ml-15">
+            <div class="row section-title">
+                <div class="title">
+                    <h5>Розклад дзвінків</h5>
+                    <p>1 пара - 9:00-10:20, перерва 10 хв.<br>
+                        2 пара - 10:30-11:50, перерва 20 хв.<br>
+                        3 пара - 12:10-13:30, перерва 10 хв.<br>
+                        4 пара - 13:40-15:00, перерва 10 хв.<br>
+                        5 пара - 15:10-16:30, перерва 10 хв.<br>
+                        6 пара - 16:40-18:00</p>
+                </div>
+
+            </div>
             @foreach($lists as $list)
             <div class="row ">
                 <div class="col-lg-12">

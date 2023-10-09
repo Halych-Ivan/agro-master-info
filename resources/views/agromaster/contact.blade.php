@@ -1,9 +1,9 @@
 @extends('agromaster.layout')
 
-@section('title', 'Contact')
+@section('title', 'Контакти')
 
 @section('page-banner')
-{{--    <x-page-banner title="Освітня програма `Агроінженерія`" img="/images/page-banner-1.jpg"></x-page-banner>--}}
+    <x-agromaster.page-banner title="Контакти" img="/images/page-banner-1.jpg"></x-agromaster.page-banner>
 @endsection
 
 

@@ -3,22 +3,10 @@
 @section('title', 'Реквізити оплати з навчання')
 
 @section('page-banner')
-    {{--    <x-page-banner title="Освітня програма `Агроінженерія`" img="/images/page-banner-1.jpg"></x-page-banner>--}}
+        <x-agromaster.page-banner title="Реквізити оплати з навчання" img="/images/page-banner-1.jpg"></x-agromaster.page-banner>
 @endsection
 
-
 @section('content')
-    <!--====== Page Banner Start ======-->
-    <section class="page-banner">
-        <div class="page-banner-bg bg_cover" style="background-image: url(https://agromaster.pp.ua/images/page-banner-1.jpg);">
-            <div class="container">
-                <div class="banner-content text-center">
-                    <h2 class="title">Реквізити оплати з навчання</h2>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--====== Page Banner Ends ======-->
 
     <section class="container">
         <div class="ml-15">

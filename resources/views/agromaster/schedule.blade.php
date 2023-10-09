@@ -3,22 +3,12 @@
 @section('title', 'Розклад занять')
 
 @section('page-banner')
-    {{--    <x-page-banner title="Освітня програма `Агроінженерія`" img="/images/page-banner-1.jpg"></x-page-banner>--}}
+        <x-agromaster.page-banner title="Розклад занять" img="/images/page-banner-1.jpg"></x-agromaster.page-banner>
 @endsection
 
 
 @section('content')
-    <!--====== Page Banner Start ======-->
-    <section class="page-banner">
-        <div class="page-banner-bg bg_cover" style="background-image: url(https://agromaster.pp.ua/images/page-banner-1.jpg);">
-            <div class="container">
-                <div class="banner-content text-center">
-                    <h2 class="title">Розклад занять</h2>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--====== Page Banner Ends ======-->
+
     @php
         $lists = array();
         $lists[] = [

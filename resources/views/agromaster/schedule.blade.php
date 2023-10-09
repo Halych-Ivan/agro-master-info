@@ -1,6 +1,6 @@
 @extends('agromaster.layout')
 
-@section('title', 'Contact')
+@section('title', 'Розклад занять')
 
 @section('page-banner')
     {{--    <x-page-banner title="Освітня програма `Агроінженерія`" img="/images/page-banner-1.jpg"></x-page-banner>--}}
@@ -8,51 +8,96 @@
 
 
 @section('content')
+    <!--====== Page Banner Start ======-->
+    <section class="page-banner">
+        <div class="page-banner-bg bg_cover" style="background-image: url(https://agromaster.pp.ua/images/page-banner-1.jpg);">
+            <div class="container">
+                <div class="banner-content text-center">
+                    <h2 class="title">Розклад занять</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--====== Page Banner Ends ======-->
+    @php
+        $lists = array();
+        $lists[] = [
+                'title'=>'1 курс', 'groups'=>[
+                    ['title'=>'11М (208-23б-01)', 'file'=>'208-1'],
+                    ['title'=>'12М (208-23б-02)', 'file'=>'1208-1'],
+                    ['title'=>'13М (208-23б-03)', 'file'=>'208-1'],
+                     ]
+            ];
+        $lists[] = [
+                'title'=>'2 курс, 1 (скорочений термін навчання) курс', 'groups'=>[
+                    ['title'=>'21М (208-22б-01)', 'file'=>'208-2'],
+                    ['title'=>'22М (208-22б-02)', 'file'=>'208-2'],
+                    ['title'=>'23М (208-22б-03)', 'file'=>'208-2'],
+                    ['title'=>'24Мпр (208-23б-стн-01)', 'file'=>'208-2-стн'],
+                    ['title'=>'25Мпр (208-23б-стн-02)', 'file'=>'208-2-стн'],
+                    ['title'=>'26Мпр (208-23б-стн-03)', 'file'=>'208-2-стн'],
+                     ]
+            ];
+        $lists[] = [
+                'title'=>'3 курс, 2 (скорочений термін навчання) курс', 'groups'=>[
+                    ['title'=>'31М (208-21б-01)', 'file'=>'208-3'],
+                    ['title'=>'32М (208-21б-02)', 'file'=>'208-3'],
+                    ['title'=>'33М (208-21б-03)', 'file'=>'208-3'],
+                    ['title'=>'35М (208-21б-04)', 'file'=>'208-3'],
+                    ['title'=>'36Мпр (208-22б-стн-01)', 'file'=>'208-3'],
+                     ]
+            ];
+        $lists[] = [
+                'title'=>'4 курс, 3 (скорочений термін навчання) курс', 'groups'=>[
+                    ['title'=>'41М (208-20б-01)', 'file'=>'41М'],
+                    ['title'=>'42М (208-20б-02)', 'file'=>'42М'],
+                    ['title'=>'43М (208-20б-03)', 'file'=>'43М'],
+                    ['title'=>'48М (208-20б-04)', 'file'=>'41М'],
+                    ['title'=>'44Мпр (208-21б-стн-01)', 'file'=>'44Мпр'],
+                    ['title'=>'45Мпр (208-21б-стн-02)', 'file'=>'45Мпр'],
+                    ['title'=>'46Мпр (208-21б-стн-03)', 'file'=>'46Мпр'],
+                    ['title'=>'48Мпр (208-21б-стн-04)', 'file'=>'41М'],
+                     ]
+            ];
+        $lists[] = [
+                'title'=>'1 (магістерський) курс', 'groups'=>[
+                    ['title'=>'51М (208-23м-01)', 'file'=>'51М'],
+                    ['title'=>'52М (208-23м-02)', 'file'=>'52М'],
+                    ['title'=>'53М (208-23м-03)', 'file'=>'53М'],
+                    ['title'=>'54М (208-23м-04)', 'file'=>'54М'],
+                     ]
+            ];
+        $lists[] = [
+                'title'=>'2 (магістерський) курс', 'groups'=>[
+                    ['title'=>'61М (208-22м-01)', 'file'=>'61М'],
+                    ['title'=>'62М (208-22м-02)', 'file'=>'62М'],
+                    ['title'=>'63М (208-22м-03)', 'file'=>'63М'],
+                    ['title'=>'64М (208-22м-04)', 'file'=>'64М'],
+                    ['title'=>'65М (208-22м-04)', 'file'=>'65М'],
+                     ]
+            ];
+    @endphp
 
-    <section class="container mt-200">
-        <div class="container ml-10">
+
+    <section class="container">
+        <div class=" ml-15">
+            @foreach($lists as $list)
             <div class="row ">
                 <div class="col-lg-12">
                     <div class="section-title-2 mt-30">
-                        <h2 class="title">208 Агроінженерія</h2>
+                        <h2 class="title">{{$list['title']}}</h2>
                         <span class="line"></span>
                     </div>
                 </div>
             </div>
-            <div class="">
-                <div class="single-notice">
-                    <span class="number">-</span>
-                    <h3 class="notice-title"><a href="https://agromaster.pp.ua/documents/schedule/2022-2023-II//208/208-1.pdf" target="_blank">1 курс (11М, 12М, 13М)</a></h3>
-                </div>
-                <div class="single-notice">
-                    <span class="number">-</span>
-                    <h3 class="notice-title"><a href="https://agromaster.pp.ua/documents/schedule/2022-2023-II//208/208-2.pdf" target="_blank">2 курс (21М, 22М, 23М, 25М, 26Мпр)</a></h3>
-                </div>
-                <div class="single-notice">
-                    <span class="number">-</span>
-                    <h3 class="notice-title"><a href="https://agromaster.pp.ua/documents/schedule/2022-2023-II//208/208-3.pdf" target="_blank">3 курс, (31М, 32М, 33М, 34Мпр, 35Мпр, 36Мпр, 38М, 38Мпр)</a></h3>
-                </div>
-                <div class="single-notice">
-                    <span class="number">-</span>
-                    <h3 class="notice-title"><a href="https://agromaster.pp.ua/documents/schedule/2022-2023-II//208/208-4.pdf" target="_blank">4 курс, (41М, 42М, 43М, 44Мпр, 45Мпр, 46Мпр, 48М, 48Мпр)</a></h3>
-                </div>
-                <div class="single-notice">
-                    <span class="number">-</span>
-                    <h3 class="notice-title"><a href="https://agromaster.pp.ua/documents/schedule/2022-2023-II//208/208-5-ОНП.pdf" target="_blank">1 курс магістерський ОНП (51М)</a></h3>
-                </div>
-                <div class="single-notice">
-                    <span class="number">-</span>
-                    <h3 class="notice-title"><a href="https://agromaster.pp.ua/documents/schedule/2022-2023-II//208/208-5-ОПП.pdf" target="_blank">1 курс магістерський ОПП (52М, 53М, 54М, 55М)</a></h3>
-                </div>
+            <div class="single-notice">
+                @foreach($list['groups'] as $group)
+                    <p class="notice-title">
+                        <a href="{{asset('/uploads/schedule/2023-2024-I/'.$group['file'].'.pdf')}}" target="_blank">{{$group['title']}}</a>
+                    </p>
+                @endforeach
             </div>
-
-
-            <div>
-                <span class="line mt-5"></span>
-            </div>
-
-
-
+            @endforeach
         </div>
     </section>
 

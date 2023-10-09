@@ -20,6 +20,7 @@ Route::view('/science','welcome')->name('science');
 
 Route::view('/schedule','agromaster.schedule')->name('schedule'); // Розклад ззанять
 Route::view('/lists','agromaster.lists')->name('lists'); // Списки груп
+Route::view('/details','agromaster.details')->name('details'); // Реквізити
 
 
 

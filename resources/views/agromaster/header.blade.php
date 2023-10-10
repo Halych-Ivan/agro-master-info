@@ -1,6 +1,7 @@
 @php
     $nav[0][0] = ['href' => 'home', 'title' => 'Головна'];
-    $nav[1][0] = ['href' => 'home', 'title' => 'Вступ'];
+    $nav[1][0] = ['href' => 'admission', 'title' => 'Вступ'];
+        $nav[1][1] = ['href' => 'admission/confirmation', 'title' => 'Підвердження вступу'];
     $nav[2][0] = ['href' => 'home', 'title' => 'Навчання'];
         $nav[2][1] = ['href' => 'schedule', 'title' => 'Розклад занять'];
        //$nav[2][2] = ['href' => 'session', 'title' => 'Розклад іспитів'];
@@ -51,7 +52,7 @@
                                 <ul class="nav-dropdown nav-submenu">
 @foreach($value as $key => $item)
 @continue($key == 0)
-                                    <li><a class="" href="{{$item['href']}}">{{$item['title']}}</a></li>
+                                    <li><a class="" href="{{route($item['href'])}}">{{$item['title']}}</a></li>
 @endforeach
                                 </ul>
 @endif

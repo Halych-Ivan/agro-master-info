@@ -26,7 +26,7 @@
     <!--====== Header Start ======-->
         @include('agromaster.header')
     <!--====== Header Ends ======-->
-
+        @yield('page-banner')
         @yield('content')
 
     @include('agromaster.newsletter')

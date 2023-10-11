@@ -15,6 +15,7 @@ class ProgramsController extends Controller
     public function index()
     {
         $programs = Program::orderBy('year', 'asc')->get();
+//        dd($programs);
         return view('admin.programs.index', compact('programs'));
     }
 

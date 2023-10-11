@@ -24,7 +24,7 @@
                     <td class="text-center">{{$loop->iteration}}</td>
                     <td class="text-center"><b>{{$program->year}}</b></td>
                     <td><b>{{$program->title}}</b></td>
-                    <td><b>{{$program->specialty->code}} {{$program->specialty->title}}</b><br>{{$program->level->title}}</td>
+                    <td><b>{{$program->specialty->code??''}} {{$program->specialty->title??''}}</b><br>{{$program->level->title}}</td>
                     <td class="text-center"><img src="{{$program->image}}" alt="" height="100"></td>
                     <td class="text-center">
                         @if($program->file)

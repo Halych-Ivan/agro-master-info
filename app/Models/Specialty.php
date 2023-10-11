@@ -15,4 +15,11 @@ class Specialty extends Model
 
     protected $table = 'specialties';
     protected $guarded = false;
+
+
+    public function programs()
+    {
+        return $this->hasMany(Program::class);
+    }
+
 }

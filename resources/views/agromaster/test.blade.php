@@ -12,7 +12,6 @@
 
     @php
     $days = ['1'=>'Понеділок', '2'=>'Вівторок', '3'=>'Середа', '4'=>'Четвер', '5'=>'П\'ятниця',];
-    $col = 0;
 
     $collection = collect([
     ['code'=>'210', 'title'=>'te222st1', 'teacher'=>'Галич І.В.', 'link'=>'https://google.com'],
@@ -22,74 +21,65 @@
     ['code'=>'112', 'title'=>'tesggt2333', 'teacher'=>'Галич І.В.', 'link'=>'https://google.com'],
 ]);
 
+    $weekNumber = date("W");
+    $isEvenWeek = $weekNumber % 2 === 0;
+    $style = 'table-info';
+    $style_2 = '';
+
+    $daysInUkrainian = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П\'ятниця', 'Субота'];
+
 
 
 
     @endphp
-    <div class="event-schedule">
+
+<section>
     <div class="event-schedule-table table-responsive">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>111</th>
-            <th>222</th>
-            <th>333</th>
-        </tr>
-        </thead>
-        <tbody>
-
-
-        @foreach($days as $key=>$day)
-            @for($i = 1; $i < 7; $i++)
+        <div>
+            <h2></h2>
+            <h2>Сьогодні {{$dayOfWeek = date('d,m,Y')}}, {{$daysInUkrainian[date('w')]}}, {{$isEvenWeek ? 'Не парний тиждень' : 'Парний тиждень'}}</h2>
+        </div>
+        <table class="table table-sm table-bordered border-primary text-center ">
+            <caption>List of users</caption>
+            <thead>
             <tr>
-                @if($i==1)<td rowspan="12">{{$day}}</td>@endif
-                    <td rowspan="2">{{$i}}</td>
-                    @foreach($collection as $item)
-                        @if($item['code'][0] == $key && $item['code'][1] == $i && $item['code'][2] == 0)
-                            <td rowspan="2">
-                                {{$item['title']}}
-                            </td>
-            </tr><tr><td></td></tr>
-                        @endif
-                    @if($item['code'][0] == $key && $item['code'][1] == $i && $item['code'][2] == 1)
-                        <td>
-                            {{$item['title']}}
+                <th>День тижня</th>
+                <th>Пара</th>
+                <th class="{{$isEvenWeek ? $style : $style_2}}">Не парний тиждень</th>
+                <th class="{{!$isEvenWeek ? $style : $style_2}}">Парний тиждень</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($days as $key=>$day)
+                @for($i = 1; $i <= ($y = 6); $i++)
+                <tr>
+                    @if($i==1)<td rowspan="{{$y}}" class="align-middle">{{$day}}</td>@endif
+                        <td class="align-middle">{{$i}}</td>
+                        <td class="">
+                            @foreach($collection as $item)
+                                @if($item['code'][0] == $key && $item['code'][1] == $i && ($item['code'][2] == 0 || $item['code'][2] == 1))
+                                    <div class="{{$isEvenWeek ? $style : $style_2}}">
+                                        <a href="{{$item['link']}}"><b>{{$item['title']}}</b><br>
+                                        {{$item['teacher']}}<br>
+                                        {{$item['link']}}</a>
+                                    </div>
+                                @endif
+                            @endforeach
                         </td>
-                        </tr><tr><td></td></tr>
-                    @endif
-
-
-
-                    @endforeach
-
-
-            @endfor
-        @endforeach
-        </tbody>
-    </table>
+                        <td class="">
+                            @foreach($collection as $item)
+                                @if($item['code'][0] == $key && $item['code'][1] == $i && ($item['code'][2] == 0 || $item['code'][2] == 2))
+                                    <p class="{{!$isEvenWeek ? $style : $style_2}}">{{$item['title']}}<br>{{$item['teacher']}}<br>{{$item['link']}}</p>
+                                @endif
+                            @endforeach
+                        </td>
+                </tr>
+                @endfor
+            @endforeach
+            </tbody>
+        </table>
     </div>
-    </div>
-
-
-{{--    /*--}}
-{{--    @foreach($collection as $item)--}}
-{{--        @if($item['code'][0] == $key && $item['code'][1] == $i)--}}
-
-{{--            @if($item['code'][2] == 0)--}}
-
-{{--                {{$item['title']}}<br>--}}
-{{--                {{$item['teacher']}}<br>--}}
-{{--                {{$item['link']}}--}}
-
-{{--                @break--}}
-{{--            @endif--}}
-
-{{--        @endif--}}
-{{--    @endforeach--}}
-{{--    */--}}
-
-
-
+</section>
 @endsection
 
 

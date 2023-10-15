@@ -12,7 +12,7 @@ class SpecialtiesController extends Controller
 
     public function index()
     {
-        $specialties = Specialty::orderBy('code', 'asc')->get();;
+        $specialties = Specialty::orderBy('code', 'asc')->get();
         return view('admin.specialties.index', compact('specialties'));
     }
 
@@ -26,7 +26,7 @@ class SpecialtiesController extends Controller
     public function store(SpecialtiesRequest $request, Specialty $specialty)
     {
         $data = $request->validated();
-        $this->save($data, $specialty, 'specialties');
+        $this->save($data, $specialty, 'uploads/specialties');
         return view('admin.specialties.show', compact('specialty'))->with('alert', 'Дія виконана успішно!');
     }
 
@@ -46,7 +46,7 @@ class SpecialtiesController extends Controller
     public function update(SpecialtiesRequest $request, Specialty $specialty)
     {
         $data = $request->validated();
-        $this->save($data, $specialty, 'specialties');
+        $this->save($data, $specialty, 'uploads/specialties');
         return redirect()->route('admin.specialties.index')->with('alert', 'Дія виконана успішно!');
     }
 
@@ -59,21 +59,16 @@ class SpecialtiesController extends Controller
 
     private function save($request, $model, $folder)
     {
-//        dd($request);
         if(isset($request['code'])){ $model->code = $request['code']; }
         if(isset($request['title'])){ $model->title = $request['title']; }
         if(isset($request['info'])){ $model->info = $request['info']; }
 
         if(isset($request['image'])){
-            $image = $request['image'];
-            $path = $image->store('public/'.$folder);
-            $model->image = Storage::url($path);
+            $model->image = $folder.'/'.$this->saveFile($request['image'], $folder, $model->image);
         }
 
         if(isset($request['file'])){
-            $file = $request['file'];
-            $path = $file->store('public/'.$folder);
-            $model->file = Storage::url($path);
+            $model->file = $folder.'/'.$this->saveFile($request['file'], $folder, $model->file);
         }
 
         $model->save();

@@ -38,6 +38,7 @@
                 <a class="collapse-item" href="{{route('admin.levels.index')}}">Рівні освіти</a>
                 <a class="collapse-item" href="{{route('admin.specialties.index')}}">Спеціальності</a>
                 <a class="collapse-item" href="{{route('admin.programs.index')}}">Освітні програми</a>
+{{--                <a class="collapse-item" href="{{route('admin.groups.index')}}">Навчальні групи</a>--}}
 {{--                <a class="collapse-item" href="register.html">Register</a>--}}
 {{--                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>--}}
 {{--                <div class="collapse-divider"></div>--}}
@@ -56,7 +57,7 @@
         </a>
         <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-{{--                <a class="collapse-item" href="{{route('admin.cathedras.index')}}">Кафедри</a>--}}
+                <a class="collapse-item" href="{{route('admin.cathedras.index')}}">Кафедри</a>
 {{--                <a class="collapse-item" href="{{route('admin.teachers.index')}}">Викладачі</a>--}}
             </div>
         </div>
@@ -70,12 +71,23 @@
         </a>
         <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-{{--                <a class="collapse-item" href="{{route('admin.groups.index')}}">Групи</a>--}}
-{{--                <a class="collapse-item" href="{{route('admin.students.index')}}">Студенти</a>--}}
+                <a class="collapse-item" href="{{route('admin.groups.index')}}">Навчальні групи</a>
             </div>
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3"
+           aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Дисципліни</span>
+        </a>
+        <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{route('admin.subjects.index')}}">Дисципліни</a>
+            </div>
+        </div>
+    </li>
 
 
 

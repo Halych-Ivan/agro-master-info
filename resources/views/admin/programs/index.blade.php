@@ -25,13 +25,12 @@
                     <td class="text-center"><b>{{$program->year}}</b></td>
                     <td><b>{{$program->title}}</b></td>
                     <td><b>{{$program->specialty->code??''}} {{$program->specialty->title??''}}</b><br>{{$program->level->title}}</td>
-                    <td class="text-center"><img src="{{$program->image}}" alt="" height="100"></td>
+                    <td class="text-center"><img src="{{asset($program->image)}}" alt="" height="100"></td>
                     <td class="text-center">
-                        @if($program->file)
-                            <b><a href="{{$program->file}}">Переглянути</a></b>
-                        @else
-                            відсутній
-                        @endif
+                        @if($program->file)<b><a href="{{asset($program->file)}}">Переглянути</a></b>@endif
+                        @if($program->plan_full)<b><a href="{{asset($program->plan_full)}}">Навчальний план (денне)</a></b><br>@endif
+                        @if($program->plan_extra)<b><a href="{{asset($program->plan_extra)}}">Навчальний план (заочне)</a></b><br>@endif
+                        @if($program->plan_dual)<b><a href="{{asset($program->plan_dual)}}">Навчальний план (дуальне)</a></b>@endif
                     </td>
                     <td><b>{{$program->info}}</b></td>
                     <td class="text-center"><x-admin.action-icons resource="programs" id="{{$program->id}}"></x-admin.action-icons></td>

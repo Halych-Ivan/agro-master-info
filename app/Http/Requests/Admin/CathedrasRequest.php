@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SpecialtiesRequest extends FormRequest
+class CathedrasRequest extends FormRequest
 {
 
     public function authorize(): bool
@@ -16,12 +16,16 @@ class SpecialtiesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'string|max:255',
-            'code' => 'nullable|string|max:255',
+
+            'title' => 'nullable|string|max:255',
+            'abbr' => 'nullable|string|max:255',
+            'link' => 'nullable|string|max:255',
+            'content' => 'nullable|string',
             'info' => 'nullable|string|max:255',
 
             'image' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp|max:2048',
-            'file'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
+            'logo' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp|max:2048',
+
         ];
     }
 }

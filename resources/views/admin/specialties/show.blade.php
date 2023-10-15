@@ -6,32 +6,11 @@
 
     <div class="">
         <table class="table table-bordered">
-            <tr>
-                <td>Номер</td>
-                <th>{{$specialty->code}}</th>
-            </tr>
-            <tr>
-                <td>Назва</td>
-                <th>{{$specialty->title}}</th>
-            </tr>
-            <tr>
-                <td>Картинка</td>
-                <th>
-                    <img src="{{$specialty->image}}" alt="" height="100">
-                </th>
-            </tr>
-            <tr>
-                <td>Файл</td>
-                <th>
-                    @if($specialty->file)
-                        <a href="{{$specialty->file}}">Переглянути</a>{{$specialty->file}}
-                    @endif
-                </th>
-            </tr>
-            <tr>
-                <td>Примітки</td>
-                <th>{{$specialty->info??'.....'}}</th>
-            </tr>
+            <x-admin.show title="Номер">{{$specialty->code}}</x-admin.show>
+            <x-admin.show title="Назва">{{$specialty->title}}</x-admin.show>
+            <x-admin.show title="Картинка"><img src="{{asset(asset($specialty->image))}}" alt="" height="100"></x-admin.show>
+            <x-admin.show title="Файл">@if($specialty->file) <a href="{{asset($specialty->file)}}">Переглянути</a>@endif</x-admin.show>
+            <x-admin.show title="Примітки">{{$specialty->info??'.....'}}</x-admin.show>
             <x-admin.action-icons resource="specialties" id="{{$specialty->id}}"></x-admin.action-icons>
         </table>
     </div>

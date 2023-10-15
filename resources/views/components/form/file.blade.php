@@ -4,9 +4,9 @@
         <div>
             @if($src)
                 @if($type == 'img')
-                    <img src="{{$src}}" height="100">
+                    <img src="{{asset($src)}}" height="100" alt="">
                 @else
-                    <a href="{{$src}}">Переглянути </a>{{$src}}
+                    <a href="{{asset($src)}}">Переглянути </a>{{$src}}
                 @endif
             @endif
         </div>

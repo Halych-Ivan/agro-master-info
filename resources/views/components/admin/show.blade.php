@@ -1,8 +1,8 @@
 @props(['title', 'value' => false])
 <tr>
     <td>{{ $title }}</td>
-    <td>
+    <th>
         {{ $value }}
         {{ $slot }}
-</td>
+    </th>
 </tr>

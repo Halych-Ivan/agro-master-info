@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('name')->nullable();
             $table->string('file')->nullable();
+            $table->string('plan_full')->nullable();
+            $table->string('plan_extra')->nullable();
+            $table->string('plan_dual')->nullable();
             $table->string('code')->nullable();
             $table->string('image')->nullable();
             $table->string('info')->nullable();

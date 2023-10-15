@@ -29,6 +29,11 @@ class Program extends Model
         return $this->belongsTo(Specialty::class, 'specialty_id');
     }
 
+    // Навчальні групи даної ОП
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
+    }
 
     public function subjects()
     {

@@ -31,7 +31,7 @@ class ProgramsController extends Controller
     public function store(ProgramsRequest $request, Program $program)
     {
         $data = $request->validated();
-        $this->save($data, $program, 'programs');
+        $this->save($data, $program, 'uploads/programs');
         return view('admin.programs.show', compact('program'))->with('alert', 'Дія виконана успішно!');
     }
 
@@ -53,7 +53,7 @@ class ProgramsController extends Controller
     public function update(ProgramsRequest $request, Program $program)
     {
         $data = $request->validated();
-        $this->save($data, $program, 'programs');
+        $this->save($data, $program, 'uploads/programs');
         return redirect()->route('admin.programs.index')->with('alert', 'Дія виконана успішно!');
     }
 
@@ -67,7 +67,6 @@ class ProgramsController extends Controller
 
     private function save($request, $model, $folder)
     {
-//        dd($request);
         if(isset($request['title'])){ $model->title = $request['title']; }
         if(isset($request['year'])){ $model->year = $request['year']; }
         if(isset($request['info'])){ $model->info = $request['info']; }
@@ -76,15 +75,23 @@ class ProgramsController extends Controller
         if(isset($request['specialty_id'])){ $model->specialty_id = $request['specialty_id']; }
 
         if(isset($request['image'])){
-            $image = $request['image'];
-            $path = $image->store('public/'.$folder);
-            $model->image = Storage::url($path);
+            $model->image = $folder.'/'.$this->saveFile($request['image'], $folder, $model->image);
+        }
+
+        if(isset($request['plan_full'])){
+            $model->plan_full = $folder.'/'.$this->saveFile($request['plan_full'], $folder, $model->plan_full);
+        }
+
+        if(isset($request['plan_extra'])){
+            $model->plan_extra = $folder.'/'.$this->saveFile($request['plan_extra'], $folder, $model->plan_extra);
+        }
+
+        if(isset($request['plan_dual'])){
+            $model->plan_dual = $folder.'/'.$this->saveFile($request['plan_dual'], $folder, $model->plan_dual);
         }
 
         if(isset($request['file'])){
-            $file = $request['file'];
-            $path = $file->store('public/'.$folder);
-            $model->file = Storage::url($path);
+            $model->file = $folder.'/'.$this->saveFile($request['file'], $folder, $model->file);
         }
 
         $model->save();

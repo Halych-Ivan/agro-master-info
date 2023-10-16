@@ -10,6 +10,7 @@
                 <tr>
                     <th class="text-center">№</th>
                     <th class="text-center">Назва</th>
+                    <th class="text-center">Посилання</th>
                     <th class="text-center">Активні дії</th>
                 </tr>
             </thead>
@@ -18,6 +19,7 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td><b>{{$level->title}}</b></td>
+                    <td><b>{{$level->link}}</b></td>
                     <td class="text-center"><x-admin.action-icons resource="levels" id="{{$level->id}}"></x-admin.action-icons></td>
                 </tr>
             @endforeach

@@ -17,7 +17,7 @@ class LevelsRequest extends FormRequest
     {
         return [
             'title' => 'string|max:255',
-            'name' => 'nullable|string|max:255',
+            'link' => 'nullable|string|max:255',
             'info' => 'nullable|string|max:255',
         ];
     }

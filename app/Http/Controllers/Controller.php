@@ -28,5 +28,15 @@ class Controller extends BaseController
         if (File::exists($fileForDelete)) { File::delete($fileForDelete); }
     }
 
+    protected function save($request, $model, $folder)
+    {
+        if(isset($request['title'])){ $model->title = $request['title']; }
+
+
+
+
+        $model->save();
+    }
+
 
 }

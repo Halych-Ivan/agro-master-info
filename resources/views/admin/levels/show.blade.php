@@ -7,7 +7,7 @@
     <div class="">
         <table class="table table-bordered">
             <x-admin.show title="Назва">{{$level->title}}</x-admin.show>
-            <x-admin.show title="Назва детально">{{$level->name}}</x-admin.show>
+            <x-admin.show title="Посилання">{{$level->link}}</x-admin.show>
             <x-admin.show title="Примітки">{{$level->info??'....'}}</x-admin.show>
         </table>
     </div>

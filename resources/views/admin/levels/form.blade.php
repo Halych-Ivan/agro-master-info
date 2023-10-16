@@ -12,7 +12,7 @@
             @if($level->exists) @method('PATCH') @endif
 
             <x-form.text name="title" value="{{ old('title', $level->title) }}" placeholder="Назва"></x-form.text>
-            <x-form.text name="name" value="{{ old('name', $level->name) }}" placeholder="Назва детально"></x-form.text>
+            <x-form.text name="link" value="{{ old('link', $level->link) }}" placeholder="Посилання"></x-form.text>
             <x-form.textarea rows="3" name="info" value="{{ old('info', $level->info) }}"></x-form.textarea>
             <x-form.botton></x-form.botton>
         </form>

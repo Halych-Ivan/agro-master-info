@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('levels', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('name')->nullable();
+            $table->string('link')->nullable();
             $table->string('info')->nullable();
 
             $table->softDeletes();

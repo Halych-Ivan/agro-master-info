@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('specialties', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('name')->nullable();
-            $table->string('file')->nullable();
             $table->string('code')->nullable();
+            $table->string('title');
+            $table->string('file')->nullable();
             $table->string('image')->nullable();
             $table->string('info')->nullable();
 

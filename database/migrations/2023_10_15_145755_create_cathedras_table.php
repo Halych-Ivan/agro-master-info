@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('cathedras', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('content')->nullable();
             $table->string('abbr')->nullable();
             $table->string('link')->nullable();
+            $table->string('content')->nullable();
             $table->string('image')->nullable();
             $table->string('logo')->nullable();
             $table->string('info')->nullable();

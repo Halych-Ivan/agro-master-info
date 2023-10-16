@@ -59,10 +59,9 @@ class LevelsController extends Controller
 
     private function save($request, $model, $folder)
     {
-//        dd($request);
-        if(isset($request['title'])){ $model->title = $request['title']; }
-        if(isset($request['name'])){ $model->name = $request['name']; }
-        if(isset($request['info'])){ $model->info = $request['info']; }
+        $model->title = $request['title'] ?? $model->title;
+        $model->link = $request['link'] ?? $model->link;
+        $model->info = $request['info'] ?? $model->info;
 
         $model->save();
     }

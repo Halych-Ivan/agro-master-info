@@ -19,7 +19,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $subject->title }}</td>
-                        <td>{{ $subject->title }}</td>
+                        <td>{{ $subject->abbr }}</td>
 
                         <td><img src="{{ asset($subject->image) }}" height="50px" alt=""></td>
                         <td class="text-center"><x-admin.action-icons resource="subjects" id="{{$subject->id}}"></x-admin.action-icons></td>

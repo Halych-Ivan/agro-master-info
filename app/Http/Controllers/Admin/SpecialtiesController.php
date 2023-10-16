@@ -57,20 +57,19 @@ class SpecialtiesController extends Controller
         return redirect()->route('admin.specialties.index')->with('alert', 'Дія виконана успішно!');
     }
 
-    private function save($request, $model, $folder)
-    {
-        if(isset($request['code'])){ $model->code = $request['code']; }
-        if(isset($request['title'])){ $model->title = $request['title']; }
-        if(isset($request['info'])){ $model->info = $request['info']; }
-
-        if(isset($request['image'])){
-            $model->image = $folder.'/'.$this->saveFile($request['image'], $folder, $model->image);
-        }
-
-        if(isset($request['file'])){
-            $model->file = $folder.'/'.$this->saveFile($request['file'], $folder, $model->file);
-        }
-
-        $model->save();
-    }
+//    protected function save($request, $model, $folder)
+//    {
+////        $model->title = $request['title'] ?? $model->title;
+//        $model->code = $request['code'] ?? $model->code;
+//        $model->info = $request['info'] ?? $model->info;
+//
+//        if(isset($request['image'])){
+//            $model->image = $folder.'/'.$this->saveFile($request['image'], $folder, $model->image);
+//        }
+//        if(isset($request['file'])){
+//            $model->file = $folder.'/'.$this->saveFile($request['file'], $folder, $model->file);
+//        }
+//
+//        $model->save();
+//    }
 }

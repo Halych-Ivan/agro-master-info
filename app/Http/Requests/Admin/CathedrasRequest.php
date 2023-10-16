@@ -16,7 +16,6 @@ class CathedrasRequest extends FormRequest
     public function rules(): array
     {
         return [
-
             'title' => 'nullable|string|max:255',
             'abbr' => 'nullable|string|max:255',
             'link' => 'nullable|string|max:255',
@@ -25,7 +24,6 @@ class CathedrasRequest extends FormRequest
 
             'image' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp|max:2048',
             'logo' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp|max:2048',
-
         ];
     }
 }

@@ -58,23 +58,4 @@ class CathedrasController extends Controller
         return redirect()->route('admin.cathedras.index')->with('alert', 'Дія виконана успішно!');
     }
 
-
-    private function save($request, $model, $folder)
-    {
-        $model->title = $request['title'] ?? $model->title;
-        $model->abbr = $request['abbr'] ?? $model->abbr;
-        $model->link = $request['link'] ?? $model->link;
-        $model->content = $request['content'] ?? $model->content;
-        $model->info = $request['info'] ?? $model->info;
-
-        if(isset($request['image'])){
-            $model->image = $folder.'/'.$this->saveFile($request['image'], $folder, $model->image);
-        }
-
-        if(isset($request['logo'])){
-            $model->logo = $folder.'/'.$this->saveFile($request['logo'], $folder, $model->logo);
-        }
-
-        $model->save();
-    }
 }

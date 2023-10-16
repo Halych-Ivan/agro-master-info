@@ -195,11 +195,11 @@ class GroupsTableSeeder extends Seeder
             'program_id' => '5',
         ]);
         Group::create([
-        'title' => '208-23м-02',
-        'name' => '52М',
-        'entry' => '2023',
-        'term' => '1 р. 4 міс.',
-        'program_id' => '6',
+            'title' => '208-23м-02',
+            'name' => '52М',
+            'entry' => '2023',
+            'term' => '1 р. 4 міс.',
+            'program_id' => '6',
         ]);
         Group::create([
             'title' => '208-23м-03',
@@ -229,8 +229,5 @@ class GroupsTableSeeder extends Seeder
             'term' => '1 р. 9 міс.',
             'program_id' => '8',
         ]);
-
-
-
     }
 }

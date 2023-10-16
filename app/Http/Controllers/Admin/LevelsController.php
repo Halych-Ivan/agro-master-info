@@ -56,13 +56,4 @@ class LevelsController extends Controller
         return redirect()->route('admin.levels.index')->with('alert', 'Дія виконана успішно!');
     }
 
-
-    private function save($request, $model, $folder)
-    {
-        $model->title = $request['title'] ?? $model->title;
-        $model->link = $request['link'] ?? $model->link;
-        $model->info = $request['info'] ?? $model->info;
-
-        $model->save();
-    }
 }

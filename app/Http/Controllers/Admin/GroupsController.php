@@ -60,17 +60,4 @@ class GroupsController extends Controller
         return redirect()->route('admin.groups.index')->with('alert', 'Дія виконана успішно!');
     }
 
-    private function save($request, $model, $folder)
-    {
-//        dd($request);
-        if(isset($request['title'])){ $model->title = $request['title']; }
-        if(isset($request['name'])){ $model->name = $request['name']; }
-        if(isset($request['info'])){ $model->info = $request['info']; }
-        if(isset($request['entry'])){ $model->entry = $request['entry']; }
-        if(isset($request['term'])){ $model->term = $request['term']; }
-
-        if(isset($request['program_id'])){ $model->program_id = $request['program_id']; }
-
-        $model->save();
-    }
 }

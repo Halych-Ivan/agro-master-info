@@ -58,16 +58,4 @@ class SubjectsController extends Controller
         return redirect()->route('admin.subjects.index')->with('alert', 'Дія виконана успішно!');
     }
 
-
-    private function save($request, $model, $folder)
-    {
-        $model->title = $request['title'] ?? $model->title;
-        $model->info = $request['info'] ?? $model->info;
-
-        if(isset($request['image'])){
-            $model->image = $folder.'/'.$this->saveFile($request['image'], $folder, $model->image);
-        }
-
-        $model->save();
-    }
 }

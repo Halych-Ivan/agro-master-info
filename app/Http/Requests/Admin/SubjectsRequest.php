@@ -17,8 +17,6 @@ class SubjectsRequest extends FormRequest
     {
         return [
             'title' => 'nullable|string|max:255',
-
-
         ];
     }
 }

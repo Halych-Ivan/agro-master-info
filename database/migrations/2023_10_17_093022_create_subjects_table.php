@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('abbr')->nullable();
             $table->string('link')->nullable();
             $table->string('syllabus')->nullable();
-            $table->string('program')->nullable();
             $table->string('image')->nullable();
             $table->string('info')->nullable();
             $table->string('semester')->nullable();
@@ -34,8 +33,8 @@ return new class extends Migration
             $table->boolean('is_main')->default(false);
             $table->boolean('is_active')->default(false);
 
-            $table->foreignId('program_id')->references('id')->on('programs');
-            $table->foreignId('cathedra_id')->references('id')->on('cathedras');
+            $table->foreignId('program_id');
+            $table->foreignId('cathedra_id');
 
             $table->softDeletes();
             $table->timestamps();

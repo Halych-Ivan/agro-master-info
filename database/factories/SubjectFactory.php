@@ -23,7 +23,6 @@ class SubjectFactory extends Factory
             'abbr' => $this->faker->userName(),
             'link' => $this->faker->url,
             'syllabus' => 'uploads/logo.webp',
-            'program' => 'uploads/logo.webp',
             'image' => 'uploads/logo.webp',
             'info' => '',
             'semester' => $this->faker->numberBetween($min = 1, $max = 8),

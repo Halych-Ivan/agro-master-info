@@ -40,6 +40,9 @@ class SubjectsRequest extends FormRequest
             'syllabus' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
             'program' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
             'image' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
+
+            'search' => 'nullable|string|max:255',
+            'paginate' => 'nullable|string|max:255',
         ];
     }
 }

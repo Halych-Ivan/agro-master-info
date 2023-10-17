@@ -35,6 +35,7 @@ class Program extends Model
         return $this->hasMany(Group::class);
     }
 
+
     public function subjects()
     {
         return $this->hasMany(Subject::class);

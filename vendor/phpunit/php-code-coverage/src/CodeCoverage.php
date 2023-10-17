@@ -14,6 +14,7 @@ use function array_diff_key;
 use function array_flip;
 use function array_keys;
 use function array_merge;
+use function array_merge_recursive;
 use function array_unique;
 use function count;
 use function explode;
@@ -56,6 +57,11 @@ final class CodeCoverage
     private bool $useAnnotationsForIgnoringCode = true;
 
     /**
+     * @psalm-var array<string,list<int>>
+     */
+    private array $linesToBeIgnored = [];
+
+    /**
      * @psalm-var array<string, TestType>
      */
     private array $tests = [];
@@ -66,6 +72,7 @@ final class CodeCoverage
     private array $parentClassesExcludedFromUnintentionallyCoveredCodeCheck = [];
     private ?FileAnalyser $analyser                                         = null;
     private ?string $cacheDirectory                                         = null;
+    private ?Directory $cachedReport                                        = null;
 
     public function __construct(Driver $driver, Filter $filter)
     {
@@ -80,7 +87,11 @@ final class CodeCoverage
      */
     public function getReport(): Directory
     {
-        return (new Builder($this->analyser()))->build($this);
+        if ($this->cachedReport === null) {
+            $this->cachedReport = (new Builder($this->analyser()))->build($this);
+        }
+
+        return $this->cachedReport;
     }
 
     /**
@@ -88,10 +99,19 @@ final class CodeCoverage
      */
     public function clear(): void
     {
-        $this->currentId   = null;
-        $this->currentSize = null;
-        $this->data        = new ProcessedCodeCoverageData;
-        $this->tests       = [];
+        $this->currentId    = null;
+        $this->currentSize  = null;
+        $this->data         = new ProcessedCodeCoverageData;
+        $this->tests        = [];
+        $this->cachedReport = null;
+    }
+
+    /**
+     * @internal
+     */
+    public function clearCache(): void
+    {
+        $this->cachedReport = null;
     }
 
     /**
@@ -150,6 +170,8 @@ final class CodeCoverage
         $this->currentSize = $size;
 
         $this->driver->start();
+
+        $this->cachedReport = null;
     }
 
     /**
@@ -159,10 +181,16 @@ final class CodeCoverage
     {
         $data = $this->driver->stop();
 
+        $this->linesToBeIgnored = array_merge_recursive(
+            $this->linesToBeIgnored,
+            $linesToBeIgnored
+        );
+
         $this->append($data, null, $append, $status, $linesToBeCovered, $linesToBeUsed, $linesToBeIgnored);
 
-        $this->currentId   = null;
-        $this->currentSize = null;
+        $this->currentId    = null;
+        $this->currentSize  = null;
+        $this->cachedReport = null;
 
         return $data;
     }
@@ -183,6 +211,8 @@ final class CodeCoverage
         if ($id === null) {
             throw new TestIdMissingException;
         }
+
+        $this->cachedReport = null;
 
         if ($status === null) {
             $status = TestStatus::unknown();
@@ -243,6 +273,8 @@ final class CodeCoverage
         $this->data->merge($that->data);
 
         $this->tests = array_merge($this->tests, $that->getTests());
+
+        $this->cachedReport = null;
     }
 
     public function enableCheckForUnintentionallyCoveredCode(): void
@@ -455,7 +487,8 @@ final class CodeCoverage
                         $uncoveredFile,
                         $this->analyser()
                     ),
-                    self::UNCOVERED_FILES
+                    self::UNCOVERED_FILES,
+                    linesToBeIgnored: $this->linesToBeIgnored
                 );
             }
         }
@@ -587,7 +620,9 @@ final class CodeCoverage
         if ($this->cachesStaticAnalysis()) {
             $this->analyser = new CachingFileAnalyser(
                 $this->cacheDirectory,
-                $this->analyser
+                $this->analyser,
+                $this->useAnnotationsForIgnoringCode,
+                $this->ignoreDeprecatedCode
             );
         }
 

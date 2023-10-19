@@ -17,7 +17,7 @@ class ProgramsRequest extends AdminRequest
     {
         return array_merge(parent::rules(), [
             // Ваши специфічні правила валідації для цього конкретного запиту
-
+            'year' => 'required|integer|between:2015,'.date('Y'),
 
             // ...
         ]);

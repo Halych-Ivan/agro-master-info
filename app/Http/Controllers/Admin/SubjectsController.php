@@ -14,15 +14,32 @@ class SubjectsController extends Controller
 
     public function index()
     {
+        $size = request('size') ?? 10;
         $search = request('search') ?? false;
+        $cathedra = request('cathedra') ?? false;
+        $program = request('program') ?? false;
+        $this->filter($search, 'search');
+        $this->filter($cathedra, 'cathedra');
+        $this->filter($program, 'program');
 
-        $subjects = Subject::with('program')
-            ->leftJoin('programs', 'subjects.program_id', '=', 'programs.id')
-            ->orderBy('programs.year', 'desc')
-            ->where('subjects.title', 'like', '%'.$search.'%')
-            ->select('subjects.*')
-            ->paginate(10);
-        return view('admin.subjects.index', compact('subjects'));
+        $searchSubjectTitle = session('search') ?? '';
+        $searchCathedraId = session('cathedra') ?? '';
+        $searchProgramId = session('program') ?? '';
+
+        $subjects = Subject::whereHas('cathedra', function ($q) use ($searchCathedraId) {
+            $q->where('id', 'like', '%' . $searchCathedraId . '%');})
+            ->whereHas('program', function ($q) use ($searchProgramId) {
+                $q->where('id', 'like', '%' . $searchProgramId . '%');})
+            ->where('title', 'like', '%' . $searchSubjectTitle . '%')
+            ->orderBy('is_active', 'desc')
+            ->orderBy('program_id', 'desc')
+            ->orderBy('semester', 'asc')
+            ->orderBy('title', 'asc')
+            ->paginate($size);
+
+        $cathedras = Cathedra::query()->select('id', 'abbr')->orderBy('abbr', 'asc')->get();
+        $programs = Program::query()->select('id', 'title', 'year')->orderBy('year', 'asc')->get();
+        return view('admin.subjects.index', compact('subjects', 'cathedras', 'programs'));
     }
 
 
@@ -37,6 +54,20 @@ class SubjectsController extends Controller
     public function store(SubjectsRequest $request, Subject $subject)
     {
         $data = $request->validated();
+
+        $currentYear = date("Y"); // отримуємо поточний рік
+        $currentMonth = date("n"); // отримуємо поточний місяць (1-12)
+        $course = $currentYear - $subject->program->year;
+        if ($currentMonth > 8) {$course++;}
+
+        $semester_I = $course * 2 - 1;
+        $semester_II = $course * 2;
+        if($data['semester'] == $semester_I || $data['semester'] == $semester_II){
+            $data['is_active'] = 1;
+        } else {
+            $data['is_active'] = 0;
+        }
+
         $this->save($data, $subject, 'uploads/subjects');
         return view('admin.subjects.show', compact('subject'))->with('alert', 'Дія виконана успішно!');
     }
@@ -59,6 +90,22 @@ class SubjectsController extends Controller
     public function update(SubjectsRequest $request, Subject $subject)
     {
         $data = $request->validated();
+
+
+        $currentYear = date("Y"); // отримуємо поточний рік
+        $currentMonth = date("n"); // отримуємо поточний місяць (1-12)
+        $startYear = Program::where('id', $data['program_id'])->value('year');
+        $course = $currentYear - $startYear;
+        if ($currentMonth > 8) {$course++;}
+        $semester_I = $course * 2 - 1;
+        $semester_II = $course * 2;
+        if($data['semester'] == $semester_I || $data['semester'] == $semester_II){
+            $data['is_active'] = 1;
+        } else {
+            $data['is_active'] = 0;
+        }
+
+
         $this->save($data, $subject, 'uploads/subjects');
         return view('admin.subjects.show', compact('subject'))->with('alert', 'Дія виконана успішно!');
     }

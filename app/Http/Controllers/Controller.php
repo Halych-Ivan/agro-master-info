@@ -28,6 +28,12 @@ class Controller extends BaseController
         if (File::exists($fileForDelete)) { File::delete($fileForDelete); }
     }
 
+    protected function filter($value, $key)
+    {
+        if($value) {session([$key => $value]);}
+        if($value == 'all') {session()->forget($key);}
+    }
+
 
     protected function save($request, $model, $folder)
     {

@@ -18,7 +18,7 @@ class Subject extends Model
 
     public function cathedra()
     {
-        return $this->belongsTo(Cathedra::class, 'cathedra_id');
+        return $this->belongsTo(Cathedra::class);
     }
 
     public function program()

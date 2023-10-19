@@ -18,7 +18,7 @@
                 @foreach($cathedras as $cathedra)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $cathedra->title }}</td>
+                        <td><a href="{{ route('admin.cathedras.show', $cathedra->id) }}">{{ $cathedra->title }}</a></td>
                         <td>{{ $cathedra->abbr }}</td>
                         <td><img src="{{ asset($cathedra->logo) }}" height="50px" alt=""></td>
                         <td class="text-center"><x-admin.action-icons resource="cathedras" id="{{$cathedra->id}}"></x-admin.action-icons></td>

@@ -12,8 +12,22 @@ class TeachersController extends Controller
 
     public function index()
     {
-        $teachers = Teacher::all();
-        return view('admin.teachers.index', compact('teachers'));
+        $size = request('size') ?? 10;
+        $search = request('search') ?? false;
+        $cathedra = request('cathedra') ?? false;
+        $this->filter($search, 'search');
+        $this->filter($cathedra, 'cathedra');
+
+        $searchTeacherTitle = session('search') ?? '';
+        $searchCathedraId = session('cathedra') ?? '';
+
+        $teachers = Teacher::whereHas('cathedra', function ($q) use ($searchCathedraId) {
+            $q->where('id', 'like', '%' . $searchCathedraId . '%');})
+            ->where('name', 'like', '%' . $searchTeacherTitle . '%')
+            ->paginate($size);
+
+        $cathedras = Cathedra::query()->select('id', 'abbr')->orderBy('abbr', 'asc')->get();
+        return view('admin.teachers.index', compact('teachers', 'cathedras'));
     }
 
 

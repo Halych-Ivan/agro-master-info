@@ -3,14 +3,27 @@
 @section('title', 'Предмети - всі записи')
 
 @section('content')
+{{--    {{dd($subjects)}}--}}
 
     <div class="container m-2">
         <x-admin.action-icons resource="subjects" id=""></x-admin.action-icons>
 
         <form class="d-flex m-3" role="search" action="{{route('admin.subjects.index')}}">
-            <input class="form-control w-50" name="search" type="search" placeholder="{{session('search'??'Пошук по назві')}}" aria-label="Search">
+            <input class="form-control w-25" name="search" type="search" placeholder="{{session('search'??'Пошук по назві')}}" aria-label="Search">
+            <select class="form-select btn ml-3 " name="program">
+                <option value="all" {{session('program')?'selected':''}}>Всі програми</option>
+                @foreach($programs as $program)
+                    <option value="{{$program->id}}" {{session('program')==$program->id?'selected':''}}>{{$program->title}}, {{$program->year}}</option>
+                @endforeach
+            </select>
+            <select class="form-select btn  ml-3 " name="cathedra">
+                <option value="all" {{session('cathedra')?'selected':''}}>Всі кафедри</option>
+                @foreach($cathedras as $cathedra)
+                    <option value="{{$cathedra->id}}" {{session('cathedra')==$cathedra->id?'selected':''}}>{{$cathedra->abbr}}</option>
+                @endforeach
+            </select>
             <button class="btn btn-outline-primary ml-3 mr-5" type="submit">Пошук</button>
-            <a href="{{route('admin.subjects.index', 'search=0')}}" class="btn btn-outline-primary">Всі записи</a>
+            <a href="{{route('admin.subjects.index', 'search=all&cathedra=all&program=all')}}" class="btn btn-outline-primary">Всі записи</a>
         </form>
         {{ $subjects->links('admin.layout.pagination') }}
 
@@ -27,7 +40,7 @@
                 </tr>
                 @foreach($subjects as $subject)
 {{--                    @php(dd($subject->program))--}}
-                    <tr>
+                    <tr class="{{$subject->is_active?'':'bg-gray-300'}} ">
                         <td>{{ $loop->iteration }}</td>
                         <td><a href="{{route('admin.subjects.show', $subject->id)}}">{{ $subject->title }}</a></td>
                         <td>{{ $subject->semester }}</td>

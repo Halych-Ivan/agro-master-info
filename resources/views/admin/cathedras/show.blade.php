@@ -16,4 +16,50 @@
             <x-admin.action-icons resource="cathedras" id="{{$cathedra->id}}"></x-admin.action-icons>
         </table>
     </div>
+
+    <h2>Викладачі кафедри</h2>
+    <table class="table table-bordered">
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        @foreach($cathedra->teachers as $teacher)
+            <tr>
+                <td>
+                    <a href="{{route('admin.teachers.show', $teacher->id)}}">
+                        {{$teacher->name}}
+                    </a>
+                </td>
+                <td>{{$teacher->grade}}</td>
+                <td>{{$teacher->rank}}</td>
+                <td><img src="{{asset($teacher->image)}}" alt="" height="100"></td>
+            </tr>
+        @endforeach
+    </table>
+
+
+    <h2>Дисципліни кафедри</h2>
+    <table class="table table-bordered">
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        @foreach($cathedra->subjects as $subject)
+            @continue(!$subject->is_active)
+            <tr>
+                <td>
+                    <a href="{{route('admin.subjects.show', $subject->id)}}">
+                        {{$subject->title}}
+                    </a>
+                </td>
+                <td>
+                    {{$subject->semester}}
+                </td>
+                <td>
+                    {{$subject->lecture}} / {{$subject->practical}} / {{$subject->laboratory}}
+                </td>
+                <td>
+                    {{$subject->control}}
+                </td>
+            </tr>
+        @endforeach
+    </table>
 @endsection

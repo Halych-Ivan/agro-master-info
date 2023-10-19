@@ -65,7 +65,6 @@
                 </div>
             </div>
 
-
             <x-form.text name="size" value="{{ old('size', $subject->size) }}" placeholder="Кількість кредитів"></x-form.text>
             <x-form.text name="lecture" value="{{ old('lecture', $subject->lecture) }}" placeholder="Лекції"></x-form.text>
             <x-form.text name="practical" value="{{ old('practical', $subject->practical) }}" placeholder="Практичні"></x-form.text>
@@ -80,6 +79,18 @@
                 <div class="form-check ml-3 d-flex align-items-center">
                     <input class="form-check-input" type="radio" name="is_main" id="is_main-2" value="0" {{!$subject->is_main?'checked':''}}>
                     <label class="form-check-label" for="is_main-2">Вибіркова дисципліна</label>
+                </div>
+            </div>
+
+            <div class="input-group m-3">
+                <label class="input-group-text w-25" for="">Активна</label>
+                <div class="form-check ml-3 d-flex align-items-center">
+                    <input class="form-check-input" type="radio" name="is_active" id="is_active-1" value="1" {{$subject->is_active?'checked':''}}>
+                    <label class="form-check-label" for="is_active-1">Активна</label>
+                </div>
+                <div class="form-check ml-3 d-flex align-items-center">
+                    <input class="form-check-input" type="radio" name="is_active" id="is_active-2" value="0" {{!$subject->is_active?'checked':''}}>
+                    <label class="form-check-label" for="is_active-2">Не активна</label>
                 </div>
             </div>
 

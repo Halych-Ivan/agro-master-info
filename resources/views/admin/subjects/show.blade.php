@@ -21,7 +21,7 @@
             <x-admin.show title="Лабораторні ">{{$subject->laboratory}} год.</x-admin.show>
             <x-admin.show title="Опис">{{$subject->description}}</x-admin.show>
             <x-admin.show title="Основна / вибіркова">{{$subject->is_main?'Основна':'Вибіркова'}}</x-admin.show>
-{{--            <x-admin.show title="Активний">{{$subject->is_active}}</x-admin.show>--}}
+            <x-admin.show title="Активна">{{$subject->is_active}}</x-admin.show>
 
             <x-admin.show title="Силабус">@if($subject->syllabus) <a href="{{asset($subject->syllabus)}}">Переглянути</a>@endif</x-admin.show>
             <x-admin.show title="Програма">@if($subject->program) <a href="{{asset($subject->program)}}">Переглянути</a>@endif</x-admin.show>

@@ -58,6 +58,7 @@
         <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{route('admin.cathedras.index')}}">Кафедри</a>
+                <a class="collapse-item" href="{{route('admin.teachers.index')}}">Викладачі</a>
 {{--                <a class="collapse-item" href="{{route('admin.teachers.index')}}">Викладачі</a>--}}
             </div>
         </div>

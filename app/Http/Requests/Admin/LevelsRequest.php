@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LevelsRequest extends FormRequest
+class LevelsRequest extends AdminRequest
 {
 
     public function authorize(): bool
@@ -15,10 +15,11 @@ class LevelsRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
-            'title' => 'string|max:255',
-            'link' => 'nullable|string|max:255',
-            'info' => 'nullable|string|max:255',
-        ];
+        return array_merge(parent::rules(), [
+            // Ваши специфічні правила валідації для цього конкретного запиту
+
+
+            // ...
+        ]);
     }
 }

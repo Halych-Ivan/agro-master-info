@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CathedrasRequest extends FormRequest
+class CathedrasRequest extends AdminRequest
 {
 
     public function authorize(): bool
@@ -15,15 +15,11 @@ class CathedrasRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
-            'title' => 'nullable|string|max:255',
-            'abbr' => 'nullable|string|max:255',
-            'link' => 'nullable|string|max:255',
-            'content' => 'nullable|string',
-            'info' => 'nullable|string|max:255',
+        return array_merge(parent::rules(), [
+            // Ваши специфічні правила валідації для цього конкретного запиту
 
-            'image' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp|max:2048',
-            'logo' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp|max:2048',
-        ];
+
+            // ...
+        ]);
     }
 }

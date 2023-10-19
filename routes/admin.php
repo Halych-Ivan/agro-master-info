@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\ProgramsController;
 use App\Http\Controllers\Admin\GroupsController;
 use App\Http\Controllers\Admin\CathedrasController;
 use App\Http\Controllers\Admin\SubjectsController;
-
+use App\Http\Controllers\Admin\TeachersController;
 
 
 //************************************************************
@@ -24,20 +24,5 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::resource('groups', GroupsController::class); // Навчальні групи
     Route::resource('cathedras', CathedrasController::class); // Кафедри
     Route::resource('subjects', SubjectsController::class); // Дисципліни
-
-
-
-//
-//
-//    Route::resource('cathedras', App\Http\Controllers\Admin\CathedrasController::class);
-//    Route::resource('teachers', App\Http\Controllers\Admin\TeachersController::class);
-//
-//    Route::resource('groups', App\Http\Controllers\Admin\GroupsController::class);
-//    Route::resource('students', App\Http\Controllers\Admin\StudentsController::class);
-//
-//
-//
-//
-//    Route::resource('subjects', App\Http\Controllers\Admin\SubjectsController::class);
-//    Route::resource('plans', App\Http\Controllers\Admin\PlansController::class);
+    Route::resource('teachers', TeachersController::class); // Викладачі
 });

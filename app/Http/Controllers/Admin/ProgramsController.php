@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\ProgramsRequest;
 use App\Models\Level;
 use App\Models\Program;
 use App\Models\Specialty;
+use App\Models\Subject;
 use Illuminate\Support\Facades\Storage;
 
 class ProgramsController extends Controller
@@ -36,8 +37,12 @@ class ProgramsController extends Controller
     }
 
 
-    public function show(Program $program)
+    public function show($id)
     {
+        $program = Program::with(['subjects' => function ($query) {
+            $query->orderBy('semester', 'asc')->orderBy('title', 'asc');
+        }])->find($id);
+
         return view('admin.programs.show', compact('program'));
     }
 

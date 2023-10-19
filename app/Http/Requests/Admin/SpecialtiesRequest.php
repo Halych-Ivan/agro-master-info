@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SpecialtiesRequest extends FormRequest
+class SpecialtiesRequest extends AdminRequest
 {
 
     public function authorize(): bool
@@ -15,13 +15,11 @@ class SpecialtiesRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
-            'title' => 'string|max:255',
-            'code' => 'nullable|string|max:255',
-            'info' => 'nullable|string|max:255',
+        return array_merge(parent::rules(), [
+            // Ваши специфічні правила валідації для цього конкретного запиту
 
-            'image' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp|max:2048',
-            'file'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
-        ];
+
+            // ...
+        ]);
     }
 }

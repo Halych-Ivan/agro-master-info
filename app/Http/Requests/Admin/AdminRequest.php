@@ -24,8 +24,52 @@ class AdminRequest extends FormRequest
     public function rules()
     {
         return [
+            'search' => 'nullable|string|max:255',
+            'paginate' => 'nullable|string|max:255',
+
+            'title' => 'nullable|string|max:255',
+            'code' => 'nullable|string|max:255',
+            'abbr' => 'nullable|string|max:255',
+            'link' => 'nullable|string|max:255',
+
+            'info' => 'nullable|string|max:255',
+            'semester' => 'nullable|string|max:255',
+            'control' => 'nullable|string|max:255',
+            'size' => 'nullable|string|max:255',
+            'lecture' => 'nullable|string|max:255',
+            'practical' => 'nullable|string|max:255',
+            'laboratory' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'teacher' => 'nullable|string|max:255',
+            'year' => 'required|integer|between:2015,'.date('Y'),
+            'name' => 'nullable|string|max:255',
+            'entry' => 'nullable|string|max:255',
+            'term' => 'nullable|string|max:255',
+            'content' => 'nullable|string',
+
+
+            'is_main' => 'nullable|string|max:255',
+            'is_active' => 'nullable|string|max:255',
+
+
+            'level_id' => 'nullable|string|max:3',
+            'program_id' => 'nullable|string|max:255',
+            'cathedra_id' => 'nullable|string|max:255',
+            'specialty_id' => 'nullable|string|max:3',
+
+
+            'file'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
+            'syllabus' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
+            'program' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
+            'plan_full'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
+            'plan_extra'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
+            'plan_dual'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
+            'logo' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp|max:2048',
+            'image' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
+
+
 //            'year' => 'required|integer|between:2015,'.date('Y'),
-////            'year' => 'nullable|int|max:5',
+//            'year' => 'nullable|int|max:5',
 //            'code' => 'nullable|string|max:5',
 //            'term' => 'nullable|string|max:4',
 //            'entry' => 'nullable|string|max:4',

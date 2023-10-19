@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GroupsRequest extends AdminRequest
+class TeachersRequest extends AdminRequest
 {
 
     public function authorize(): bool

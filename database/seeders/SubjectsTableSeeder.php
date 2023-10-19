@@ -38,7 +38,7 @@ class SubjectsTableSeeder extends Seeder
 //
 //        ]);
 
-        Subject::factory()->count(20)->create();
+        Subject::factory()->count(500)->create();
 
 
     }

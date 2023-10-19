@@ -12,22 +12,16 @@ use Illuminate\Http\Request;
 class SubjectsController extends Controller
 {
 
-    public function index(SubjectsRequest $request)
+    public function index()
     {
-        $data = $request->validated();
-        $paginate = $request['paginate'] ?? 10;
-
-        if(isset($data['search'])){
-            if($data['search'] == 0) session()->forget('search');
-            else session(['search' => $data['search']]);
-        }
+        $search = request('search') ?? false;
 
         $subjects = Subject::with('program')
             ->leftJoin('programs', 'subjects.program_id', '=', 'programs.id')
             ->orderBy('programs.year', 'desc')
+            ->where('subjects.title', 'like', '%'.$search.'%')
             ->select('subjects.*')
-            ->where('subjects.title', 'like', session('search').'%')
-            ->paginate($paginate);
+            ->paginate(10);
         return view('admin.subjects.index', compact('subjects'));
     }
 

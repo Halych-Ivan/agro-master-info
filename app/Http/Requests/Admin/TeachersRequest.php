@@ -16,6 +16,8 @@ class TeachersRequest extends AdminRequest
     public function rules(): array
     {
         return array_merge(parent::rules(), [
+            'title' => 'nullable|string|max:255',
+            'name' => 'required|string|max:255',
             // Ваши специфічні правила валідації для цього конкретного запиту
 
 

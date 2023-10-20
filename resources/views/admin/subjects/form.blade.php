@@ -32,7 +32,7 @@
 
             <div class="mb-3">
                 <div class="input-group m-3">
-                    <label class="input-group-text w-25" for="select01">Освітня програма</label>
+                    <label class="input-group-text w-25" for="select01">Кафедра</label>
                     <select class="form-select w-75" id="select01" name="cathedra_id">
                         @foreach($cathedras as $cathedra)
                             @php($id = old('cathedra_id') ?? $subject->cathedra->id ?? '')

@@ -25,4 +25,7 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::resource('cathedras', CathedrasController::class); // Кафедри
     Route::resource('subjects', SubjectsController::class); // Дисципліни
     Route::resource('teachers', TeachersController::class); // Викладачі
+
+    Route::get('subjects/{id}/add_teacher', [SubjectsController::class, 'add_teacher'])->name('subjects.add_teacher'); // Довідки
+
 });

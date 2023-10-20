@@ -26,5 +26,10 @@ class Subject extends Model
         return $this->belongsTo(Program::class);
     }
 
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class);
+    }
+
 
 }

@@ -118,4 +118,13 @@ class SubjectsController extends Controller
         return redirect()->route('admin.subjects.index')->with('alert', 'Дія виконана успішно!');
     }
 
+    public function add_teacher(Subject $subject)
+    {
+
+        dd(123456);
+
+
+        return view('admin.subjects.add_teacher', compact('subject'));
+    }
+
 }

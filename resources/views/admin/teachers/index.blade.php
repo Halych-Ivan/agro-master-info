@@ -25,15 +25,13 @@
                 <tr>
                     <th>N</th>
                     <th>Назва</th>
-                    <th>Семестр</th>
-                    <th>ОП</th>
                     <th>Кафедра</th>
-                    <th>Картинка</th>
+                    <th>Фото</th>
                     <th>Активні дії</th>
                 </tr>
                 @foreach($teachers as $teacher)
                     {{--                    @php(dd($subject->program))--}}
-                    <tr>
+                    <tr class="{{$teacher->is_active?'':'bg-gray-300'}}">
                         <td>{{ $loop->iteration }}</td>
                         <td><a href="{{route('admin.teachers.show', $teacher->id)}}">{{ $teacher->name }}</a></td>
                         <td><a href="{{route('admin.cathedras.show', $teacher->cathedra->id)}}">{{ $teacher->cathedra->abbr }}</a></td>

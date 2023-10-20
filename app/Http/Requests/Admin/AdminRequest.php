@@ -24,6 +24,7 @@ class AdminRequest extends FormRequest
     public function rules()
     {
         return [
+            'id' => 'nullable|string|max:255',
             'search' => 'nullable|string|max:255',
             'paginate' => 'nullable|string|max:255',
 
@@ -31,6 +32,7 @@ class AdminRequest extends FormRequest
             'code' => 'nullable|string|max:255',
             'abbr' => 'nullable|string|max:255',
             'link' => 'nullable|string|max:255',
+            'meet' => 'nullable|string|max:255',
 
             'info' => 'nullable|string|max:255',
             'semester' => 'nullable|string|max:255',
@@ -46,10 +48,14 @@ class AdminRequest extends FormRequest
             'entry' => 'nullable|string|max:255',
             'term' => 'nullable|string|max:255',
             'content' => 'nullable|string',
+            'phone' => 'nullable|string',
+            'phone_2' => 'nullable|string',
+            'email' => 'nullable|email',
 
 
             'is_main' => 'nullable|string|max:255',
             'is_active' => 'nullable|string|max:255',
+            'position' => 'nullable|string|max:255',
 
 
             'level_id' => 'nullable|string|max:3',

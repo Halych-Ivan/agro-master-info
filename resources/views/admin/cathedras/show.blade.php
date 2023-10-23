@@ -31,6 +31,7 @@
                 </td>
                 <td>{{$teacher->grade}}</td>
                 <td>{{$teacher->rank}}</td>
+                <td>Кількість предметів: {{ $teacher->subjects->filter(function ($subject) { return $subject->is_active; })->count() }}</td>
                 <td><img src="{{asset($teacher->image)}}" alt="" height="100"></td>
             </tr>
         @endforeach
@@ -62,7 +63,8 @@
                 <td>
                     @foreach($subject->teachers as $teacher)
                         <div class="{{($teacher->cathedra->id != $cathedra->id)?'bg-warning':''}}">
-                            {{$teacher->name}}
+                            <b><a href="{{route('admin.teachers.show', $teacher->id)}}">{{$teacher->name}}</a></b>
+                            {{($teacher->pivot->is_main)?'Лектор':''}}
                             <b>{{($teacher->cathedra->id != $cathedra->id)?', '.$teacher->cathedra->abbr:''}}</b>
                         </div>
                     @endforeach

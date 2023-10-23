@@ -16,8 +16,9 @@
                 <div id="collapse{{$loop->iteration}}" class="accordion-collapse collapse ml-10" data-bs-parent="#accordion">
                 @foreach($cathedra->teachers as $teacher)
                         <div class="accordion-body">
+                            <a href="{{route('admin.subjects.add_teacher', [$subject->id, $teacher->id])}}" class="btn btn-primary">Викладач</a>
+                            <a href="{{route('admin.subjects.add_teacher', [$subject->id, $teacher->id, true])}}" class="btn btn-primary">Лектор</a>
                             <strong >{{$teacher->name}}</strong>
-                            <a href="{{route('admin.subjects.add_teacher', [$subject->id, $teacher->id])}}" class="btn btn-primary">Додати</a>
                             </p>
                         </div>
                     @endforeach

@@ -75,10 +75,10 @@ class SubjectsController extends Controller
     }
 
 
-    public function show(Subject $subject)
+    public function show($id)
     {
-        $teachers = $subject->teachers;
-//        dd($teachers);
+//        dd($id);
+        $subject = Subject::with('teachers')->find($id);
         return view('admin.subjects.show', compact('subject'));
     }
 
@@ -122,7 +122,8 @@ class SubjectsController extends Controller
         return redirect()->route('admin.subjects.index')->with('alert', 'Дія виконана успішно!');
     }
 
-    public function add_teacher($id, $teacher = null)
+
+    public function add_teacher($id, $teacher = null, $main = null)
     {
         try {
             $subject = Subject::findOrFail($id);
@@ -131,7 +132,13 @@ class SubjectsController extends Controller
 
                 $teacher = Teacher::find($teacher);
 //                $subject->teachers()->attach($teacher);
-                $subject->teachers()->syncWithoutDetaching($teacher);
+
+                if($main){
+                    $subject->teachers()->syncWithoutDetaching([$teacher->id => ['is_main' => true]]);
+                }else{
+                    $subject->teachers()->syncWithoutDetaching([$teacher->id => ['is_main' => false]]);
+                }
+
                 return redirect()->route('admin.subjects.show', $subject->id);
             }
 
@@ -145,5 +152,14 @@ class SubjectsController extends Controller
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with('error', 'Subject not found.');
         }
+    }
+
+    public function dell_teacher($id, $teacher)
+    {
+        $subject = Subject::find($id);
+        $teacher = Teacher::find($teacher);
+        $teacher->subjects()->detach($subject);
+
+        return redirect()->back();
     }
 }

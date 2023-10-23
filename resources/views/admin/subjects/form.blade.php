@@ -48,9 +48,21 @@
                     <label class="input-group-text w-25" for="select02">Викладач</label>
                     <div>
                         @foreach($subject->teachers as $teacher)
-                            {{$teacher->name}}, каф. {{$teacher->cathedra->abbr}}<br>
+                            @if($teacher->pivot->is_main)
+                                <div class="bg-gray-200 text-right">
+                                    <b>ЛЕКТОР</b> {{$teacher->name}}, каф. {{$teacher->cathedra->abbr}}
+                                    <a class="btn btn-outline-primary" href="{{route('admin.subjects.add_teacher', [$subject->id, $teacher->id])}}">Не лектор <i class="fas fa-user-minus"></i></a>
+
+                            @else
+                                <div class="text-right">
+                                    {{$teacher->name}}, каф. {{$teacher->cathedra->abbr}}
+                                    <a class="btn btn-outline-primary" href="{{route('admin.subjects.add_teacher', [$subject->id, $teacher->id, 'ok'])}}">Лектор <i class="fas fa-user-check"></i></a>
+
+                            @endif
+                                    <a class="btn btn-outline-danger" href="{{route('admin.subjects.dell_teacher', [$subject->id, $teacher->id])}}"> <i class="fas fa-trash"></i></a>
+                                </div>
                         @endforeach
-                        <a href="{{route('admin.subjects.add_teacher', $subject->id)}}" class="btn btn-outline-primary">Додати викладача</a>
+                                        <a href="{{route('admin.subjects.add_teacher', $subject->id)}}" class="btn btn-outline-success">Додати викладача <i class="fas fa-user-plus"></i></a>
                     </div>
                 </div>
             </div>

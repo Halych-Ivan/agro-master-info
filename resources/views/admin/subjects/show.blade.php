@@ -13,9 +13,12 @@
             <x-admin.show title="Спеціальність">{{$subject->program->specialty->code}} {{$subject->program->specialty->title}}</x-admin.show>
             <x-admin.show title="Кафедра">{{$subject->cathedra->title}}</x-admin.show>
             <x-admin.show title="Викладач">{{''}}</x-admin.show>
+            <x-admin.show title="Викладач">
             @foreach($subject->teachers as $teacher)
-                <x-admin.show title="Викладач">{{$teacher->name}}, каф. {{$teacher->cathedra->abbr}}</x-admin.show>
+                    <div class="{{($teacher->pivot->is_main)?'bg-gray-200':''}} ">{{$teacher->name}}, каф. {{$teacher->cathedra->abbr}}
+                    {{($teacher->pivot->is_main == 1) ? ', Лектор' : ''}}</div>
             @endforeach
+            </x-admin.show>
 
 
 

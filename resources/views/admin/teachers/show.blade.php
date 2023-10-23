@@ -16,6 +16,9 @@
             <x-admin.show title="Посилання meet">{{$teacher->meet}}<br></x-admin.show>
             <x-admin.show title="Активна">{{$teacher->is_active}}</x-admin.show>
             <x-admin.show title="Примітки">{{$teacher->info??'.....'}}</x-admin.show>
+            @foreach($teacher->subjects as $subject)
+                <x-admin.show title="Дисципліна">{{$subject->title??'.....'}}</x-admin.show>
+            @endforeach
             <x-admin.action-icons resource="teachers" id="{{$teacher->id}}"></x-admin.action-icons>
         </table>
     </div>

@@ -30,6 +30,7 @@
             <x-form.text name="link" value="{{ old('link', $subject->link) }}" placeholder="Посилання"></x-form.text>
             <x-form.text name="description" value="{{ old('description', $subject->description) }}" placeholder="Опис"></x-form.text>
 
+
             <div class="mb-3">
                 <div class="input-group m-3">
                     <label class="input-group-text w-25" for="select01">Кафедра</label>
@@ -42,7 +43,17 @@
                 </div>
             </div>
 
-            <x-form.text name="teacher" value="{{ old('teacher', $subject->teacher) }}" placeholder="Викладач"></x-form.text>
+            <div class="mb-3">
+                <div class="input-group m-3">
+                    <label class="input-group-text w-25" for="select02">Викладач</label>
+                    <div>
+                        @foreach($subject->teachers as $teacher)
+                            {{$teacher->name}}, каф. {{$teacher->cathedra->abbr}}<br>
+                        @endforeach
+                        <a href="{{route('admin.subjects.add_teacher', $subject->id)}}" class="btn btn-outline-primary">Додати викладача</a>
+                    </div>
+                </div>
+            </div>
 
             <div class="mb-3">
                 <div class="input-group m-3">

@@ -59,6 +59,14 @@
                 <td>
                     {{$subject->control}}
                 </td>
+                <td>
+                    @foreach($subject->teachers as $teacher)
+                        <div class="{{($teacher->cathedra->id != $cathedra->id)?'bg-warning':''}}">
+                            {{$teacher->name}}
+                            <b>{{($teacher->cathedra->id != $cathedra->id)?', '.$teacher->cathedra->abbr:''}}</b>
+                        </div>
+                    @endforeach
+                </td>
             </tr>
         @endforeach
     </table>

@@ -4,12 +4,22 @@
 
 @section('content')
 
+{{--    {{dd($subject->teachers)}}--}}
+
     <div class="">
         <table class="table table-bordered">
             <x-admin.show title="Назва">{{$subject->title}}</x-admin.show>
             <x-admin.show title="Освітня програма">{{$subject->program->title}}, {{$subject->program->year}}</x-admin.show>
             <x-admin.show title="Спеціальність">{{$subject->program->specialty->code}} {{$subject->program->specialty->title}}</x-admin.show>
             <x-admin.show title="Кафедра">{{$subject->cathedra->title}}</x-admin.show>
+            <x-admin.show title="Викладач">{{''}}</x-admin.show>
+            @foreach($subject->teachers as $teacher)
+                <x-admin.show title="Викладач">{{$teacher->name}}, каф. {{$teacher->cathedra->abbr}}</x-admin.show>
+            @endforeach
+
+
+
+
             <x-admin.show title="Код по плану">{{$subject->code}}</x-admin.show>
             <x-admin.show title="Абревіатура">{{$subject->abbr}}</x-admin.show>
             <x-admin.show title="Посилання">{{$subject->link}}</x-admin.show>

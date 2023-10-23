@@ -7,6 +7,8 @@ use App\Http\Requests\Admin\SubjectsRequest;
 use App\Models\Cathedra;
 use App\Models\Program;
 use App\Models\Subject;
+use App\Models\Teacher;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class SubjectsController extends Controller
@@ -75,6 +77,8 @@ class SubjectsController extends Controller
 
     public function show(Subject $subject)
     {
+        $teachers = $subject->teachers;
+//        dd($teachers);
         return view('admin.subjects.show', compact('subject'));
     }
 
@@ -118,13 +122,28 @@ class SubjectsController extends Controller
         return redirect()->route('admin.subjects.index')->with('alert', 'Дія виконана успішно!');
     }
 
-    public function add_teacher(Subject $subject)
+    public function add_teacher($id, $teacher = null)
     {
+        try {
+            $subject = Subject::findOrFail($id);
 
-        dd(123456);
+            if($teacher) {
 
+                $teacher = Teacher::find($teacher);
+//                $subject->teachers()->attach($teacher);
+                $subject->teachers()->syncWithoutDetaching($teacher);
+                return redirect()->route('admin.subjects.show', $subject->id);
+            }
 
-        return view('admin.subjects.add_teacher', compact('subject'));
+            $cathedras = Cathedra::query()
+                ->select('id', 'title', 'abbr')
+                ->orderBy('abbr', 'asc')
+                ->get();
+
+            return view('admin.subjects.add_teacher', compact('subject', 'cathedras'));
+
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->with('error', 'Subject not found.');
+        }
     }
-
 }

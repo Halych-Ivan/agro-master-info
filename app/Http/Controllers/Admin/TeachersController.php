@@ -12,7 +12,7 @@ class TeachersController extends Controller
 
     public function index()
     {
-        $size = request('size') ?? 10;
+        $size = request('size') ?? 20;
         $search = request('search') ?? false;
         $cathedra = request('cathedra') ?? false;
         $this->filter($search, 'search');
@@ -24,6 +24,7 @@ class TeachersController extends Controller
         $teachers = Teacher::whereHas('cathedra', function ($q) use ($searchCathedraId) {
             $q->where('id', 'like', '%' . $searchCathedraId . '%');})
             ->where('name', 'like', '%' . $searchTeacherTitle . '%')
+            ->orderBy('name')
             ->paginate($size);
 
         $cathedras = Cathedra::query()->select('id', 'abbr')->orderBy('abbr', 'asc')->get();
@@ -48,6 +49,7 @@ class TeachersController extends Controller
 
     public function show(Teacher $teacher)
     {
+//        dd($teacher);
         return view('admin.teachers.show', compact('teacher'));
     }
 

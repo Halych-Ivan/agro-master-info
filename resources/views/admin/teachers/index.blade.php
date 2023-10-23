@@ -39,7 +39,7 @@
 {{--                        <td>{{ $subject->program->title }}, {{ $subject->program->year }}</td>--}}
 {{--                        <td>{{ $subject->cathedra->title }}</td>--}}
 
-                        <td><img src="{{ asset($teacher->image) }}" height="50px" alt=""></td>
+                        <td><img src="{{ asset($teacher->photo) }}" height="75px" alt=""></td>
                         <td class="text-center"><x-admin.action-icons resource="teachers" id="{{$teacher->id}}"></x-admin.action-icons></td>
                     </tr>
                 @endforeach

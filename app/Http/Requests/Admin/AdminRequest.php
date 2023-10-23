@@ -72,6 +72,7 @@ class AdminRequest extends FormRequest
             'plan_dual'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
             'logo' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp|max:2048',
             'image' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
+            'photo' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
 
 
 //            'year' => 'required|integer|between:2015,'.date('Y'),

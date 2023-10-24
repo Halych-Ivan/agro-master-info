@@ -11,9 +11,8 @@
             <x-admin.show title="Назва">{{$subject->title}}</x-admin.show>
             <x-admin.show title="Освітня програма">{{$subject->program->title}}, {{$subject->program->year}}</x-admin.show>
             <x-admin.show title="Спеціальність">{{$subject->program->specialty->code}} {{$subject->program->specialty->title}}</x-admin.show>
-            <x-admin.show title="Кафедра">{{$subject->cathedra->title}}</x-admin.show>
-            <x-admin.show title="Викладач">{{''}}</x-admin.show>
-            <x-admin.show title="Викладач">
+            <x-admin.show title="Кафедра"><a href="{{route('admin.cathedras.show', $subject->cathedra->id)}}">{{$subject->cathedra->title}}</a></x-admin.show>
+                        <x-admin.show title="Викладач">
             @foreach($subject->teachers as $teacher)
                     <div class="{{($teacher->pivot->is_main)?'bg-gray-200':''}} ">{{$teacher->name}}, каф. {{$teacher->cathedra->abbr}}
                     {{($teacher->pivot->is_main == 1) ? ', Лектор' : ''}}</div>

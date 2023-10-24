@@ -21,10 +21,10 @@
     <h2>Дисципліни</h2>
     <table class="table table-bordered">
         <tr>
-            <td>Назва</td><td>Семестр</td><td>Лек/практ/лаб</td><td>Форма контролю</td><td>Кафедра</td>
+            <td>Назва</td><td>Семестр</td><td>Лек/практ/лаб</td><td>Форма контролю</td><td>Кафедра</td><td>Осн./Виб.</td>
         </tr>
         @foreach($program->subjects as $subject)
-            <tr>
+            <tr class="{{$subject->is_active?'':'bg-gray-300'}}">
                 <td>
                     <a href="{{route('admin.subjects.show', $subject->id)}}">
                         {{$subject->title}}
@@ -43,6 +43,9 @@
                     <a href="{{route('admin.cathedras.show', $subject->cathedra->id)}}">
                         {{$subject->cathedra->abbr}}
                     </a>
+                </td>
+                <td>
+                    {{$subject->is_main?'Основна':'Вибіркова'}}
                 </td>
             </tr>
         @endforeach

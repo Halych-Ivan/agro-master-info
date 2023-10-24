@@ -35,7 +35,7 @@ class TeachersController extends Controller
     public function create(Teacher $teacher)
     {
         $cathedras = Cathedra::all();
-        return view('admin.subjects.form', compact('teacher',  'cathedras'));
+        return view('admin.teachers.form', compact('teacher',  'cathedras'));
     }
 
 

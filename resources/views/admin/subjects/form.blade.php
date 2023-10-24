@@ -35,7 +35,7 @@
                 <div class="input-group m-3">
                     <label class="input-group-text w-25" for="select01">Кафедра</label>
                     <select class="form-select w-75" id="select01" name="cathedra_id">
-                        @foreach($cathedras as $cathedra)
+                    @foreach($cathedras as $cathedra)
                             @php($id = old('cathedra_id') ?? $subject->cathedra->id ?? '')
                             <option value="{{$cathedra->id}}" {{ $id == $cathedra->id ? 'selected' : '' }}>{{$cathedra->title}}</option>
                         @endforeach
@@ -62,7 +62,9 @@
                                     <a class="btn btn-outline-danger" href="{{route('admin.subjects.dell_teacher', [$subject->id, $teacher->id])}}"> <i class="fas fa-trash"></i></a>
                                 </div>
                         @endforeach
-                                        <a href="{{route('admin.subjects.add_teacher', $subject->id)}}" class="btn btn-outline-success">Додати викладача <i class="fas fa-user-plus"></i></a>
+                                        @isset($subject->id)
+                                            <a href="{{route('admin.subjects.add_teacher', $subject->id)}}" class="btn btn-outline-success">Додати викладача <i class="fas fa-user-plus"></i></a>
+                                        @endisset
                     </div>
                 </div>
             </div>
@@ -108,11 +110,11 @@
             <div class="input-group m-3">
                 <label class="input-group-text w-25" for="">Активна</label>
                 <div class="form-check ml-3 d-flex align-items-center">
-                    <input class="form-check-input" type="radio" name="is_active" id="is_active-1" value="1" {{$subject->is_active?'checked':''}}>
+                    <input class="form-check-input" type="radio" name="is_active" id="is_active-1"  disabled value="1" {{$subject->is_active?'checked':''}}>
                     <label class="form-check-label" for="is_active-1">Активна</label>
                 </div>
                 <div class="form-check ml-3 d-flex align-items-center">
-                    <input class="form-check-input" type="radio" name="is_active" id="is_active-2" value="0" {{!$subject->is_active?'checked':''}}>
+                    <input class="form-check-input" type="radio" name="is_active" id="is_active-2"  disabled value="0" {{!$subject->is_active?'checked':''}}>
                     <label class="form-check-label" for="is_active-2">Не активна</label>
                 </div>
             </div>

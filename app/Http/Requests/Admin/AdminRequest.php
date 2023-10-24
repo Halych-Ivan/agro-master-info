@@ -33,6 +33,8 @@ class AdminRequest extends FormRequest
             'abbr' => 'nullable|string|max:255',
             'link' => 'nullable|string|max:255',
             'meet' => 'nullable|string|max:255',
+            'rank' => 'nullable|string|max:255',
+            'grade' => 'nullable|string|max:255',
 
             'info' => 'nullable|string|max:255',
             'semester' => 'nullable|string|max:255',

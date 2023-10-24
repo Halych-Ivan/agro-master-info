@@ -43,9 +43,9 @@
                     <tr class="{{$subject->is_active?'':'bg-gray-300'}} ">
                         <td>{{ $loop->iteration }}</td>
                         <td><a href="{{route('admin.subjects.show', $subject->id)}}">{{ $subject->title }}</a></td>
-                        <td>{{ $subject->semester }}</td>
+                        <td>{{ $subject->semester }}, {{ $subject->control }}, {{$subject->is_main?'Основна':'Вибіркова'}}</td>
                         <td>{{ $subject->program->title }}, {{ $subject->program->year }}</td>
-                        <td>{{ $subject->cathedra->title }}</td>
+                        <td>{{ $subject->cathedra->abbr }}</td>
 
                         <td><img src="{{ asset($subject->image) }}" height="50px" alt=""></td>
                         <td class="text-center"><x-admin.action-icons resource="subjects" id="{{$subject->id}}"></x-admin.action-icons></td>

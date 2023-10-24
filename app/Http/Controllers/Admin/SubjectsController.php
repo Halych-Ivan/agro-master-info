@@ -16,7 +16,7 @@ class SubjectsController extends Controller
 
     public function index()
     {
-        $size = request('size') ?? 10;
+        $size = request('size') ?? 25;
         $search = request('search') ?? false;
         $cathedra = request('cathedra') ?? false;
         $program = request('program') ?? false;
@@ -56,20 +56,6 @@ class SubjectsController extends Controller
     public function store(SubjectsRequest $request, Subject $subject)
     {
         $data = $request->validated();
-
-        $currentYear = date("Y"); // отримуємо поточний рік
-        $currentMonth = date("n"); // отримуємо поточний місяць (1-12)
-        $course = $currentYear - $subject->program->year;
-        if ($currentMonth > 8) {$course++;}
-
-        $semester_I = $course * 2 - 1;
-        $semester_II = $course * 2;
-        if($data['semester'] == $semester_I || $data['semester'] == $semester_II){
-            $data['is_active'] = 1;
-        } else {
-            $data['is_active'] = 0;
-        }
-
         $this->save($data, $subject, 'uploads/subjects');
         return view('admin.subjects.show', compact('subject'))->with('alert', 'Дія виконана успішно!');
     }
@@ -95,7 +81,7 @@ class SubjectsController extends Controller
     {
         $data = $request->validated();
 
-
+        // ----is_active-----------------
         $currentYear = date("Y"); // отримуємо поточний рік
         $currentMonth = date("n"); // отримуємо поточний місяць (1-12)
         $startYear = Program::where('id', $data['program_id'])->value('year');
@@ -108,10 +94,11 @@ class SubjectsController extends Controller
         } else {
             $data['is_active'] = 0;
         }
-
+        // ----is_active-----------------
 
         $this->save($data, $subject, 'uploads/subjects');
-        return view('admin.subjects.show', compact('subject'))->with('alert', 'Дія виконана успішно!');
+        return redirect()->route('admin.subjects.index');
+//        return view('admin.subjects.show', compact('subject'))->with('alert', 'Дія виконана успішно!');
     }
 
 
@@ -161,5 +148,10 @@ class SubjectsController extends Controller
         $teacher->subjects()->detach($subject);
 
         return redirect()->back();
+    }
+
+    private function is_active()
+    {
+
     }
 }

@@ -18,6 +18,7 @@
     </div>
 
     <h2>Викладачі кафедри</h2>
+    <x-admin.action-icons resource="teachers"></x-admin.action-icons>
     <table class="table table-bordered">
         <tr>
             <td></td><td></td><td></td><td></td><td></td>
@@ -45,20 +46,22 @@
         </tr>
         @foreach($cathedra->subjects as $subject)
             @continue(!$subject->is_active)
-            <tr>
+            <tr class="{{$subject->is_main?'':'bg-gray-200'}} ">
                 <td>
                     <a href="{{route('admin.subjects.show', $subject->id)}}">
                         {{$subject->title}}
                     </a>
                 </td>
                 <td>
-                    {{$subject->semester}}
+                    {{$subject->semester}}, {{$subject->control}}
                 </td>
                 <td>
                     {{$subject->lecture}} / {{$subject->practical}} / {{$subject->laboratory}}
                 </td>
                 <td>
-                    {{$subject->control}}
+                    {{$subject->program->title}}, {{$subject->program->year}}<br>
+                    {{$subject->is_main?'Основна':'Вибіркова'}}
+
                 </td>
                 <td>
                     @foreach($subject->teachers as $teacher)

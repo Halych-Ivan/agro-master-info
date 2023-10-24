@@ -37,24 +37,35 @@ class Controller extends BaseController
 
     protected function save($request, $model, $folder)
     {
-        if(isset($request['title'])){ $model->title = $request['title']; }
-        if(isset($request['name'])){ $model->name = $request['name']; }
+        if(isset($request['abbr'])){ $model->abbr = $request['abbr']; }
         if(isset($request['code'])){ $model->code = $request['code']; }
-        if(isset($request['year'])){ $model->year = $request['year']; }
+        if(isset($request['content'])){ $model->content = $request['content']; }
+        if(isset($request['control'])){ $model->control = $request['control']; }
+        if(isset($request['description'])){ $model->description = $request['description']; }
+        if(isset($request['entry'])){ $model->entry = $request['entry']; }
+        if(isset($request['grade'])){
+            if($request['grade'] === 'null') $model->grade = null;
+            else $model->grade = $request['grade'];
+        }
         if(isset($request['info'])){ $model->info = $request['info']; }
         if(isset($request['link'])){ $model->link = $request['link']; }
-        if(isset($request['abbr'])){ $model->abbr = $request['abbr']; }
-        if(isset($request['term'])){ $model->term = $request['term']; }
-        if(isset($request['entry'])){ $model->entry = $request['entry']; }
-        if(isset($request['content'])){ $model->content = $request['content']; }
-        if(isset($request['semester'])){ $model->semester = $request['semester']; }
-        if(isset($request['control'])){ $model->control = $request['control']; }
-        if(isset($request['size'])){ $model->size = $request['size']; }
         if(isset($request['lecture'])){ $model->lecture = $request['lecture']; }
-        if(isset($request['practical'])){ $model->practical = $request['practical']; }
         if(isset($request['laboratory'])){ $model->laboratory = $request['laboratory']; }
-        if(isset($request['description'])){ $model->description = $request['description']; }
+        if(isset($request['name'])){ $model->name = $request['name']; }
+        if(isset($request['rank'])){
+            if($request['rank'] === 'null') $model->rank = null;
+            else $model->rank = $request['rank'];
+        }
+        if(isset($request['practical'])){ $model->practical = $request['practical']; }
+        if(isset($request['position'])){ $model->position = $request['position']; }
+        if(isset($request['semester'])){ $model->semester = $request['semester']; }
+        if(isset($request['size'])){ $model->size = $request['size']; }
         if(isset($request['teacher'])){ $model->teacher = $request['teacher']; }
+        if(isset($request['title'])){ $model->title = $request['title']; }
+        if(isset($request['term'])){ $model->term = $request['term']; }
+        if(isset($request['year'])){ $model->year = $request['year']; }
+
+
         if(isset($request['is_main'])){ $model->is_main = $request['is_main']; }
         if(isset($request['is_active'])){ $model->is_active = $request['is_active']; }
 

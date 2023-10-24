@@ -11,7 +11,9 @@ class CathedrasController extends Controller
 {
     public function index()
     {
-        $cathedras = Cathedra::all();
+        $cathedras = Cathedra::query()
+            ->orderBy('title', 'asc')
+            ->get();
         return view('admin.cathedras.index', compact('cathedras'));
     }
 
@@ -30,8 +32,11 @@ class CathedrasController extends Controller
     }
 
 
-    public function show(Cathedra $cathedra)
+    public function show($id)
     {
+        $cathedra = Cathedra::with(['teachers' => function ($query) {
+            $query->orderBy('name', 'asc');}])
+            ->find($id);
         return view('admin.cathedras.show', compact('cathedra'));
     }
 

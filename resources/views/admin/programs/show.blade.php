@@ -11,7 +11,7 @@
             <x-admin.show title="Рівень вищої освіти">{{$program->level->title}}</x-admin.show>
             <x-admin.show title="Рік">{{$program->year}}</x-admin.show>
             <x-admin.show title="Картинка"><img src="{{asset($program->image)}}" alt="" height="100"></x-admin.show>
-            <x-admin.show title="Файл">@if($program->file)<a href="{{asset($program->file)}}">Переглянути</a>@endif</x-admin.show>
+            <x-admin.show title="Освітня програма">@if($program->file)<a href="{{asset($program->file)}}">Переглянути</a>@endif</x-admin.show>
             <x-admin.show title="Навчальний план (денне)">@if($program->plan_full)<a href="{{asset($program->plan_full)}}">Переглянути</a>@endif</x-admin.show>
             <x-admin.show title="Навчальний план (заочне)">@if($program->plan_extra)<a href="{{asset($program->plan_extra)}}">Переглянути</a>@endif</x-admin.show>
             <x-admin.show title="Навчальний план (дуальне)">@if($program->plan_dual)<a href="{{asset($program->plan_dual)}}">Переглянути</a>@endif</x-admin.show>
@@ -26,9 +26,11 @@
         @foreach($program->subjects as $subject)
             <tr class="{{$subject->is_active?'':'bg-gray-300'}}">
                 <td>
-                    <a href="{{route('admin.subjects.show', $subject->id)}}">
-                        {{$subject->title}}
-                    </a>
+                    <div class="{{$subject->is_main?'':'bg-gray-500 ml-5'}}">
+                        <a href="{{route('admin.subjects.show', $subject->id)}}">
+                            {{$subject->title}}
+                        </a>
+                    </div>
                 </td>
                 <td>
                     {{$subject->semester}}

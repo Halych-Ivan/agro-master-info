@@ -37,6 +37,7 @@
                     </select>
                 </div>
             </div>
+            <x-form.file src="{{ old('file', $program->file) }}" name="file" title="Виберіть файл освітньої програми"></x-form.file>
             <x-form.file src="{{ old('plan_full', $program->plan_full) }}" name="plan_full" title="Виберіть файл навчальний план (денне)"></x-form.file>
             <x-form.file src="{{ old('plan_extra', $program->plan_extra) }}" name="plan_extra" title="Виберіть файл навчальний план (заочне)"></x-form.file>
             <x-form.file src="{{ old('plan_dual', $program->plan_dual) }}" name="plan_dual" title="Виберіть файл навчальний план (дуальне)"></x-form.file>

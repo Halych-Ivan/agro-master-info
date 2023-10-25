@@ -40,7 +40,11 @@ class ProgramsController extends Controller
     public function show($id)
     {
         $program = Program::with(['subjects' => function ($query) {
-            $query->orderBy('semester', 'asc')->orderBy('title', 'asc');
+            $query->orderBy('semester', 'asc')
+                ->orderBy('control', 'desc')
+                ->orderBy('is_main', 'desc')
+//                ->orderBy('title', 'asc')
+                ->orderBy('code', 'asc');
         }])->find($id);
 
         return view('admin.programs.show', compact('program'));

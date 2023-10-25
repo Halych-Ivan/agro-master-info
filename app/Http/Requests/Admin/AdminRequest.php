@@ -66,12 +66,12 @@ class AdminRequest extends FormRequest
             'specialty_id' => 'nullable|string|max:3',
 
 
-            'file'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
-            'syllabus' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
-            'program' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
-            'plan_full'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
-            'plan_extra'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
-            'plan_dual'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
+            'file'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,xlsx,pdf,doc,docx|max:2048',
+            'syllabus' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,xlsx,pdf,doc,docx|max:2048',
+            'program' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,xlsx,pdf,doc,docx|max:2048',
+            'plan_full'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,xlsx,pdf,doc,docx|max:2048',
+            'plan_extra'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,xlsx,pdf,doc,docx|max:2048',
+            'plan_dual'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,xlsx,pdf,doc,docx|max:2048',
             'logo' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp|max:2048',
             'image' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',
             'photo' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx|max:2048',

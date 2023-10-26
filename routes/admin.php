@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\GroupsController;
 use App\Http\Controllers\Admin\CathedrasController;
 use App\Http\Controllers\Admin\SubjectsController;
 use App\Http\Controllers\Admin\TeachersController;
+use App\Http\Controllers\Admin\StudentsController;
 
 
 //************************************************************
@@ -25,6 +26,7 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::resource('cathedras', CathedrasController::class); // Кафедри
     Route::resource('subjects', SubjectsController::class); // Дисципліни
     Route::resource('teachers', TeachersController::class); // Викладачі
+    Route::resource('students', StudentsController::class); // Викладачі
 
     Route::get('subjects/{id}/add_teacher/{teacher?}/{main?}', [SubjectsController::class, 'add_teacher'])->name('subjects.add_teacher'); // Довідки
     Route::get('subjects/{id}/dell_teacher/{teacher}', [SubjectsController::class, 'dell_teacher'])->name('subjects.dell_teacher'); // Довідки

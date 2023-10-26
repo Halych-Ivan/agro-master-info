@@ -22,6 +22,11 @@ class Group extends Model
         return $this->belongsTo(Program::class, 'program_id');
     }
 
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
+
 
 
 

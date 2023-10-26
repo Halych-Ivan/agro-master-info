@@ -73,6 +73,7 @@
         <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{route('admin.groups.index')}}">Навчальні групи</a>
+                <a class="collapse-item" href="{{route('admin.students.index')}}">Студенти</a>
             </div>
         </div>
     </li>

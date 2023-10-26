@@ -18,12 +18,28 @@
             <x-admin.show title="Примітки">{{$program->info??'.....'}}</x-admin.show>
         </table>
     </div>
+
+    <h2>Навчальні групи</h2>
+    @foreach($program->groups as $group)
+         <div>
+             <a href="{{route('admin.groups.show', $group->id)}}">{{$group->title}} ({{$group->name}})</a>
+         </div>
+    @endforeach
+    <hr>
+
+
     <h2>Дисципліни</h2>
     <table class="table table-bordered">
-        <tr>
-            <td>Назва</td><td>Семестр</td><td>Лек/практ/лаб</td><td>Форма контролю</td><td>Кафедра</td><td>Осн./Виб.</td>
+        <tr class="text-center">
+            <td>Назва</td><td>Семестр<br>форма контролю</td><td>Лек/практ/лаб</td><td>Кафедра</td><td>Викладач</td><td>Осн./Виб.</td>
         </tr>
+        @php($i = 0)
         @foreach($program->subjects as $subject)
+{{--            @php( $i ? '' : 0)--}}
+            @if($i != $subject->semester)
+                @php( $i = $i +1)
+            <tr><td colspan="6" class="text-center">Семестр {{$i}}</td></tr>
+            @endif
             <tr class="{{$subject->is_active?'':'bg-gray-300'}}">
                 <td>
                     <div class="{{$subject->is_main?'':'bg-gray-500 ml-5'}}">
@@ -33,18 +49,23 @@
                     </div>
                 </td>
                 <td>
-                    {{$subject->semester}}
+                    {{$subject->semester}}, {{$subject->control}}
                 </td>
                 <td>
                     {{$subject->lecture}} / {{$subject->practical}} / {{$subject->laboratory}}
                 </td>
                 <td>
-                    {{$subject->control}}
-                </td>
-                <td>
                     <a href="{{route('admin.cathedras.show', $subject->cathedra->id)}}">
                         {{$subject->cathedra->abbr}}
                     </a>
+                </td>
+                <td>
+                    @foreach($subject->teachers as $teacher)
+                        <div>
+                            <a href="{{route('admin.teachers.show', $teacher->id)}}">
+                            {{$teacher->name}}</a>
+                        </div>
+                    @endforeach
                 </td>
                 <td>
                     {{$subject->is_main?'Основна':'Вибіркова'}}

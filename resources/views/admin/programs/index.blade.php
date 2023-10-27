@@ -14,6 +14,7 @@
                 <th class="text-center">Спеціальність</th>
                 <th class="text-center">Картинка</th>
                 <th class="text-center">Файл</th>
+                <th class="text-center">Групи</th>
                 <th class="text-center">Примітки</th>
                 <th class="text-center">Активні дії</th>
             </tr>
@@ -23,7 +24,7 @@
                 <tr>
                     <td class="text-center">{{$loop->iteration}}</td>
                     <td class="text-center"><b>{{$program->year}}</b></td>
-                    <td><b>{{$program->title}}</b></td>
+                    <td><b><x-admin.href href="programs.show" id="{{$program->id}}">{{$program->title}}</x-admin.href></b></td>
                     <td><b>{{$program->specialty->code??''}} {{$program->specialty->title??''}}</b><br>{{$program->level->title}}</td>
                     <td class="text-center"><img src="{{asset($program->image)}}" alt="" height="100"></td>
                     <td class="text-center">
@@ -31,6 +32,11 @@
                         @if($program->plan_full)<b><a href="{{asset($program->plan_full)}}">Навчальний план (денне)</a></b><br>@endif
                         @if($program->plan_extra)<b><a href="{{asset($program->plan_extra)}}">Навчальний план (заочне)</a></b><br>@endif
                         @if($program->plan_dual)<b><a href="{{asset($program->plan_dual)}}">Навчальний план (дуальне)</a></b>@endif
+                    </td>
+                    <td>
+                        @foreach($program->groups as $group)
+                            <x-admin.href href="groups.show" id="{{$group->id}}" br>{{$group->name}}({{$group->students->count()}})</x-admin.href>
+                        @endforeach
                     </td>
                     <td><b>{{$program->info}}</b></td>
                     <td class="text-center"><x-admin.action-icons resource="programs" id="{{$program->id}}"></x-admin.action-icons></td>

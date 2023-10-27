@@ -17,6 +17,8 @@ class StudentsRequest extends AdminRequest
     {
         return array_merge(parent::rules(), [
             // Ваші специфічні правила валідації для цього конкретного запиту
+            'name' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
 
 
             // ...

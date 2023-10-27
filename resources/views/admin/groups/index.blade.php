@@ -10,6 +10,7 @@
             <tr>
                 <th class="text-center">№</th>
                 <th class="text-center" colspan="2">Номер групи</th>
+                <th class="text-center">Кільк. студентів</th>
 
                 <th class="text-center">Рік вступу</th>
                 <th class="text-center">Термін навчання</th>
@@ -26,6 +27,7 @@
                     <td class="text-center">{{$loop->iteration}}</td>
                     <td class="text-center"><b>{{$group->title}}</b></td>
                     <td class="text-center"><b>{{$group->name}}</b></td>
+                    <td class="text-center"><b>{{$group->students->count()}}</b></td>
                     <td class="text-center"><b>{{$group->entry}}</b></td>
                     <td class="text-center"><b>{{$group->term}}</b></td>
                     <td><a href="{{route('admin.programs.show', $group->program->id)}}"><b>{{$group->program->title??''}}</b>, {{$group->program->year??''}}</a></td>

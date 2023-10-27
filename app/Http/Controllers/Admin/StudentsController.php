@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StudentsRequest;
 use App\Models\Group;
+use App\Models\Program;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -33,15 +34,20 @@ class StudentsController extends Controller
     }
 
 
-    public function create()
+    public function create(Student $student)
     {
-        //
+        $groups = Group::all();
+        $programs = Program::orderBy('year', 'desc')->get();
+        return view('admin.students.form', compact( 'student','groups', 'programs'));
     }
 
 
-    public function store(StudentsRequest $request)
+    public function store(StudentsRequest $request, Student $student)
     {
-        //
+        $data = $request->validated();
+        $this->save($data, $student, 'uploads/students');
+        return view('admin.students.show', compact('student'))->with('alert', 'Дія виконана успішно!');
+
     }
 
 

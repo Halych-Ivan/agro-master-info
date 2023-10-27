@@ -25,24 +25,21 @@
                 <tr>
                     <th>N</th>
                     <th>Назва</th>
-                    <th>Кафедра</th>
-                    <th>Посада</th>
+                    <th>Група</th>
+                    <th>Освітня програма</th>
                     <th>Фото</th>
                     <th>Активні дії</th>
                 </tr>
                 @foreach($students as $student)
 {{--                    --}}{{--                    @php(dd($subject->program))--}}
-{{--                    <tr class="{{$teacher->is_active?'':'bg-gray-300'}}">--}}
-{{--                        <td>{{ $loop->iteration }}</td>--}}
-{{--                        <td><a href="{{route('admin.teachers.show', $teacher->id)}}">{{ $teacher->name }}</a></td>--}}
-{{--                        <td><a href="{{route('admin.cathedras.show', $teacher->cathedra->id)}}">{{ $teacher->cathedra->abbr }}</a></td>--}}
-{{--                        <td>{{ $teacher->position }}</td>--}}
-{{--                        --}}{{--                        <td>{{ $subject->program->title }}, {{ $subject->program->year }}</td>--}}
-{{--                        --}}{{--                        <td>{{ $subject->cathedra->title }}</td>--}}
-
-{{--                        <td><img src="{{ asset($teacher->photo) }}" height="75px" alt=""></td>--}}
-{{--                        <td class="text-center"><x-admin.action-icons resource="teachers" id="{{$teacher->id}}"></x-admin.action-icons></td>--}}
-{{--                    </tr>--}}
+                    <tr class="{{$student->is_active?'':'bg-gray-300'}}">
+                        <td>{{ $loop->iteration }}</td>
+                        <td><a href="{{route('admin.students.show', $student->id)}}">{{ $student->name }}</a></td>
+                        <td><a href="{{route('admin.groups.show', $student->group->id)}}">{{ $student->group->title }} ({{$student->group->name}})</a></td>
+                        <td>{{ $student->group->program->title }}, {{ $student->group->program->year }}</td>
+                        <td><img src="{{ asset($student->photo) }}" height="75px" alt=""></td>
+                        <td class="text-center"><x-admin.action-icons resource="students" id="{{$student->id}}"></x-admin.action-icons></td>
+                    </tr>
                 @endforeach
             </table>
             {{ $students->links('admin.layout.pagination') }}

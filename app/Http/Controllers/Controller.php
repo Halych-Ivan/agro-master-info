@@ -70,10 +70,11 @@ class Controller extends BaseController
         if(isset($request['is_active'])){ $model->is_active = $request['is_active']; }
 
 
+        if(isset($request['cathedra_id'])){ $model->cathedra_id = $request['cathedra_id']; }
+        if(isset($request['group_id'])){ $model->group_id = $request['group_id']; }
         if(isset($request['level_id'])){ $model->level_id = $request['level_id']; }
         if(isset($request['program_id'])){ $model->program_id = $request['program_id']; }
         if(isset($request['specialty_id'])){ $model->specialty_id = $request['specialty_id']; }
-        if(isset($request['cathedra_id'])){ $model->cathedra_id = $request['cathedra_id']; }
 
 
         if(isset($request['plan_full'])){$model->plan_full = $folder.'/'.$this->saveFile($request['plan_full'], $folder, $model->plan_full);}

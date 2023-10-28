@@ -24,7 +24,7 @@
             <table class="table mt-3">
                 <tr>
                     <th>N</th>
-                    <th>Назва</th>
+                    <th>ПІБ</th>
                     <th>Група</th>
                     <th>Освітня програма</th>
                     <th>Фото</th>
@@ -34,7 +34,7 @@
 {{--                    --}}{{--                    @php(dd($subject->program))--}}
                     <tr class="{{$student->is_active?'':'bg-gray-300'}}">
                         <td>{{ $loop->iteration }}</td>
-                        <td><a href="{{route('admin.students.show', $student->id)}}">{{ $student->name }}</a></td>
+                        <td><a href="{{route('admin.students.show', $student->id)}}">{{ $student->surname}} {{ $student->name }} {{ $student->patronymic }}</a></td>
                         <td><a href="{{route('admin.groups.show', $student->group->id)}}">{{ $student->group->title }} ({{$student->group->name}})</a></td>
                         <td>{{ $student->group->program->title }}, {{ $student->group->program->year }}</td>
                         <td><img src="{{ asset($student->photo) }}" height="75px" alt=""></td>

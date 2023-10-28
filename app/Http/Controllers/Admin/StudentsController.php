@@ -21,7 +21,7 @@ class StudentsController extends Controller
         $this->filter($group, 'group');
 
         $searchStudentTitle = session('search') ?? '';
-        $searchGroupId = session('cathedra') ?? '';
+        $searchGroupId = session('group') ?? '';
 
         $students = Student::whereHas('group', function ($q) use ($searchGroupId) {
             $q->where('id', 'like', '%' . $searchGroupId . '%');})
@@ -46,31 +46,39 @@ class StudentsController extends Controller
     {
         $data = $request->validated();
         $this->save($data, $student, 'uploads/students');
-        return view('admin.students.show', compact('student'))->with('alert', 'Дія виконана успішно!');
-
+        return redirect()->route('admin.students.show', $student->id);
     }
 
 
     public function show(Student $student)
     {
-        //
+        $subjects = $student->group->program->subjects
+            ->sortBy('code')
+            ->sortByDesc('is_main')
+            ->sortByDesc('control')
+            ->sortBy('semester');
+        return view('admin.students.show', compact('student', 'subjects'));
     }
 
 
     public function edit(Student $student)
     {
-        //
+        $groups = Group::all();
+        $programs = Program::orderBy('year', 'desc')->get();
+        return view('admin.students.form', compact( 'student','groups', 'programs'));
     }
 
 
     public function update(StudentsRequest $request, Student $student)
     {
-        //
+        $data = $request->validated();
+        $this->save($data, $student, 'uploads/students');
+        return redirect()->route('admin.students.show', $student->id);
     }
 
 
     public function destroy(Student $student)
     {
-        //
+
     }
 }

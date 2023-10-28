@@ -6,28 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Student extends Model
+class Document extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    // Модель студента
 
-    protected $table = 'students';
+    protected $table = 'documents';
     protected $guarded = false;
-
 
     public function group()
     {
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(Student::class);
     }
-
-
-    public function documents()
-    {
-        return $this->hasMany(Document::class);
-    }
-
-
-
 }

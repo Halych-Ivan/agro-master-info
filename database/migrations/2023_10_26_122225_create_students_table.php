@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('sex')->nullable();
             $table->string('birth')->nullable();
             $table->string('phone')->nullable();
+            $table->string('phone_2')->nullable();
             $table->string('email')->nullable();
 
             $table->string('passport')->nullable();
@@ -55,6 +56,7 @@ return new class extends Migration
 
             $table->string('finance')->nullable();
             $table->string('case')->nullable();
+
             $table->string('contract')->nullable();
             $table->string('contract_sum')->nullable();
             $table->string('contract_date')->nullable();

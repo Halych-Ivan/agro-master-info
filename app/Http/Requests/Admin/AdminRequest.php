@@ -68,6 +68,7 @@ class AdminRequest extends FormRequest
             'group_id' => 'nullable|string|max:3',
 
 
+            'documents.*'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,xlsx,pdf,doc,docx,webp|max:2048',
             'file'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,xlsx,pdf,doc,docx,webp|max:2048',
             'syllabus' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,xlsx,pdf,doc,docx,webp|max:2048',
             'program' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,xlsx,pdf,doc,docx,webp|max:2048',
@@ -77,6 +78,7 @@ class AdminRequest extends FormRequest
             'logo' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp|max:2048',
             'image' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx,webp|max:2048',
             'photo' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx,webp|max:2048',
+            'photos.*' => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,pdf,doc,docx,webp|max:2048',
             'school_document_photo' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp',
             'passport_photo' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp',
             'student_id_photo' => 'nullable|mimes:jpg,jpeg,bmp,png,gif,webp',

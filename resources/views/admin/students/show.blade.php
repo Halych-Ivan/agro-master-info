@@ -75,7 +75,7 @@
                                     @if($subject->is_main)
                                         {{$loop->iteration}}
                                     @else
-                                        {{'-- вибіркова - ' }}
+                                        {{'--- вибіркова --- ' }}
                                     @endif
                                     <a href="{{route('admin.subjects.show', $subject->id)}}">{{$subject->title??''}}</a>
                                     , {{$subject->semester??''}} семестр, {{$subject->control??''}}
@@ -97,7 +97,7 @@
                 <div class="accordion-body">
                     <table class="table table-bordered">
 
-<div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between">
                         @foreach($student->documents as $document)
                             <div class="m-2 ">
                                 <a href="{{route('admin.documents.show', $document)}}" class="btn btn-primary">
@@ -115,7 +115,7 @@
 
                             </div>
                         @endforeach
-</div>
+                        </div>
                     </table>
                 </div>
             </div>
@@ -124,5 +124,21 @@
             <a class="btn btn-primary" href="{{route('admin.documents.edit', $student->id)}}">Додати документ</a>
         </div>
     </div>
+
+    <h3>Потрібно обрати дисципліни</h3>
+    @foreach($selectSubjectsCountBySemester as $key=>$count)
+        <div>
+            Семестр {{$key}} - потрібно обрати <b>{{$count}}</b>
+            @foreach($selectSubjectsBySemester[$key] as $item)
+                <div>--- {{$item->title}}</div>
+            @endforeach
+        </div>
+    @endforeach
+
+
+
+
+
+
 @endsection
 

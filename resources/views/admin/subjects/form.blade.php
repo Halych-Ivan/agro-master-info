@@ -98,12 +98,16 @@
             <div class="input-group m-3">
                 <label class="input-group-text w-25" for="">Основна чи вибіркова</label>
                 <div class="form-check ml-3 d-flex align-items-center">
-                    <input class="form-check-input" type="radio" name="is_main" id="is_main-1" value="1" {{$subject->is_main?'checked':''}}>
+                    <input class="form-check-input" type="radio" name="is_main" id="is_main-1" value="2" {{$subject->is_main?'checked':''}}>
                     <label class="form-check-label" for="is_main-1">Основна дисципліна</label>
                 </div>
                 <div class="form-check ml-3 d-flex align-items-center">
                     <input class="form-check-input" type="radio" name="is_main" id="is_main-2" value="0" {{!$subject->is_main?'checked':''}}>
                     <label class="form-check-label" for="is_main-2">Вибіркова дисципліна</label>
+                </div>
+                <div class="form-check ml-3 d-flex align-items-center">
+                    <input class="form-check-input" type="radio" name="is_main" id="is_main-3" value="1" {{!$subject->is_main?'checked':''}}>
+                    <label class="form-check-label" for="is_main-3">Для вибору</label>
                 </div>
             </div>
 

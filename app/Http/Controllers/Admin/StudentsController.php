@@ -26,7 +26,7 @@ class StudentsController extends Controller
         $students = Student::whereHas('group', function ($q) use ($searchGroupId) {
             $q->where('id', 'like', '%' . $searchGroupId . '%');})
             ->where('name', 'like', '%' . $searchStudentTitle . '%')
-            ->orderBy('name')
+            ->orderBy('surname')
             ->paginate($size);
 
         $groups = Group::query()->select('id', 'title')->orderBy('title', 'asc')->get();

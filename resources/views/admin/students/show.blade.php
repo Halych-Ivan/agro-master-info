@@ -101,15 +101,18 @@
                         @foreach($student->documents as $document)
                             <div class="m-2 ">
                                 <a href="{{route('admin.documents.show', $document)}}" class="btn btn-primary">
-                                    <img src="{{'/uploads/documents/'.$document->title}}" height="200" alt="ДОКУМЕНТ">
-                                    Переглянути
+                                    <img src="{{'/uploads/documents/'.$document->student_id.'/'.$document->title}}" height="200" alt="ДОКУМЕНТ">
+                                    <div class="m-1">Переглянути</div>
                                 </a>
-                                <form action="{{ route('admin.documents.destroy', $document->id) }}" method="POST"
-                                      onsubmit="return confirm('Ви впевнені, що хочете видалити цей документ?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Видалити</button>
-                                </form>
+                                <div class="text-center m-1">
+                                    <form action="{{ route('admin.documents.destroy', $document->id) }}" method="POST"
+                                          onsubmit="return confirm('Ви впевнені, що хочете видалити цей документ?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Видалити</button>
+                                    </form>
+                                </div>
+
                             </div>
                         @endforeach
 </div>

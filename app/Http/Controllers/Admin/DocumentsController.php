@@ -8,6 +8,7 @@ use App\Models\Document;
 use App\Models\Student;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class DocumentsController extends Controller
@@ -66,7 +67,7 @@ class DocumentsController extends Controller
             foreach ($item as $file){
                 $documents = new Document();
                 $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('uploads/documents'), $filename);
+                $file->move(public_path('uploads/documents/'.$id.'/'), $filename);
 
                 $documents->title = $filename;
                 $documents->student_id = $id;
@@ -82,8 +83,17 @@ class DocumentsController extends Controller
      */
     public function destroy(Document $document)
     {
-        $this->deleteFile('uploads/documents/'.$document->title);
+        $this->deleteFile('uploads/documents/'.$document->student_id.'/'.$document->title);
         $document->delete();
+
+        // Перевірте, чи папка порожня
+        $directory = public_path('uploads/documents/' . $document->student_id);
+        $files = glob($directory . '/*');
+        if (empty($files)) {
+            // Якщо папка порожня, видаліть її
+            rmdir($directory);
+        }
+
         return redirect()->back();
     }
 }

@@ -5,38 +5,37 @@
 @section('content')
     <x-admin.action-icons resource="groups" id=""></x-admin.action-icons>
     <div class="">
-        <table class="table table-bordered">
+        <table class="table table-bordered text-center">
             <thead>
             <tr>
-                <th class="text-center">№</th>
-                <th class="text-center" colspan="2">Номер групи</th>
-                <th class="text-center">Кільк. студентів</th>
-
-                <th class="text-center">Рік вступу</th>
-                <th class="text-center">Термін навчання</th>
-                <th class="text-center">Освітня програма</th>
-                <th class="text-center">Спеціальність</th>
-                <th class="text-center">Примітки</th>
-                <th class="text-center">Активні дії</th>
+                <th>№</th>
+                <th colspan="2">Номер групи</th>
+                <th>Кільк. студентів</th>
+                <th>Рік вступу</th>
+                <th>Термін навчання</th>
+                <th>Освітня програма</th>
+                <th>Спеціальність</th>
+                <th>Примітки</th>
+                <th>Активні дії</th>
             </tr>
             </thead>
             <tbody>
             @foreach($groups as $group)
 {{--                {{dd($group)}}--}}
                 <tr>
-                    <td class="text-center">{{$loop->iteration}}</td>
-                    <td class="text-center"><b>{{$group->title}}</b></td>
-                    <td class="text-center"><b>{{$group->name}}</b></td>
-                    <td class="text-center"><b>{{$group->students->count()}}</b></td>
-                    <td class="text-center"><b>{{$group->entry}}</b></td>
-                    <td class="text-center"><b>{{$group->term}}</b></td>
+                    <td>{{$loop->iteration}}</td>
+                    <th><x-admin.href href="{{'groups.show'}}" id="{{$group->id}}">{{$group->title}}</x-admin.href></th>
+                    <td>{{$group->name}}</td>
+                    <td>{{$group->students->count()}}</td>
+                    <td>{{$group->entry}}</td>
+                    <td>{{$group->term}}</td>
                     <td><a href="{{route('admin.programs.show', $group->program->id)}}"><b>{{$group->program->title??''}}</b>, {{$group->program->year??''}}</a></td>
                     <td>
                         <b>{{$group->program->specialty->code??''}} {{$group->program->specialty->title??''}}</b><br>
                         {{$group->program->level->title??''}}
                     </td>
-                    <td><b>{{$group->info}}</b></td>
-                    <td class="text-center"><x-admin.action-icons resource="groups" id="{{$group->id}}"></x-admin.action-icons></td>
+                    <td>{{$group->info}}</td>
+                    <td><x-admin.action-icons resource="groups" id="{{$group->id}}"></x-admin.action-icons></td>
                 </tr>
             @endforeach
             </tbody>

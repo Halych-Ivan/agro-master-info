@@ -16,6 +16,28 @@
             <x-admin.show title="Примітки">{{$group->info??'....'}}</x-admin.show>
             <x-admin.action-icons resource="groups" id="{{$group->id}}"></x-admin.action-icons>
         </table>
+
+        <h2>Список групи {{$group->title}} ({{$group->name}})</h2>
+        <table class="table table-bordered">
+            <tr>
+                <th>№</th>
+                <th>Прізвище ім'я та по-батькові</th>
+                <th>Фінансуваня</th>
+                <th>Примітки</th>
+            </tr>
+        @foreach($group->students as $student)
+            <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>
+                    <x-admin.href href="students.show" id="{{$student->id}}">
+                        {{$student->surname}} {{$student->name}} {{$student->patronymic}}
+                    </x-admin.href>
+                </td>
+                <td>{{$student->finance}}</td>
+                <td>{{$student->phone}}</td>
+            </tr>
+        @endforeach
+        </table>
     </div>
 @endsection
 

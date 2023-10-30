@@ -28,7 +28,12 @@ class Subject extends Model
 
     public function teachers()
     {
-        return $this->belongsToMany(Teacher::class, 'teacher_subject')->withPivot('is_main');;
+        return $this->belongsToMany(Teacher::class, 'teacher_subject')->withPivot('is_main');
+    }
+
+    public function plans()
+    {
+        return $this->hasMany(Plan::class);
     }
 
 

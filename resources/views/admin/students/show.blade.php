@@ -125,20 +125,30 @@
         </div>
     </div>
 
+
+    <hr>
     <h3>Потрібно обрати дисципліни</h3>
-    @foreach($selectSubjectsCountBySemester as $key=>$count)
-        <div>
-            Семестр {{$key}} - потрібно обрати <b>{{$count}}</b>
-            @foreach($selectSubjectsBySemester[$key] as $item)
-                <div>--- {{$item->title}}</div>
+        @foreach($subjects_1 as $key=>$semester)
+            <h5>Семестр {{$key}}</h5>
+
+            @foreach($semester as $subject)
+                <div class="m-3 ">
+                    <div class="ml-3"><b>{{$subject->title}}</b></div>
+                    <form action="{{route('admin.selected_subjects', [$student->id, $subject->id])}}" method="POST">
+                        @csrf
+                        @foreach($subjects_2[$subject->semester] as $item)
+                        <div class="form-check ml-5">
+                            <input class="form-check-input" type="radio" value="{{$item->id}}" name="sub" id="{{$subject->id}}{{$item->id}}">
+                            <label class="form-check-label" for="{{$subject->id}}{{$item->id}}">
+                                {{$item->title}}
+                            </label>
+                        </div>
+                    @endforeach
+                        <button class="btn btn-sm btn-outline-primary" type="submit">Зберегти</button>
+                    </form>
+                </div>
             @endforeach
-        </div>
-    @endforeach
-
-
-
-
-
+        @endforeach
 
 @endsection
 

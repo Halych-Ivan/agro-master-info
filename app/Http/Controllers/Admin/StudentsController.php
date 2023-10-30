@@ -58,23 +58,10 @@ class StudentsController extends Controller
             ->sortByDesc('control')
             ->sortBy('semester');
 
-        $selectSubjectsCountBySemester = $subjects
-            ->filter(function ($subject) {
-                return $subject->is_main == 1;
-            })
-            ->groupBy('semester')
-            ->map(function ($semesterSubjects) {
-                return $semesterSubjects->count();
-            });
+        $subjects_1 = $student->group->program->subjects->where('is_main', 1)->groupBy('semester');
+        $subjects_2 = $student->group->program->subjects->where('is_main', 0)->groupBy('semester');
 
-        $selectSubjectsBySemester = $subjects
-            ->filter(function ($subject) {
-                return $subject->is_main == 0;
-            })->groupBy('semester');
-
-        //dd($selectSubjectsBySemester);
-
-        return view('admin.students.show', compact('student', 'subjects', 'selectSubjectsCountBySemester', 'selectSubjectsBySemester'));
+        return view('admin.students.show', compact('student', 'subjects', 'subjects_1', 'subjects_2'));
     }
 
 

@@ -28,6 +28,11 @@ class Student extends Model
         return $this->hasMany(Document::class);
     }
 
+    public function selectedSubjects()
+    {
+        return $this->hasMany(SelectedSubject::class);
+    }
+
 
 
 }

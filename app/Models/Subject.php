@@ -36,5 +36,12 @@ class Subject extends Model
         return $this->hasMany(Plan::class);
     }
 
+    public function selectedSubject()
+    {
+        return $this->hasOne(SelectedSubject::class);
+    }
+
+
+
 
 }

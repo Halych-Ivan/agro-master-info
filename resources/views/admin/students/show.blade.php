@@ -70,22 +70,50 @@
                 <div class="accordion-body">
                     <table class="table table-bordered">
                         <x-admin.show title="Дисципліна">
-                            @foreach($subjects as $subject)
+                            @foreach($mandatorySubjects as $semester)
+                                <div>Семестр {{$loop->iteration}}</div>
+                                @foreach($semester as $subject)
                                 <div>
-                                    @if($subject->is_main)
-                                        {{$loop->iteration}}
-                                    @else
+                                    {{$loop->iteration}}
+
+                                    @if($subject->is_main == 1)
                                         {{'--- вибіркова --- ' }}
-                                    @endif
+                                        @if($subject->selectedSubject)
+                                            @foreach($subjects_2 as $item)
+                                                @if($item->id == $subject->selectedSubject['new_subject_id'])
+                                                    <div class="ml-5">
+                                                        обрано - {{$item->title}}, {{$subject->semester??''}} семестр, {{$subject->control??''}}
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <div class="ml-5">не обрано</div>
+
+                                        @endif
+
+                                    @else
                                     <a href="{{route('admin.subjects.show', $subject->id)}}">{{$subject->title??''}}</a>
                                     , {{$subject->semester??''}} семестр, {{$subject->control??''}}
+                                    @endif
+
+
+
+
+
+
+
+
+
                                 </div>
+                                @endforeach
                             @endforeach
                         </x-admin.show>
                     </table>
                 </div>
             </div>
         </div>
+
+
 
         <div class="accordion-item">
             <h2 class="accordion-header">
@@ -128,15 +156,21 @@
 
     <hr>
     <h3>Потрібно обрати дисципліни</h3>
-        @foreach($subjects_1 as $key=>$semester)
-            <h5>Семестр {{$key}}</h5>
 
-            @foreach($semester as $subject)
-                <div class="m-3 ">
-                    <div class="ml-3"><b>{{$subject->title}}</b></div>
+    @foreach($student->selectedSubjects as $qwerty)
+        Обрано - {{$qwerty->subject->title}} {{$qwerty->subject->semester}}<br>
+    @endforeach
+
+
+        @foreach($subjects_1 as $subject)
+
+            {{$subject->selectedSubject}}
+                <div class="m-3 {{$subject->selectedSubject?'bg-gray-300':''}}">
+                    <div class="ml-3"><b>{{$subject->title}}</b>, {{$subject->semester}} семестр</div>
                     <form action="{{route('admin.selected_subjects', [$student->id, $subject->id])}}" method="POST">
                         @csrf
-                        @foreach($subjects_2[$subject->semester] as $item)
+                        @foreach($subjects_2 as $item)
+                            @continue($subject->semester != $item->semester)
                         <div class="form-check ml-5">
                             <input class="form-check-input" type="radio" value="{{$item->id}}" name="sub" id="{{$subject->id}}{{$item->id}}">
                             <label class="form-check-label" for="{{$subject->id}}{{$item->id}}">
@@ -148,7 +182,7 @@
                     </form>
                 </div>
             @endforeach
-        @endforeach
+
 
 @endsection
 

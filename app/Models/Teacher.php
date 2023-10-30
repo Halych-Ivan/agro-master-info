@@ -22,7 +22,7 @@ class Teacher extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class, 'teacher_subject')->withPivot('is_main');;
+        return $this->belongsToMany(Subject::class, 'teacher_subject')->withPivot('is_main');
     }
 
 

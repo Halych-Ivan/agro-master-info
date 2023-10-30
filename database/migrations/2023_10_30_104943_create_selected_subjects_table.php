@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->foreignId('student_id');
             $table->foreignId('subject_id');
+            $table->foreignId('new_subject_id');
 
             $table->string('instead');
             $table->string('semester');

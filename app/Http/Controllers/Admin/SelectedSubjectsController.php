@@ -34,7 +34,8 @@ class SelectedSubjectsController extends Controller
             $sub->subject_id = $subject->id;
         }
 
-        $sub->instead = $data['sub'];
+        $sub->new_subject_id = $data['sub'];
+        $sub->instead = '1';
         $sub->semester = '1';
         $sub->info = '1';
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StudentsRequest;
 use App\Models\Group;
 use App\Models\Program;
+use App\Models\SelectedSubject;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -58,10 +59,23 @@ class StudentsController extends Controller
             ->sortByDesc('control')
             ->sortBy('semester');
 
-        $subjects_1 = $student->group->program->subjects->where('is_main', 1)->groupBy('semester');
-        $subjects_2 = $student->group->program->subjects->where('is_main', 0)->groupBy('semester');
+        $subjects_1 = $student->group->program->subjects->where('is_main', 1)->sortBy('semester')->load('selectedSubject');
+        $subjects_2 = $student->group->program->subjects->where('is_main', 0);
 
-        return view('admin.students.show', compact('student', 'subjects', 'subjects_1', 'subjects_2'));
+
+        $subjects_3 = $student->group->program->subjects
+            ->where('is_main', 2)
+            ->sortBy('semester')
+            ->sortByDesc('control')
+            ;
+
+        $mandatorySubjects = $subjects_3->merge($subjects_1)
+            ->groupBy('semester');
+
+        $sel_sub = SelectedSubject::with('student_id', $student);
+
+
+        return view('admin.students.show', compact('student', 'subjects', 'subjects_1', 'subjects_2' , 'mandatorySubjects', 'sel_sub'));
     }
 
 

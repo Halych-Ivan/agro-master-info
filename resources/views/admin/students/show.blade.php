@@ -99,50 +99,88 @@
         </div>
     </div>
 
-    <h2>Вибір дисциплін</h2>
+    <h2>Індивідуальний навчальний план</h2>
     <div>
-        @foreach($student->subjects as $sub)
-            {{$sub->title}}, семестр {{$sub->semester}} <br>
+        @php($i = 1)
+        @foreach($subjects as $subject)
+            @if($i == $subject->semester)
+                @php($i += 1)
+                <h5>Семестр {{$subject->semester}}</h5>
+            @endif
+
+            @if($subject->is_main == 2)
+                <div>
+                    {{$loop->iteration}}. <a href="{{route('admin.subjects.show', $subject)}}">{{$subject->title}}</a>, <b>{{$subject->control}}</b>
+                </div>
+            @elseif(($subject->is_main == 1))
+                <div class="bg-gray-200">
+                    {{$loop->iteration}}. {{$subject->title}}, <b>{{$subject->control}}</b>
+                    @if($subject->pivot->instead)
+                        <div class="ml-3">--- обрано --- <a href="{{route('admin.subjects.show', $selected_subjects[$subject->pivot->instead])}}">{{$selected_subjects[$subject->pivot->instead]->title}}</a></div>
+                    @else
+                        <div class="ml-3 btn btn-danger">--- НЕ ОБРАНО ---</div>
+                    @endif
+                    <div class="m-5 text-sm">
+                        <h5>Форма вибору</h5>
+                        @foreach($selective_subjects as $selective_subject)
+                            @continue($selective_subject->semester != $subject->semester)
+                            <div>
+                                @if($subject->pivot->instead == $selective_subject->id)
+                                    {{$selective_subject->title}}
+                                @else
+                                    <a href="{{route('admin.students.select', [$student->id, 'sub='.$subject->id.'&sel='.$selective_subject->id])}}">
+                                        {{$selective_subject->title}}
+                                    </a>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
         @endforeach
     </div>
     <hr>
 
 
-    <div>
-    @foreach($selected_subjects as $selected_subject)
-        <div>
-            {{$selected_subject->semester}} семестр - {{$selected_subject->title}}
-                @foreach($selective_subjects as $selective_subject)
+
+
+
+{{--    <div>--}}
+{{--    @foreach($selected_subjects as $selected_subject)--}}
+{{--        <div>--}}
+{{--            {{$selected_subject->semester}} семестр - {{$selected_subject->title}}--}}
+{{--                @foreach($selective_subjects as $selective_subject)--}}
 {{--                        @continue()--}}
-                    <a href="{{route('admin.students.select', [$student->id, 'sel='.$selected_subject->id.'&sub='.$selective_subject->id])}}">{{$selective_subject->title}}</a><br>
-                @endforeach
+{{--                    <a href="{{route('admin.students.select', [$student->id, 'sel='.$selected_subject->id.'&sub='.$selective_subject->id])}}">{{$selective_subject->title}}</a><br>--}}
+{{--                @endforeach--}}
 
-        </div>
-    @endforeach
-    </div>
-
-
+{{--        </div>--}}
+{{--    @endforeach--}}
+{{--    </div>--}}
 
 
 
 
-<div class="accordion-item">
-    <h2 class="accordion-header">
-        <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
-            Навчальний план
-        </button>
-    </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordion">
-        <div class="accordion-body">
-            <table class="table table-bordered">
 
 
-                <x-admin.show title="Дисципліна">
-                    @foreach($subjects as $semester)
-                        <div class="m-2">Семестр {{$loop->iteration}}</div>
-                        @foreach($semester as $subject)
-                            <div>
-                                {{$loop->iteration}}
+{{--<div class="accordion-item">--}}
+{{--    <h2 class="accordion-header">--}}
+{{--        <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">--}}
+{{--            Навчальний план--}}
+{{--        </button>--}}
+{{--    </h2>--}}
+{{--    <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordion">--}}
+{{--        <div class="accordion-body">--}}
+{{--            <table class="table table-bordered">--}}
+
+
+{{--                <x-admin.show title="Дисципліна">--}}
+{{--                    @foreach($subjects as $semester)--}}
+{{--                        <div class="m-2">Семестр {{$loop->iteration}}</div>--}}
+{{--                        @foreach($semester as $subject)--}}
+{{--                            <div>--}}
+{{--                                {{$loop->iteration}}--}}
 
 {{--                                {{$subject->title}}--}}
 {{--                                {{ $subject->is_main == 1 ? '--- вибіркова ---':'' }}--}}
@@ -170,21 +208,21 @@
 {{--                                        <a href="{{route('admin.subjects.show', $subject->id)}}">{{$subject->title??''}}</a>--}}
 {{--                                        , {{$subject->semester??''}} семестр, {{$subject->control??''}}--}}
 {{--                                    @endif--}}
-                            </div>
-                        @endforeach
-                    @endforeach
-                </x-admin.show>
+{{--                            </div>--}}
+{{--                        @endforeach--}}
+{{--                    @endforeach--}}
+{{--                </x-admin.show>--}}
 
 
-            </table>
-        </div>
-    </div>
-</div>
+{{--            </table>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 
 
 
-<hr>
-<h3>Потрібно обрати дисципліни</h3>
+{{--<hr>--}}
+{{--<h3>Потрібно обрати дисципліни</h3>--}}
 
 {{--    @foreach($student->selectedSubjects as $qwerty)--}}
 {{--        Обрано - {{$qwerty->subject->title}} {{$qwerty->subject->semester}}<br>--}}

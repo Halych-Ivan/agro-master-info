@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
 
             $table->string('instead')->nullable();
+            $table->string('semester')->nullable();
             $table->boolean('is_main')->default(false);
 
             $table->timestamps();

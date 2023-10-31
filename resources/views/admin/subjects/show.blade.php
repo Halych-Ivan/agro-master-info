@@ -45,5 +45,13 @@
             <x-admin.action-icons resource="subjects" id="{{$subject->id}}"></x-admin.action-icons>
         </table>
     </div>
+
+    <div>
+        @foreach($subject->students as $student)
+            <x-admin.href href="students.show" id="{{$student->id}}">
+                {{$student->surname}} {{$student->name}}
+            </x-admin.href><br>
+        @endforeach
+    </div>
 @endsection
 

@@ -54,56 +54,30 @@ class StudentsController extends Controller
 
     public function show(Student $student)
     {
-        $subjects = $student->subjects()->orderBy('subject_id', 'desc')
+        $this->add_subjects($student); //
+
+        $subjects = $student->subjects()->withPivot('instead')
+            ->orderBy('semester', 'asc')
+            ->orderBy('is_main', 'desc')
+            ->orderBy('control', 'desc')
+            ->orderBy('title', 'asc')
             ->get();
 
-//        dd($subjects)
+        $selected_subjects = array();
+        foreach ($subjects as $subject) {
+            $insteadId = $subject->pivot->instead;
+            if ($insteadId !== null) {
+                $subjectModel = Subject::find($insteadId);
+                if ($subjectModel) {
+                    $selected_subjects[$insteadId] = $subjectModel;
+                }
+            }
+        }
+
+        $selective_subjects = $student->group->program->subjects->whereIn('is_main', [0]);
 
 
 
-
-
-
-
-
-//        $subjects = $student->group->program->subjects
-//            ->sortBy('semester')
-//            ->sortByDesc('is_main')
-//            ->sortByDesc('control')
-//            ->whereIn('is_main', [1, 2])
-//            ->groupBy('semester');
-
-
-        $selected_subjects = $student->group->program->subjects
-            ->sortBy('semester')
-            ->whereIn('is_main', [1]);
-
-        $selective_subjects = $student->group->program->subjects
-            ->sortBy('semester')
-            ->whereIn('is_main', [0]);
-
-
-
-
-
-
-
-
-//        $subjects = $student->group->program->subjects
-//            ->sortBy('code')
-//            ->sortByDesc('is_main')
-//            ->sortByDesc('control')
-//            ->sortBy('semester');
-//
-//        $subjects_1 = $student->group->program->subjects->where('is_main', 1)->sortBy('semester')->load('selectedSubject');
-//        $subjects_2 = $student->group->program->subjects->where('is_main', 0);
-//
-//
-//        $subjects_3 = $student->group->program->subjects
-//            ->where('is_main', 2)
-//            ->sortBy('semester')
-//            ->sortByDesc('control')
-//            ;
 
 
         return view('admin.students.show', compact('student', 'subjects', 'selected_subjects', 'selective_subjects'));
@@ -131,6 +105,7 @@ class StudentsController extends Controller
 
     }
 
+
     public function select(Request $request, $id)
     {
         $request->validate([
@@ -141,23 +116,29 @@ class StudentsController extends Controller
         $sub = $request->input('sub');
         $sel = $request->input('sel');
 
+        $subject = Subject::find($sel);
         $student = Student::find($id);
-        $student->subjects()->syncWithoutDetaching([$sub =>['instead' => $sel]]);
 
-
-        $subjects = $student->group->program->subjects->whereIn('is_main', [2]);
-
-        foreach($subjects as $subject){
-            $student->subjects()->syncWithoutDetaching([$subject->id]);
+        $insteads = $student->subjects()->withPivot('instead')->get();
+        foreach ($insteads as $instead) {
+            $insteadId = $instead->pivot->instead;
+            if ($insteadId == $sel) {
+                return redirect()->back()->with('Вже обрано');
+            }
         }
 
-
-
+        $student->subjects()->syncWithoutDetaching([$sub => ['instead' => $sel, 'semester' => $subject->semester, 'is_main' => $subject->is_main]]);
+        $student->subjects()->syncWithoutDetaching([$sel => ['is_main' => 0]]);
 
         return redirect()->back();
     }
 
 
-
-
+    private function add_subjects($student)
+    {
+        $subjects = $student->group->program->subjects->whereIn('is_main', [2, 1]);
+        foreach($subjects as $subject){
+            $student->subjects()->syncWithoutDetaching([$subject->id =>['semester' => $subject->semester, 'is_main' => $subject->is_main]]);
+        }
+    }
 }

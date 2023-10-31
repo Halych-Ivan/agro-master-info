@@ -8,6 +8,7 @@ use App\Models\Group;
 use App\Models\Program;
 use App\Models\SelectedSubject;
 use App\Models\Student;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class StudentsController extends Controller
@@ -53,29 +54,59 @@ class StudentsController extends Controller
 
     public function show(Student $student)
     {
-        $subjects = $student->group->program->subjects
-            ->sortBy('code')
-            ->sortByDesc('is_main')
-            ->sortByDesc('control')
-            ->sortBy('semester');
+        $subjects = $student->subjects()->orderBy('subject_id', 'desc')
+            ->get();
 
-        $subjects_1 = $student->group->program->subjects->where('is_main', 1)->sortBy('semester')->load('selectedSubject');
-        $subjects_2 = $student->group->program->subjects->where('is_main', 0);
+//        dd($subjects)
 
 
-        $subjects_3 = $student->group->program->subjects
-            ->where('is_main', 2)
+
+
+
+
+
+
+//        $subjects = $student->group->program->subjects
+//            ->sortBy('semester')
+//            ->sortByDesc('is_main')
+//            ->sortByDesc('control')
+//            ->whereIn('is_main', [1, 2])
+//            ->groupBy('semester');
+
+
+        $selected_subjects = $student->group->program->subjects
             ->sortBy('semester')
-            ->sortByDesc('control')
-            ;
+            ->whereIn('is_main', [1]);
 
-        $mandatorySubjects = $subjects_3->merge($subjects_1)
-            ->groupBy('semester');
-
-        $sel_sub = SelectedSubject::with('student_id', $student);
+        $selective_subjects = $student->group->program->subjects
+            ->sortBy('semester')
+            ->whereIn('is_main', [0]);
 
 
-        return view('admin.students.show', compact('student', 'subjects', 'subjects_1', 'subjects_2' , 'mandatorySubjects', 'sel_sub'));
+
+
+
+
+
+
+//        $subjects = $student->group->program->subjects
+//            ->sortBy('code')
+//            ->sortByDesc('is_main')
+//            ->sortByDesc('control')
+//            ->sortBy('semester');
+//
+//        $subjects_1 = $student->group->program->subjects->where('is_main', 1)->sortBy('semester')->load('selectedSubject');
+//        $subjects_2 = $student->group->program->subjects->where('is_main', 0);
+//
+//
+//        $subjects_3 = $student->group->program->subjects
+//            ->where('is_main', 2)
+//            ->sortBy('semester')
+//            ->sortByDesc('control')
+//            ;
+
+
+        return view('admin.students.show', compact('student', 'subjects', 'selected_subjects', 'selective_subjects'));
     }
 
 
@@ -99,4 +130,34 @@ class StudentsController extends Controller
     {
 
     }
+
+    public function select(Request $request, $id)
+    {
+        $request->validate([
+            'sub' => 'required',
+            'sel' => 'required',
+        ]);
+
+        $sub = $request->input('sub');
+        $sel = $request->input('sel');
+
+        $student = Student::find($id);
+        $student->subjects()->syncWithoutDetaching([$sub =>['instead' => $sel]]);
+
+
+        $subjects = $student->group->program->subjects->whereIn('is_main', [2]);
+
+        foreach($subjects as $subject){
+            $student->subjects()->syncWithoutDetaching([$subject->id]);
+        }
+
+
+
+
+        return redirect()->back();
+    }
+
+
+
+
 }

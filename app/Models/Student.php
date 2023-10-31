@@ -28,11 +28,11 @@ class Student extends Model
         return $this->hasMany(Document::class);
     }
 
-    public function selectedSubjects()
-    {
-        return $this->hasMany(SelectedSubject::class);
-    }
 
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class)->withPivot('instead');
+    }
 
 
 }

@@ -11,8 +11,9 @@ class Plan extends Model
     use HasFactory;
     use SoftDeletes;
 
+    // Модель плана
+
     protected $table = 'plans';
     protected $guarded = false;
-
 
 }

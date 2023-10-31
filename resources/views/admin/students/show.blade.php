@@ -60,60 +60,6 @@
             </div>
         </div>
 
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
-                    Навчальний план
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion">
-                <div class="accordion-body">
-                    <table class="table table-bordered">
-                        <x-admin.show title="Дисципліна">
-                            @foreach($mandatorySubjects as $semester)
-                                <div>Семестр {{$loop->iteration}}</div>
-                                @foreach($semester as $subject)
-                                <div>
-                                    {{$loop->iteration}}
-
-                                    @if($subject->is_main == 1)
-                                        {{'--- вибіркова --- ' }}
-                                        @if($subject->selectedSubject)
-                                            @foreach($subjects_2 as $item)
-                                                @if($item->id == $subject->selectedSubject['new_subject_id'])
-                                                    <div class="ml-5">
-                                                        обрано - {{$item->title}}, {{$subject->semester??''}} семестр, {{$subject->control??''}}
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            <div class="ml-5">не обрано</div>
-
-                                        @endif
-
-                                    @else
-                                    <a href="{{route('admin.subjects.show', $subject->id)}}">{{$subject->title??''}}</a>
-                                    , {{$subject->semester??''}} семестр, {{$subject->control??''}}
-                                    @endif
-
-
-
-
-
-
-
-
-
-                                </div>
-                                @endforeach
-                            @endforeach
-                        </x-admin.show>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-
 
         <div class="accordion-item">
             <h2 class="accordion-header">
@@ -153,35 +99,118 @@
         </div>
     </div>
 
-
+    <h2>Вибір дисциплін</h2>
+    <div>
+        @foreach($student->subjects as $sub)
+            {{$sub->title}}, семестр {{$sub->semester}} <br>
+        @endforeach
+    </div>
     <hr>
-    <h3>Потрібно обрати дисципліни</h3>
 
-    @foreach($student->selectedSubjects as $qwerty)
-        Обрано - {{$qwerty->subject->title}} {{$qwerty->subject->semester}}<br>
+
+    <div>
+    @foreach($selected_subjects as $selected_subject)
+        <div>
+            {{$selected_subject->semester}} семестр - {{$selected_subject->title}}
+                @foreach($selective_subjects as $selective_subject)
+{{--                        @continue()--}}
+                    <a href="{{route('admin.students.select', [$student->id, 'sel='.$selected_subject->id.'&sub='.$selective_subject->id])}}">{{$selective_subject->title}}</a><br>
+                @endforeach
+
+        </div>
     @endforeach
+    </div>
 
 
-        @foreach($subjects_1 as $subject)
 
-            {{$subject->selectedSubject}}
-                <div class="m-3 {{$subject->selectedSubject?'bg-gray-300':''}}">
-                    <div class="ml-3"><b>{{$subject->title}}</b>, {{$subject->semester}} семестр</div>
-                    <form action="{{route('admin.selected_subjects', [$student->id, $subject->id])}}" method="POST">
-                        @csrf
-                        @foreach($subjects_2 as $item)
-                            @continue($subject->semester != $item->semester)
-                        <div class="form-check ml-5">
-                            <input class="form-check-input" type="radio" value="{{$item->id}}" name="sub" id="{{$subject->id}}{{$item->id}}">
-                            <label class="form-check-label" for="{{$subject->id}}{{$item->id}}">
-                                {{$item->title}}
-                            </label>
-                        </div>
+
+
+
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+            Навчальний план
+        </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordion">
+        <div class="accordion-body">
+            <table class="table table-bordered">
+
+
+                <x-admin.show title="Дисципліна">
+                    @foreach($subjects as $semester)
+                        <div class="m-2">Семестр {{$loop->iteration}}</div>
+                        @foreach($semester as $subject)
+                            <div>
+                                {{$loop->iteration}}
+
+{{--                                {{$subject->title}}--}}
+{{--                                {{ $subject->is_main == 1 ? '--- вибіркова ---':'' }}--}}
+
+
+
+
+
+{{--                                    @if($subject->is_main == 1)--}}
+{{--                                        {{'--- вибіркова --- ' }}--}}
+{{--                                        @if($subject->selectedSubject)--}}
+{{--                                            @foreach($subjects_2 as $item)--}}
+{{--                                                @if($item->id == $subject->selectedSubject['new_subject_id'])--}}
+{{--                                                    <div class="ml-5">--}}
+{{--                                                        обрано - {{$item->title}}, {{$subject->semester??''}} семестр, {{$subject->control??''}}--}}
+{{--                                                    </div>--}}
+{{--                                                @endif--}}
+{{--                                            @endforeach--}}
+{{--                                        @else--}}
+{{--                                            <div class="ml-5">не обрано</div>--}}
+
+{{--                                        @endif--}}
+
+{{--                                    @else--}}
+{{--                                        <a href="{{route('admin.subjects.show', $subject->id)}}">{{$subject->title??''}}</a>--}}
+{{--                                        , {{$subject->semester??''}} семестр, {{$subject->control??''}}--}}
+{{--                                    @endif--}}
+                            </div>
+                        @endforeach
                     @endforeach
-                        <button class="btn btn-sm btn-outline-primary" type="submit">Зберегти</button>
-                    </form>
-                </div>
-            @endforeach
+                </x-admin.show>
+
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<hr>
+<h3>Потрібно обрати дисципліни</h3>
+
+{{--    @foreach($student->selectedSubjects as $qwerty)--}}
+{{--        Обрано - {{$qwerty->subject->title}} {{$qwerty->subject->semester}}<br>--}}
+{{--    @endforeach--}}
+
+
+{{--        @foreach($subjects_1 as $subject)--}}
+
+{{--            {{$subject->selectedSubject}}--}}
+{{--                <div class="m-3 {{$subject->selectedSubject?'bg-gray-300':''}}">--}}
+{{--                    <div class="ml-3"><b>{{$subject->title}}</b>, {{$subject->semester}} семестр</div>--}}
+{{--                    <form action="{{route('admin.selected_subjects', [$student->id, $subject->id])}}" method="POST">--}}
+{{--                        @csrf--}}
+{{--                        @foreach($subjects_2 as $item)--}}
+{{--                            @continue($subject->semester != $item->semester)--}}
+{{--                        <div class="form-check ml-5">--}}
+{{--                            <input class="form-check-input" type="radio" value="{{$item->id}}" name="sub" id="{{$subject->id}}{{$item->id}}">--}}
+{{--                            <label class="form-check-label" for="{{$subject->id}}{{$item->id}}">--}}
+{{--                                {{$item->title}}--}}
+{{--                            </label>--}}
+{{--                        </div>--}}
+{{--                    @endforeach--}}
+{{--                        <button class="btn btn-sm btn-outline-primary" type="submit">Зберегти</button>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
 
 
 @endsection

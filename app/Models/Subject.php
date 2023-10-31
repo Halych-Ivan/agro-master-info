@@ -21,27 +21,32 @@ class Subject extends Model
         return $this->belongsTo(Cathedra::class);
     }
 
+
     public function program()
     {
         return $this->belongsTo(Program::class);
     }
+
 
     public function teachers()
     {
         return $this->belongsToMany(Teacher::class, 'teacher_subject')->withPivot('is_main');
     }
 
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class)->withPivot('instead');
+    }
+
+
+
+
+
+
     public function plans()
     {
         return $this->hasMany(Plan::class);
     }
-
-    public function selectedSubject()
-    {
-        return $this->hasOne(SelectedSubject::class);
-    }
-
-
-
 
 }

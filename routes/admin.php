@@ -32,9 +32,9 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::resource('students', StudentsController::class); // Викладачі
     Route::resource('documents', DocumentsController::class); // Документи
 
-    Route::post('selected_subjects/{student}/{subject}', [SelectedSubjectsController::class, 'update'])->name('selected_subjects'); //
 
 
+    Route::get('select/{id}', [StudentsController::class, 'select'])->name('students.select'); // Вибір дисциплін
     Route::get('subjects/{id}/add_teacher/{teacher?}/{main?}', [SubjectsController::class, 'add_teacher'])->name('subjects.add_teacher'); // Довідки
     Route::get('subjects/{id}/dell_teacher/{teacher}', [SubjectsController::class, 'dell_teacher'])->name('subjects.dell_teacher'); // Довідки
 

@@ -3,7 +3,7 @@
 @section('title', 'Модульний контроль')
 
 @section('page-banner')
-        <x-agromaster.page-banner title="Розклад занять" img="/images/page-banner-1.jpg"></x-agromaster.page-banner>
+        <x-agromaster.page-banner title="Модульний контроль" img="/images/page-banner-1.jpg"></x-agromaster.page-banner>
 @endsection
 
 
@@ -72,8 +72,8 @@
         <div class=" ml-15">
             <div class="row section-title">
                 <div class="title">
-                    <h5>Модульний контроль</h5>
-                    <p>Модульний контроль — це різновид контрольних заходів, який проводиться з метою оцінки результатів
+{{--                    <h5>Модульний контроль</h5>--}}
+                    <p><b>Модульний контроль</b> — це різновид контрольних заходів, який проводиться з метою оцінки результатів
                         навчання студентів на визначених його етапах, а також для встановлення зворотного зв'язку між
                         викладачем, його якістю викладання і рівнем знань і умінь студентів.</p>
                 </div>

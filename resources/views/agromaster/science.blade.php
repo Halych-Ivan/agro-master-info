@@ -19,8 +19,8 @@
             <div class="row">
                 <div class="col-lg-9">
                     <div class="event-details-content ">
-                        <img src="/images/conference/1.jpg" alt="">
-                        <img src="/images/conference/2.jpg" alt="">
+                        <img src="{{ asset('uploads/conference/2023-11/1.jpg') }}" alt="">
+                        <img src="{{ asset('uploads/conference/2023-11/2.jpg') }}" alt="">
                         <h2 class="title">Науково-практична коференція</h2>
 {{--                        <p>Even slightly believable. If you are going use a passage of Lorem Ipsum need equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish</p>--}}
                         <h5 class="sub-title">Технічний прогрес в АПВ (9-10 травня 2023 року)</h5>

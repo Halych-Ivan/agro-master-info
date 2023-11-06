@@ -141,6 +141,7 @@ class SubjectsController extends Controller
         }
     }
 
+
     public function dell_teacher($id, $teacher)
     {
         $subject = Subject::find($id);

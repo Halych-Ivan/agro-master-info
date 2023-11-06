@@ -41,8 +41,15 @@
                 @foreach($subjects as $subject)
 {{--                    @php(dd($subject->program))--}}
                     <tr class="{{$subject->is_active?'':'bg-gray-300'}} ">
-                        <td>{{ $loop->iteration }}</td>
-                        <td><a href="{{route('admin.subjects.show', $subject->id)}}">{{ $subject->title }}</a></td>
+                        <td>{{ $loop->iteration }} </td>
+                        <td>
+                            <a href="{{route('admin.subjects.show', $subject->id)}}">{{ $subject->title }}</a>
+                            <br>{{ $subject->code }}
+                            <br>кр. - {{ $subject->size }},
+                            лек. - {{ $subject->lecture??'0' }},
+                            пр. - {{ $subject->practical??'0' }},
+                            лаб. - {{ $subject->laboratory??'0' }}
+                        </td>
                         <td>{{ $subject->semester }}, {{ $subject->control }}, {{$subject->is_main?'Основна':'Вибіркова'}}</td>
                         <td>{{ $subject->program->title }}, {{ $subject->program->year }}</td>
                         <td>{{ $subject->cathedra->abbr }}</td>

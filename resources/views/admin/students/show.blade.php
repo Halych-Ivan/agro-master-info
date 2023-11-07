@@ -100,12 +100,13 @@
     </div>
 
     <h2>Індивідуальний навчальний план</h2>
+    <a href="{{route('admin.students.update_plan', $student->id)}}">Оновити план</a>
     <div>
         @php($i = 1)
         @foreach($subjects as $subject)
             @if($i == $subject->semester)
                 @php($i += 1)
-                <h5>Семестр {{$subject->semester}}</h5>
+                <h4 class="mt-3">Семестр {{$subject->semester}}</h4>
             @endif
 
             @if($subject->is_main == 2)
@@ -113,28 +114,58 @@
                     {{$loop->iteration}}. <a href="{{route('admin.subjects.show', $subject)}}">{{$subject->title}}</a>, <b>{{$subject->control}}</b>
                 </div>
             @elseif(($subject->is_main == 1))
-                <div class="bg-gray-200">
+                <div class="">
                     {{$loop->iteration}}. {{$subject->title}}, <b>{{$subject->control}}</b>
-                    @if($subject->pivot->instead)
-                        <div class="ml-3">--- обрано --- <a href="{{route('admin.subjects.show', $selected_subjects[$subject->pivot->instead])}}">{{$selected_subjects[$subject->pivot->instead]->title}}</a></div>
-                    @else
-                        <div class="ml-3 btn btn-danger">--- НЕ ОБРАНО ---</div>
-                    @endif
-                    <div class="m-5 text-sm">
-                        <h5>Форма вибору</h5>
-                        @foreach($selective_subjects as $selective_subject)
-                            @continue($selective_subject->semester != $subject->semester)
-                            <div>
-                                @if($subject->pivot->instead == $selective_subject->id)
-                                    {{$selective_subject->title}}
-                                @else
-                                    <a href="{{route('admin.students.select', [$student->id, 'sub='.$subject->id.'&sel='.$selective_subject->id])}}">
-                                        {{$selective_subject->title}}
-                                    </a>
-                                @endif
-                            </div>
-                        @endforeach
+                    <div class="ml-5">
+                        <btn class="btn btn-sm btn-outline-info" data-bs-toggle="collapse" href="#collapse-all-{{$subject->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Каталог
+                        </btn>
+                        @if($subject->pivot->instead)
+                            <btn class="btn btn-sm btn-outline-primary" data-bs-toggle="collapse" href="#collapse-{{$subject->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                --- обрано ---
+                            </btn>
+                            <a href="{{route('admin.subjects.show', $selected_subjects[$subject->pivot->instead])}}">{{$selected_subjects[$subject->pivot->instead]->title}}</a>
+                        @else
+                            <btn class="btn btn-sm btn-danger" data-bs-toggle="collapse" href="#collapse-{{$subject->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                --- НЕ ОБРАНО ---
+                            </btn>
+                        @endif
                     </div>
+
+                    <div class="collapse text-sm" id="collapse-{{$subject->id}}">
+                        <div class="card card-body">
+                            @foreach($selective_subjects as $selective_subject)
+                                @continue($selective_subject->semester != $subject->semester)
+                                <div>
+                                    @if($subject->pivot->instead == $selective_subject->id)
+                                        {{$selective_subject->title}}
+                                    @else
+                                        <a href="{{route('admin.students.select', [$student->id, 'sub='.$subject->id.'&sel='.$selective_subject->id])}}">
+                                            {{$selective_subject->title}}
+                                        </a>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="collapse text-sm" id="collapse-all-{{$subject->id}}">
+                        <div class="card card-body">
+                            @foreach($selective_subjects as $selective_subject)
+                                <div>
+                                    {{$loop->iteration}}
+                                    @if($subject->pivot->instead == $selective_subject->id)
+                                        {{$selective_subject->title}}
+                                    @else
+                                        <a href="{{route('admin.students.select', [$student->id, 'sub='.$subject->id.'&sel='.$selective_subject->id])}}">
+                                            {{$selective_subject->title}}, {{$selective_subject->semester}} семестр
+                                        </a>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
                 </div>
             @endif
 

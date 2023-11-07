@@ -54,14 +54,22 @@ class StudentsController extends Controller
 
     public function show(Student $student)
     {
-        $this->add_subjects($student); //
+        $programID = $student->group->program->id;
 
-        $subjects = $student->subjects()->withPivot('instead')
+        $subjects = $student->subjects()
+            ->withPivot('instead', 'program', 'semester')
+            ->wherePivot('program', $programID)
+//            ->orderBy('pivot_semester', 'asc')
             ->orderBy('semester', 'asc')
             ->orderBy('is_main', 'desc')
             ->orderBy('control', 'desc')
             ->orderBy('title', 'asc')
             ->get();
+
+        foreach($subjects as $key => $subject){
+            $subjects[$key] = $subject->pivot->semester;
+        }
+
 
         $selected_subjects = array();
         foreach ($subjects as $subject) {
@@ -75,10 +83,6 @@ class StudentsController extends Controller
         }
 
         $selective_subjects = $student->group->program->subjects->whereIn('is_main', [0]);
-
-
-
-
 
         return view('admin.students.show', compact('student', 'subjects', 'selected_subjects', 'selective_subjects'));
     }
@@ -96,6 +100,7 @@ class StudentsController extends Controller
     {
         $data = $request->validated();
         $this->save($data, $student, 'uploads/students');
+
         return redirect()->route('admin.students.show', $student->id);
     }
 
@@ -106,6 +111,12 @@ class StudentsController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * Вибір дисциплін
+     */
     public function select(Request $request, $id)
     {
         $request->validate([
@@ -113,10 +124,11 @@ class StudentsController extends Controller
             'sel' => 'required',
         ]);
 
-        $sub = $request->input('sub');
-        $sel = $request->input('sel');
+        $sub = $request->input('sub'); // Дисципліна по плану
+        $sel = $request->input('sel'); // Вибіркова дисципліна
 
         $subject = Subject::find($sel);
+//        dd($subject->program->id);
         $student = Student::find($id);
 
         $insteads = $student->subjects()->withPivot('instead')->get();
@@ -127,18 +139,66 @@ class StudentsController extends Controller
             }
         }
 
-        $student->subjects()->syncWithoutDetaching([$sub => ['instead' => $sel, 'semester' => $subject->semester, 'is_main' => $subject->is_main]]);
-        $student->subjects()->syncWithoutDetaching([$sel => ['is_main' => 0]]);
+        $student->subjects()->syncWithoutDetaching([$sub => [
+            'instead' => $sel,
+            'semester' => $subject->semester,
+            'program' => $subject->program->id,
+            'is_main' => 3]]);
+        $student->subjects()->syncWithoutDetaching([$sel => [
+            'instead' => $sub,
+            'semester' => $subject->semester,
+            'program' => $subject->program->id,
+            'is_main' => 0]]);
 
         return redirect()->back();
     }
 
 
+
+    public function update_plan($id)
+    {
+        $student = Student::find($id);
+        $this->del_subjects($student); // видаляємо всі предмети
+        $this->add_subjects($student); // додаємо предмети вдповідно до групи та програми
+        return redirect()->back();
+    }
+
+
+    /**
+     * @param $student
+     * @return void
+     * Додаємо студенту його дисципліни відповідно до група-програма-дисципліни із статусом 2 та 1 (основні та для вибору)
+     */
     private function add_subjects($student)
     {
         $subjects = $student->group->program->subjects->whereIn('is_main', [2, 1]);
+
         foreach($subjects as $subject){
-            $student->subjects()->syncWithoutDetaching([$subject->id =>['semester' => $subject->semester, 'is_main' => $subject->is_main]]);
+
+            $main = $student->subjects->find($subject->id) ?
+                $student->subjects->find($subject->id)->pivot->is_main :
+                $subject->is_main;
+
+            $student->subjects()->syncWithoutDetaching([$subject->id =>[
+                'semester' => $subject->semester,
+                'program' => $subject->program->id,
+                'is_main' => $main??3]]);
         }
+    }
+
+
+    /**
+     * @param $student
+     * @return void
+     * Видаляємо всі предмети студента. При зміні групи. Залишаються обрані вибіркові
+     */
+    private function del_subjects($student)
+    {
+        $student->subjects()
+            ->whereIn('is_main', [2, 1])
+//            ->wherePivot('instead', '==', null)
+            ->wherePivot('is_main', 2)
+            ->orWherePivot('is_main', 1)
+            ->detach();
     }
 }

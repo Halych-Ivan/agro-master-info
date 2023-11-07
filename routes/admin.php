@@ -35,6 +35,7 @@ Route::prefix('admin')->name('admin.')->group(function (){
 
 
     Route::get('select/{id}', [StudentsController::class, 'select'])->name('students.select'); // Вибір дисциплін
+    Route::get('update_plan/{id}', [StudentsController::class, 'update_plan'])->name('students.update_plan'); // Вибір дисциплін
     Route::get('subjects/{id}/add_teacher/{teacher?}/{main?}', [SubjectsController::class, 'add_teacher'])->name('subjects.add_teacher'); // Довідки
     Route::get('subjects/{id}/dell_teacher/{teacher}', [SubjectsController::class, 'dell_teacher'])->name('subjects.dell_teacher'); // Довідки
 

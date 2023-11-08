@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\SubjectsController;
 use App\Http\Controllers\Admin\TeachersController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\DocumentsController;
-use App\Http\Controllers\Admin\SelectedSubjectsController;
+use App\Http\Controllers\Admin\ImportController;
 
 
 
@@ -39,4 +39,6 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::get('subjects/{id}/add_teacher/{teacher?}/{main?}', [SubjectsController::class, 'add_teacher'])->name('subjects.add_teacher'); // Довідки
     Route::get('subjects/{id}/dell_teacher/{teacher}', [SubjectsController::class, 'dell_teacher'])->name('subjects.dell_teacher'); // Довідки
 
+    Route::get('import', [ImportController::class, 'import_form'])->name('import'); // Імпорт із Exel
+    Route::post('import', [ImportController::class, 'import'])->name('import'); // Імпорт із Exel
 });

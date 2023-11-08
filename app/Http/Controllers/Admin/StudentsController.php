@@ -66,14 +66,14 @@ class StudentsController extends Controller
             ->orderBy('title', 'asc')
             ->get();
 
-        foreach($subjects as $key => $subject){
-            $subjects[$key] = $subject->pivot->semester;
-        }
+//        foreach($subjects as $key => $subject){
+//            $subjects[$key] = $subject->pivot->semester;
+//        }
 
 
         $selected_subjects = array();
         foreach ($subjects as $subject) {
-            $insteadId = $subject->pivot->instead;
+            $insteadId = $subject->pivot->instead ?? null;
             if ($insteadId !== null) {
                 $subjectModel = Subject::find($insteadId);
                 if ($subjectModel) {

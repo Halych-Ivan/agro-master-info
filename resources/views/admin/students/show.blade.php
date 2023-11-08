@@ -152,13 +152,14 @@
                     <div class="collapse text-sm" id="collapse-all-{{$subject->id}}">
                         <div class="card card-body">
                             @foreach($selective_subjects as $selective_subject)
+
+                                @continue(ceil($subject->semester/2) != ceil($selective_subject->semester/2))
                                 <div>
-                                    {{$loop->iteration}}
                                     @if($subject->pivot->instead == $selective_subject->id)
-                                        {{$selective_subject->title}}
+                                        {{$selective_subject->semester}} семестр - {{$selective_subject->title}}
                                     @else
                                         <a href="{{route('admin.students.select', [$student->id, 'sub='.$subject->id.'&sel='.$selective_subject->id])}}">
-                                            {{$selective_subject->title}}, {{$selective_subject->semester}} семестр
+                                            <b>{{$selective_subject->semester}} семестр</b> - {{$selective_subject->title}}
                                         </a>
                                     @endif
                                 </div>

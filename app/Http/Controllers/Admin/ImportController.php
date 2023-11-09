@@ -21,12 +21,11 @@ class ImportController extends Controller
     {
         $file = $request->file('import_file');
 
+        set_time_limit(3600); // Збільшення максимального часу виконання на 120 секунд
         $import = new StudentsImport;
-
         Excel::import($import, $file);
 
-        $importedData = $import->importedData; // Отримуємо імпортовані дані
-
+        $importedData = $import->getImportedData(); // Отримуємо імпортовані дані
 
         return redirect()->route('admin.index')->with('success', 'Дані імпортовано успішно.');
     }

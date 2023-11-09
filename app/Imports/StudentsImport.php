@@ -10,6 +10,13 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class StudentsImport implements ToCollection, ToModel, WithHeadingRow
 {
+    private $importedData = [];
+
+
+    public function getImportedData()
+    {
+        return $this->importedData;
+    }
     /**
     * @param Collection $collection
     */
@@ -26,9 +33,22 @@ class StudentsImport implements ToCollection, ToModel, WithHeadingRow
             'group_id' => 1,
         ];
 
-        $this->importedData[] = $data;
-        return new Student($data);
+        $existingData = [
+            'surname' => $row['surname'],
+            'name' => $row['name'],
+        ];
+        // Отримуємо студента за умовою існування імені та прізвища
+        $student = Student::where($existingData)->first();
 
+        if ($student) {
+            // Якщо студент існує, оновлюємо його дані
+            $student->update($data);
+        } else {
+            // Якщо студент не існує, створюємо нового
+            $this->importedData[] = $data;
+            $student = new Student($data);
+        }
 
+        return $student;
     }
 }

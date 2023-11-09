@@ -158,7 +158,7 @@ class StudentsController extends Controller
     public function update_plan($id)
     {
         $student = Student::find($id);
-        $this->del_subjects($student); // видаляємо всі предмети
+        //$this->del_subjects($student); // видаляємо всі предмети
         $this->add_subjects($student); // додаємо предмети вдповідно до групи та програми
         return redirect()->back();
     }
@@ -194,6 +194,8 @@ class StudentsController extends Controller
      */
     private function del_subjects($student)
     {
+//        dd($student->id);
+
         $student->subjects()
             ->whereIn('is_main', [2, 1])
 //            ->wherePivot('instead', '==', null)

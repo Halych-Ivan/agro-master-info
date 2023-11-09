@@ -7,7 +7,11 @@
     <x-admin.action-icons resource="students" id="{{$student->id}}"></x-admin.action-icons>
     <table class="table table-bordered">
         <x-admin.show title="ПІБ">{{ $student->surname}} {{ $student->name }} {{ $student->patronymic }}</x-admin.show>
-        <x-admin.show title="Група">{{ $student->group->title }} ({{ $student->group->name }})</x-admin.show>
+        <x-admin.show title="Група">
+            <x-admin.href href="groups.show" id="{{ $student->group->id }}">
+                {{ $student->group->title }} ({{ $student->group->name }})
+            </x-admin.href>
+        </x-admin.show>
         <x-admin.show title="Програма">{{ $student->group->program->title }} ({{ $student->group->program->year }})</x-admin.show>
         <x-admin.show title="Спеціальність">{{ $student->group->program->specialty->code }} {{ $student->group->program->specialty->title }} ({{ $student->group->program->level->title }})</x-admin.show>
         <x-admin.show title="Фото"><img src="{{asset(asset($student->photo))}}" alt="" height="100"></x-admin.show>

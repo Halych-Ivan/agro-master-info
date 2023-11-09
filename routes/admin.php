@@ -17,7 +17,7 @@ use App\Http\Controllers\Admin\ImportController;
 //************************************************************
 // Admin panel
 //************************************************************
-Route::prefix('admin')->name('admin.')->group(function (){
+Route::prefix('admin')->name('admin.')->middleware(['admin'])->group(function (){
 //Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function (){
 
     Route::view('/','admin.index')->name(''); //

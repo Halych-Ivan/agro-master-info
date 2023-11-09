@@ -65,7 +65,11 @@ class SubjectsController extends Controller
     {
 //        dd($id);
         $subject = Subject::with('teachers')->find($id);
-        return view('admin.subjects.show', compact('subject'));
+        $students = $subject->students()
+        ->orderBy('group_id')
+        ->orderBy('surname')
+        ->get();
+        return view('admin.subjects.show', compact('subject', 'students'));
     }
 
 

@@ -47,9 +47,9 @@
     </div>
 
     <div>
-        @foreach($subject->students as $student)
+        @foreach($students as $student)
             <x-admin.href href="students.show" id="{{$student->id}}">
-                {{$student->surname}} {{$student->name}}
+                {{$student->group->name}} - {{$student->surname}} {{ Illuminate\Support\Str::limit($student->name, 1, '') }}.{{ Illuminate\Support\Str::limit($student->patronymic, 1, '') }}.,  {{$student->gradebook}}
             </x-admin.href><br>
         @endforeach
     </div>

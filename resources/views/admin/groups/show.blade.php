@@ -25,7 +25,7 @@
                 <th>Фінансуваня</th>
                 <th>Примітки</th>
             </tr>
-        @foreach($group->students as $student)
+        @foreach($students as $student)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>

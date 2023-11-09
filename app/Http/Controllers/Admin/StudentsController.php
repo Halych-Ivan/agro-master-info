@@ -27,7 +27,7 @@ class StudentsController extends Controller
 
         $students = Student::whereHas('group', function ($q) use ($searchGroupId) {
             $q->where('id', 'like', '%' . $searchGroupId . '%');})
-            ->where('name', 'like', '%' . $searchStudentTitle . '%')
+            ->where('surname', 'like', '%' . $searchStudentTitle . '%')
             ->orderBy('surname')
             ->paginate($size);
 
@@ -90,7 +90,7 @@ class StudentsController extends Controller
 
     public function edit(Student $student)
     {
-        $groups = Group::all();
+        $groups = Group::orderBy('name', 'asc')->get();
         $programs = Program::orderBy('year', 'desc')->get();
         return view('admin.students.form', compact( 'student','groups', 'programs'));
     }
@@ -158,7 +158,7 @@ class StudentsController extends Controller
     public function update_plan($id)
     {
         $student = Student::find($id);
-        //$this->del_subjects($student); // видаляємо всі предмети
+        $this->del_subjects($student); // видаляємо всі предмети
         $this->add_subjects($student); // додаємо предмети вдповідно до групи та програми
         return redirect()->back();
     }
@@ -197,10 +197,18 @@ class StudentsController extends Controller
 //        dd($student->id);
 
         $student->subjects()
-            ->whereIn('is_main', [2, 1])
-//            ->wherePivot('instead', '==', null)
-            ->wherePivot('is_main', 2)
-            ->orWherePivot('is_main', 1)
+            ->where(function ($query) {
+                $query->whereIn('is_main', [2])
+                    ->whereNull('instead')
+                    ->orWhere('is_main', 1);
+            })
             ->detach();
+//
+//        $student->subjects()
+//            ->whereIn('is_main', [2, 1])
+////            ->wherePivot('instead', '==', null)
+//            ->wherePivot('is_main', 2)
+//            ->orWherePivot('is_main', 1)
+//            ->detach();
     }
 }

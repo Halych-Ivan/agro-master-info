@@ -35,7 +35,8 @@ class GroupsController extends Controller
 
     public function show(Group $group)
     {
-        return view('admin.groups.show', compact('group'));
+        $students = $group->students()->orderBy('surname')->get();
+        return view('admin.groups.show', compact('group', 'students'));
     }
 
 

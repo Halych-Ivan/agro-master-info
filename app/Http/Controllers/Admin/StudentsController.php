@@ -16,6 +16,12 @@ class StudentsController extends Controller
 
     public function index()
     {
+//        set_time_limit(3600); // Збільшення максимального часу виконання на 120 секунд
+//        for ($i=1; $i<100; $i++){
+//            $this->update_plan($i);
+//        }
+
+
         $size = request('size') ?? 20;
         $search = request('search') ?? false;
         $group = request('group') ?? false;

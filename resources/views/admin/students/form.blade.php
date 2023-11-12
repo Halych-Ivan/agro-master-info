@@ -4,6 +4,7 @@
 
 @section('content')
     <x-admin.action-icons resource="students" id="{{$student->id ?? ''}}"></x-admin.action-icons>
+    <a href="{{route('admin.students.update_plan', $student->id)}}">Оновити план</a>
     <div class="mt-3">
         <form action="{{$student->exists ? route('admin.students.update', $student->id) : route('admin.students.store')}}"
               method="POST" enctype="multipart/form-data">

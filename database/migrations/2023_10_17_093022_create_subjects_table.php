@@ -28,11 +28,12 @@ return new class extends Migration
             $table->string('practical')->nullable();
             $table->string('laboratory')->nullable();
             $table->string('description')->nullable();
-            $table->string('teacher')->nullable();
 
-            $table->boolean('is_main')->default(false);
-            $table->boolean('is_selected')->default(false);
+            $table->boolean('is_main')->nullable();
             $table->boolean('is_active')->default(false);
+
+//            $table->string('teacher')->nullable();
+//            $table->boolean('is_selected')->default(false);
 
             $table->foreignId('program_id');
             $table->foreignId('cathedra_id');

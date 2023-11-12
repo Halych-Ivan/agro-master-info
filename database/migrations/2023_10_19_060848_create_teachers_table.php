@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('title')->nullable();
             $table->string('phone')->nullable();
+            $table->string('phone_2')->nullable();
             $table->string('grade')->nullable();
             $table->string('rank')->nullable();
-            $table->string('phone_2')->nullable();
             $table->string('email')->nullable();
             $table->string('link')->nullable();
             $table->string('photo')->nullable();

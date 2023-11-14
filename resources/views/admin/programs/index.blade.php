@@ -25,7 +25,7 @@
                     <td class="text-center">{{$loop->iteration}}</td>
                     <td class="text-center"><b>{{$program->year}}</b></td>
                     <td><b><x-admin.href href="programs.show" id="{{$program->id}}">{{$program->title}}</x-admin.href></b></td>
-                    <td><b>{{$program->specialty->code??''}} {{$program->specialty->title??''}}</b><br>{{$program->level->title}}</td>
+                    <td><b>{{$program->specialty->code??''}} {{$program->specialty->title??''}}</b><br>{{$program->level->title??''}}</td>
                     <td class="text-center"><img src="{{asset($program->image)}}" alt="" height="100"></td>
                     <td class="text-center">
                         @if($program->file)<b><a href="{{asset($program->file)}}">Освітня програма</a></b><br>@endif

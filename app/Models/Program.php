@@ -32,7 +32,7 @@ class Program extends Model
     // Навчальні групи даної ОП
     public function groups()
     {
-        return $this->hasMany(Group::class);
+        return $this->hasMany(Group::class, 'program_id');
     }
 
 

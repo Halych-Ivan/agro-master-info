@@ -17,8 +17,9 @@ class StudentsController extends Controller
     public function index()
     {
 //        set_time_limit(3600); // Збільшення максимального часу виконання на 120 секунд
-//        for ($i=1; $i<100; $i++){
+//        for ($i=1; $i<1000; $i++){
 //            $this->update_plan($i);
+//            sleep(10);
 //        }
 
 
@@ -117,6 +118,7 @@ class StudentsController extends Controller
     }
 
 
+
     /**
      * @param Request $request
      * @param $id
@@ -164,8 +166,10 @@ class StudentsController extends Controller
     public function update_plan($id)
     {
         $student = Student::find($id);
-        $this->del_subjects($student); // видаляємо всі предмети
-        $this->add_subjects($student); // додаємо предмети вдповідно до групи та програми
+        if($student) {
+            $this->del_subjects($student); // видаляємо всі предмети
+            $this->add_subjects($student); // додаємо предмети вдповідно до групи та програми
+        }
         return redirect()->back();
     }
 
@@ -200,8 +204,6 @@ class StudentsController extends Controller
      */
     private function del_subjects($student)
     {
-//        dd($student->id);
-
         $student->subjects()
             ->where(function ($query) {
                 $query->whereIn('is_main', [2])
@@ -209,12 +211,5 @@ class StudentsController extends Controller
                     ->orWhere('is_main', 1);
             })
             ->detach();
-//
-//        $student->subjects()
-//            ->whereIn('is_main', [2, 1])
-////            ->wherePivot('instead', '==', null)
-//            ->wherePivot('is_main', 2)
-//            ->orWherePivot('is_main', 1)
-//            ->detach();
     }
 }

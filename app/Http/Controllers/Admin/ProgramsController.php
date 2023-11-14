@@ -7,24 +7,28 @@ use App\Http\Requests\Admin\ProgramsRequest;
 use App\Models\Level;
 use App\Models\Program;
 use App\Models\Specialty;
-use App\Models\Subject;
-use Illuminate\Support\Facades\Storage;
 
 class ProgramsController extends Controller
 {
 
     public function index()
     {
-        $programs = Program::orderBy('year', 'asc')->get();
-//        dd($programs);
+        $programs = Program::with('specialty', 'level', 'groups')
+            ->orderBy('year', 'asc')
+            ->get(['id', 'title', 'year', 'image', 'file', 'info', 'specialty_id', 'level_id']);
         return view('admin.programs.index', compact('programs'));
     }
 
 
     public function create(Program $program)
     {
-        $specialties = Specialty::query()->select('id', 'title')->orderBy('code', 'asc')->get();
-        $levels = Level::query()->select('id', 'title')->get();
+        $specialties = Specialty::query()
+            ->select('id', 'title', 'code')
+            ->orderBy('code', 'asc')
+            ->get();
+        $levels = Level::query()
+            ->select('id', 'title')
+            ->get();
         return view('admin.programs.form', compact('program','specialties', 'levels'));
     }
 
@@ -39,23 +43,25 @@ class ProgramsController extends Controller
 
     public function show($id)
     {
-        $program = Program::with(['subjects' => function ($query) {
-            $query->orderBy('semester', 'asc')
-                ->orderBy('control', 'desc')
-                ->orderBy('is_main', 'desc');
-//                ->orderBy('title', 'asc')
-//                ->orderBy('code', 'asc');
-        }])->find($id);
-
+        $program = Program::with([
+            'subjects' => function ($query) {
+                $query->orderByRaw('semester ASC, control DESC, is_main DESC');
+            },
+        ])->find($id);
         return view('admin.programs.show', compact('program'));
     }
 
 
     public function edit(Program $program)
     {
-        $specialties = Specialty::query()->select('id', 'title')->orderBy('code', 'asc')->get();
-        $levels = Level::query()->select('id', 'title')->get();
-        return view('admin.programs.form', compact('program', 'specialties', 'levels'));
+        $specialties = Specialty::query()
+            ->select('id', 'title')
+            ->orderBy('code', 'asc')
+            ->get();
+        $levels = Level::query()
+            ->select('id', 'title')
+            ->get();
+        return view('admin.programs.form', compact('program', 'specialties', 'levels'))->with('alert', 'Дія виконана успішно!');
     }
 
 

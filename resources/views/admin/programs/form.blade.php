@@ -20,7 +20,7 @@
                     <select class="form-select w-75" id="select01" name="specialty_id">
                         @foreach($specialties as $specialty)
                             @php($id = old('specialty_id') ?? $program->specialty->id ?? '')
-                            <option value="{{$specialty->id}}" {{ $id == $specialty->id ? 'selected' : '' }}>{{$specialty->title}}</option>
+                            <option value="{{$specialty->id}}" {{ $id == $specialty->id ? 'selected' : '' }}>{{$specialty->code}} {{$specialty->title}}</option>
                         @endforeach
                     </select>
                 </div>

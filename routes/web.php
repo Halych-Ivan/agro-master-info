@@ -21,6 +21,7 @@ Route::view('/admission','agromaster.admission.001')->name('admission'); // Вс
 Route::view('/admission/confirmation','agromaster.admission.confirmation')->name('admission/confirmation'); // Вступ
 
 Route::view('/schedule','agromaster.schedule')->name('schedule'); // Розклад занять
+Route::view('/session','agromaster.session')->name('session'); // Розклад занять
 Route::view('/lists','agromaster.lists')->name('lists'); // Списки груп
 Route::view('/details','agromaster.details')->name('details'); // Реквізити
 Route::view('/reference','agromaster.reference')->name('reference'); // Довідки

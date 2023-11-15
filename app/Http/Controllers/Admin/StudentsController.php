@@ -162,12 +162,11 @@ class StudentsController extends Controller
 
         $students = Student::all();
         foreach ($students as $student){
-            //$this->del_subjects($student); // видаляємо всі предмети
-            //$this->add_subjects($student); // додаємо предмети вдповідно до групи та програми
+            $this->del_subjects($student); // видаляємо всі предмети
+            $this->add_subjects($student); // додаємо предмети вдповідно до групи та програми
             $student->is_active = 0;
             $student->save();
-
-            sleep(20);
+            sleep(10);
         }
 
         return redirect()->route('admin.students.index');

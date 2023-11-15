@@ -45,11 +45,11 @@ class GroupsController extends Controller
             ->get();
 
 
-        set_time_limit(3600);
-        foreach($students as $student){
-            $q = new StudentsController();
-            $res = $q->update_plan($student->id);
-        }
+//        set_time_limit(3600);
+//        foreach($students as $student){
+//            $q = new StudentsController();
+//            $res = $q->update_plan($student->id);
+//        }
 
         return view('admin.groups.show', compact('group', 'students'));
     }

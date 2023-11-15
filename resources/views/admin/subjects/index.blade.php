@@ -24,6 +24,8 @@
             </select>
             <button class="btn btn-outline-primary ml-3 mr-5" type="submit">Пошук</button>
             <a href="{{route('admin.subjects.index', 'search=all&cathedra=all&program=all')}}" class="btn btn-outline-primary">Всі записи</a>
+            <span class="pl-3"> </span>
+            <a href="{{route('admin.subjects.is_active', '0')}}" class="btn btn-outline-danger">Перевірка</a>
         </form>
         {{ $subjects->links('admin.layout.pagination') }}
 
@@ -40,7 +42,7 @@
                 </tr>
                 @foreach($subjects as $subject)
 {{--                    @php(dd($subject->program))--}}
-                    <tr class="{{$subject->is_active?'':'bg-gray-300'}} ">
+                    <tr class="{{$subject->is_active == 0 ? 'bg-gray-300' : ($subject->is_active == 2 ? '' : 'bg-gray-500')}}">
                         <td>{{ $loop->iteration }} </td>
                         <td>
                             <a href="{{route('admin.subjects.show', $subject->id)}}">{{ $subject->title }}</a>

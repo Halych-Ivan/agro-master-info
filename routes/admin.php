@@ -35,9 +35,13 @@ Route::prefix('admin')->name('admin.')->middleware(['admin'])->group(function ()
 
 
     Route::get('select/{id}', [StudentsController::class, 'select'])->name('students.select'); // Вибір дисциплін
-    Route::get('update_plan/{id}', [StudentsController::class, 'update_plan'])->name('students.update_plan'); // Вибір дисциплін
+    Route::get('update_plan/{id}', [StudentsController::class, 'update_plan'])->name('students.update_plan'); // Оновлення плану
+
+    Route::get('/student/audit', [StudentsController::class, 'audit'])->name('student.audit'); // Оновлення плану
+
     Route::get('subjects/{id}/add_teacher/{teacher?}/{main?}', [SubjectsController::class, 'add_teacher'])->name('subjects.add_teacher'); // Довідки
     Route::get('subjects/{id}/dell_teacher/{teacher}', [SubjectsController::class, 'dell_teacher'])->name('subjects.dell_teacher'); // Довідки
+    Route::get('subjects/{id}/is_active', [SubjectsController::class, 'is_active'])->name('subjects.is_active'); // Довідки
 
     Route::get('import', [ImportController::class, 'import_form'])->name('import'); // Імпорт із Exel
     Route::post('import', [ImportController::class, 'import'])->name('import'); // Імпорт із Exel

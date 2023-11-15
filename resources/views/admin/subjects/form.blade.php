@@ -7,10 +7,10 @@
     <div class="mt-3">
         <form action="{{$subject->exists ? route('admin.subjects.update', $subject->id) : route('admin.subjects.store')}}"
               method="POST" enctype="multipart/form-data">
-
             @csrf
             @if($subject->exists) @method('PATCH') @endif
 
+            <x-form.botton></x-form.botton>
             <x-form.text name="title" value="{{ old('title', $subject->title) }}" placeholder="Назва"></x-form.text>
 
             <div class="mb-3">

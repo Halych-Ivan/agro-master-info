@@ -13,50 +13,37 @@ use Illuminate\Support\Str;
 
 class DocumentsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Document $document)
     {
         return view('admin.documents.show', compact('document'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         $student = Student::query()->find($id);
         return view('admin.documents.form', compact('student'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         $data = $request->validate([
@@ -78,9 +65,7 @@ class DocumentsController extends Controller
         return redirect()->route('admin.students.show', $id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Document $document)
     {
         $this->deleteFile('uploads/documents/'.$document->student_id.'/'.$document->title);

@@ -13,7 +13,7 @@ class CathedrasController extends Controller
     {
         $cathedras = Cathedra::query()
             ->orderBy('title', 'asc')
-            ->get();
+            ->get(['id', 'title', 'abbr', 'logo']);
         return view('admin.cathedras.index', compact('cathedras'));
     }
 
@@ -34,8 +34,7 @@ class CathedrasController extends Controller
 
     public function show($id)
     {
-        $cathedra = Cathedra::with(['teachers' => function ($query) {
-            $query->orderBy('name', 'asc');}])
+        $cathedra = Cathedra::with(['teachers' => function ($query){$query->orderBy('name', 'asc');}])
             ->find($id);
         return view('admin.cathedras.show', compact('cathedra'));
     }
@@ -62,5 +61,4 @@ class CathedrasController extends Controller
         $cathedra->delete();
         return redirect()->route('admin.cathedras.index')->with('alert', 'Дія виконана успішно!');
     }
-
 }

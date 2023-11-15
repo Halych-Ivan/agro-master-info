@@ -40,7 +40,7 @@
                 @php( $i = $i +1)
             <tr><td colspan="6" class="text-center">Семестр {{$i}}</td></tr>
             @endif
-            <tr class="{{$subject->is_active?'':'bg-gray-300'}}">
+            <tr class="{{$subject->is_active == 0 ? 'bg-gray-300' : ($subject->is_active == 2 ? '' : 'bg-gray-500')}}">
                 <td>
                     <div class="{{$subject->is_main?'':'bg-gray-500 ml-5'}}">
                         <a href="{{route('admin.subjects.show', $subject->id)}}">

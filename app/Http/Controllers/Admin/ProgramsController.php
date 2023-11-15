@@ -26,9 +26,11 @@ class ProgramsController extends Controller
             ->select('id', 'title', 'code')
             ->orderBy('code', 'asc')
             ->get();
+
         $levels = Level::query()
             ->select('id', 'title')
             ->get();
+
         return view('admin.programs.form', compact('program','specialties', 'levels'));
     }
 
@@ -43,11 +45,8 @@ class ProgramsController extends Controller
 
     public function show($id)
     {
-        $program = Program::with([
-            'subjects' => function ($query) {
-                $query->orderByRaw('semester ASC, control DESC, is_main DESC');
-            },
-        ])->find($id);
+        $program = Program::with(['subjects' => function ($query){$query->orderByRaw('semester ASC, control DESC, is_main DESC');},])
+            ->find($id);
         return view('admin.programs.show', compact('program'));
     }
 
@@ -58,9 +57,11 @@ class ProgramsController extends Controller
             ->select('id', 'title')
             ->orderBy('code', 'asc')
             ->get();
+
         $levels = Level::query()
             ->select('id', 'title')
             ->get();
+
         return view('admin.programs.form', compact('program', 'specialties', 'levels'))->with('alert', 'Дія виконана успішно!');
     }
 

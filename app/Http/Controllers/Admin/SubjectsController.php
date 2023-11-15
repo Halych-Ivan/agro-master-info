@@ -63,12 +63,12 @@ class SubjectsController extends Controller
 
     public function show($id)
     {
-//        dd($id);
-        $subject = Subject::with('teachers')->find($id);
+        $subject = Subject::with('teachers', 'students')->find($id);
+//        $subject = Subject::query()->find($id);
         $students = $subject->students()
-        ->orderBy('group_id')
-        ->orderBy('surname')
-        ->get();
+            ->orderBy('group_id')
+            ->orderBy('surname')
+            ->get();
         return view('admin.subjects.show', compact('subject', 'students'));
     }
 
@@ -85,20 +85,7 @@ class SubjectsController extends Controller
     {
         $data = $request->validated();
 
-        // ----is_active-----------------
-        $currentYear = date("Y"); // отримуємо поточний рік
-        $currentMonth = date("n"); // отримуємо поточний місяць (1-12)
-        $startYear = Program::where('id', $data['program_id'])->value('year');
-        $course = $currentYear - $startYear;
-        if ($currentMonth > 8) {$course++;}
-        $semester_I = $course * 2 - 1;
-        $semester_II = $course * 2;
-        if($data['semester'] == $semester_I || $data['semester'] == $semester_II){
-            $data['is_active'] = 1;
-        } else {
-            $data['is_active'] = 0;
-        }
-        // ----is_active-----------------
+        $this->is_subject_active($subject);
 
         $this->save($data, $subject, 'uploads/subjects');
         return redirect()->route('admin.subjects.index');
@@ -155,8 +142,40 @@ class SubjectsController extends Controller
         return redirect()->back();
     }
 
-    private function is_active()
-    {
 
+    public function is_active()
+    {
+        set_time_limit(3600); // Збільшення максимального часу виконання на 120 секунд
+        $subjects = Subject::all();
+        foreach ($subjects as $subject){
+            $this->is_subject_active($subject);
+        }
+        return redirect()->route('admin.subjects.index');
     }
+
+
+    private function is_subject_active($subject)
+    {
+        $currentYear = date("Y"); // отримуємо поточний рік
+        $currentMonth = date("n"); // отримуємо поточний місяць (1-12)
+        $startYear = $subject->program->year;
+
+        $course = $currentYear - $startYear;
+        if ($currentMonth > 8) {$course++;}
+
+        $semester_I = $course * 2 - 1;
+        $semester_II = $course * 2;
+
+        if($subject->semester == $semester_I || $subject->semester == $semester_II){
+            $subject->is_active = 2;
+        }
+        elseif ($subject->semester > $semester_I || $subject->semester > $semester_II){
+            $subject->is_active = 1;
+        }
+        else {
+            $subject->is_active = 0;
+        }
+        $subject->save();
+    }
+
 }

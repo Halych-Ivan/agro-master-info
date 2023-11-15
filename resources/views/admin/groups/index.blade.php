@@ -29,7 +29,13 @@
                     <td>{{$group->students->count()}}</td>
                     <td>{{$group->entry}}</td>
                     <td>{{$group->term}}</td>
-                    <td><a href="{{route('admin.programs.show', $group->program->id)}}"><b>{{$group->program->title??''}}</b>, {{$group->program->year??''}}</a></td>
+                    <td>
+                        @if($group->program)
+                            <a href="{{route('admin.programs.show', $group->program->id)}}"><b>{{$group->program->title??''}}</b>, {{$group->program->year??''}}</a>
+                        @else
+                            <b>Не приєднано до плана</b>
+                        @endif
+                    </td>
                     <td>
                         <b>{{$group->program->specialty->code??''}} {{$group->program->specialty->title??''}}</b><br>
                         {{$group->program->level->title??''}}

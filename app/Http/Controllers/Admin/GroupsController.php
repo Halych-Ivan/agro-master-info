@@ -13,14 +13,19 @@ class GroupsController extends Controller
 
     public function index()
     {
-        $groups = Group::query()->orderBy('name', 'asc')->get();
+        $groups = Group::query()
+            ->orderBy('name', 'asc')
+            ->get();
         return view('admin.groups.index', compact('groups'));
     }
 
 
     public function create(Group $group)
     {
-        $programs = Program::query()->select('id', 'title', 'year')->orderBy('year', 'asc')->get();
+        $programs = Program::query()
+            ->select('id', 'title', 'year')
+            ->orderBy('year', 'desc')
+            ->get();
         return view('admin.groups.form', compact('group','programs'));
     }
 
@@ -42,7 +47,10 @@ class GroupsController extends Controller
 
     public function edit(Group $group)
     {
-        $programs = Program::query()->select('id', 'title', 'year')->orderBy('year', 'asc')->get();
+        $programs = Program::query()
+            ->select('id', 'title', 'year')
+            ->orderBy('year', 'desc')
+            ->get();
         return view('admin.groups.form', compact('group','programs'));
     }
 

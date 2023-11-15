@@ -60,11 +60,10 @@ class ImportController extends Controller
                 $import = new SubjectsImport();
                 break;
         }
-//        dd($file);
 
         Excel::import($import, $file);
 
-        $importedData = $import->getImportedData(); // Отримуємо імпортовані дані
+        //$importedData = $import->getImportedData(); // Отримуємо імпортовані дані
 
         return redirect()->back()->with('success', 'Дані імпортовано успішно.');
     }

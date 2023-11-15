@@ -44,13 +44,6 @@ class GroupsController extends Controller
             ->orderBy('surname')
             ->get();
 
-
-//        set_time_limit(3600);
-//        foreach($students as $student){
-//            $q = new StudentsController();
-//            $res = $q->update_plan($student->id);
-//        }
-
         return view('admin.groups.show', compact('group', 'students'));
     }
 
@@ -78,5 +71,22 @@ class GroupsController extends Controller
         $group->delete();
         return redirect()->route('admin.groups.index')->with('alert', 'Дія виконана успішно!');
     }
+
+    public function audit(Group $group)
+    {
+        $students = $group->students();
+        set_time_limit(3600);
+        foreach($students as $student){
+            $q = new StudentsController();
+            $res = $q->update_plan($student->id);
+            $student->is_active = 0;
+            $student->save();
+            sleep(10);
+        }
+
+        return redirect()->route('admin.groups.index');
+
+    }
+
 
 }

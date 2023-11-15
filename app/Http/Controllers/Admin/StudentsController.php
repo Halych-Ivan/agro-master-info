@@ -187,11 +187,8 @@ class StudentsController extends Controller
 
     private function del_subjects($student)
     {
-
-//        $student->subjects()->wherePivot('is_main', 0)->detach();
         $student->subjects()->wherePivot('is_main', 1)->detach();
         $student->subjects()->wherePivot('is_main', 2)->detach();
-        $student->subjects()->wherePivot('is_main', 3)->detach();
     }
 
 
@@ -206,13 +203,21 @@ class StudentsController extends Controller
                 $student->subjects->find($subject->id)->pivot->is_main :
                 $subject->is_main;
 
-            $data[] = [
-                'student_id' => $student->id,
-                'subject_id' => $subject->id,
-                'semester' => $subject->semester,
-                'program' => $subject->program->id,
-                'is_main' => $main ?? 3,
-            ];
+            $existingRecord = $student->subjects()
+                ->wherePivot('student_id', $student->id)
+                ->wherePivot('subject_id', $subject->id)
+                ->first();
+
+            if (!$existingRecord) {
+                $data[] = [
+                    'student_id' => $student->id,
+                    'subject_id' => $subject->id,
+                    'semester' => $subject->semester,
+                    'program' => $subject->program->id,
+                    'is_main' => $main ?? 3,
+                ];
+            }
+
         }
 
         // Використання пакетної вставки

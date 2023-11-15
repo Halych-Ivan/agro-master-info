@@ -1,6 +1,6 @@
 @extends('admin.layout.admin')
 
-@section('title', 'Освітні програми - перегляд')
+@section('title', 'Групи - перегляд')
 
 @section('content')
 
@@ -22,6 +22,7 @@
             <tr>
                 <th>№</th>
                 <th>Прізвище ім'я та по-батькові</th>
+                <th>Вибіркові дисципліни</th>
                 <th>Фінансуваня</th>
                 <th>Примітки</th>
             </tr>
@@ -31,8 +32,31 @@
                 <td>
                     <x-admin.href href="students.show" id="{{$student->id}}">
                         {{$student->surname}} {{$student->name}} {{$student->patronymic}}
+
                     </x-admin.href>
                 </td>
+                <td>
+                    @php
+                        $l = ($group->program->level->title == 'магістр')? 3 : 5;
+                    @endphp
+                    @for($i = 1; $i < $l; $i++)
+                        @php
+                        $k1 = $student->subjects()->wherePivot('is_main', 3)->wherePivot('semester', $i*2-1)->count();
+                        $k2 = $student->subjects()->wherePivot('is_main', 3)->wherePivot('semester', $i*2)->count();
+                        $s1 = $group->program->subjects()->where('is_main', 1)->where('semester', $i*2-1)->count();
+                        $s2 = $group->program->subjects()->where('is_main', 1)->where('semester', $i*2)->count();
+                        $sum = $s1 + $s2 - $k1 - $k2;
+                        @endphp
+
+                        {{$i}} курс {{$k1}} + {{$k2}} |
+
+                        @if($k1 + $k2 < $s1 + $s2)
+                            <a href="{{route('admin.students.show', $student->id)}}" class="btn btn-sm btn-outline-danger">не обрано {{$sum}}</a>
+                        @endif
+
+                        <br>
+                    @endfor
+                                    </td>
                 <td>{{$student->finance}}</td>
                 <td>{{$student->phone}}</td>
             </tr>

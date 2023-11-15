@@ -119,7 +119,7 @@
                 </div>
             @elseif(($subject->is_main == 1))
                 <div class="">
-                    {{$loop->iteration}}. {{$subject->id}} {{$subject->title}}, <b>{{$subject->control}}</b>
+                    {{$loop->iteration}}. {{$subject->title}}, <b>{{$subject->control}}</b>
                     <div class="ml-5">
                         <btn class="btn btn-sm btn-outline-info" data-bs-toggle="collapse" href="#collapse-all-{{$subject->id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Каталог

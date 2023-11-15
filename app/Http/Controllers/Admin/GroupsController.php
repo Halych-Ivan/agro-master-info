@@ -40,7 +40,17 @@ class GroupsController extends Controller
 
     public function show(Group $group)
     {
-        $students = $group->students()->orderBy('surname')->get();
+        $students = $group->students()
+            ->orderBy('surname')
+            ->get();
+
+
+        set_time_limit(3600);
+        foreach($students as $student){
+            $q = new StudentsController();
+            $res = $q->update_plan($student->id);
+        }
+
         return view('admin.groups.show', compact('group', 'students'));
     }
 

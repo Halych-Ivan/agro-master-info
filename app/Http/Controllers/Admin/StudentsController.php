@@ -16,7 +16,7 @@ class StudentsController extends Controller
 
     public function index()
     {
-        $size = request('size') ?? 20;
+        $size = request('size') ?? 50;
         $search = request('search') ?? false;
         $group = request('group') ?? false;
         $this->filter($search, 'search');

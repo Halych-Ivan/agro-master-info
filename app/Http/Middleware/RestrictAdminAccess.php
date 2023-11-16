@@ -15,7 +15,7 @@ class RestrictAdminAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $allowedIPs = ['80.73.14.172', '127.0.0.1'];
+        $allowedIPs = ['80.73.14.172', '193.105.7.210', '127.0.0.1'];
 
         if (in_array($request->ip(), $allowedIPs)) {
             return $next($request);

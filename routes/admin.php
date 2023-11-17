@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SubjectsController;
 use App\Http\Controllers\Admin\TeachersController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\DocumentsController;
+use App\Http\Controllers\Admin\StatementsController;
 use App\Http\Controllers\Admin\ImportController;
 
 
@@ -31,6 +32,7 @@ Route::prefix('admin')->name('admin.')->middleware(['admin'])->group(function ()
     Route::resource('teachers', TeachersController::class); // Викладачі
     Route::resource('students', StudentsController::class); // Викладачі
     Route::resource('documents', DocumentsController::class); // Документи
+    Route::resource('statements', StatementsController::class); // Документи
 
 
 

@@ -47,11 +47,26 @@
     </div>
 
     <div>
-        @foreach($students as $student)
-            <x-admin.href href="students.show" id="{{$student->id}}">
-                {{$student->group->name}} - {{$student->surname}} {{ Illuminate\Support\Str::limit($student->name, 1, '') }}.{{ Illuminate\Support\Str::limit($student->patronymic, 1, '') }}.,  {{$student->gradebook}}
-            </x-admin.href><br>
-        @endforeach
+        <table class="table mt-3">
+            <th>
+
+            </th>
+            @foreach($students as $student)
+                <tr>
+                    <td>
+                        {{$student->group->name}}
+                    </td>
+                    <td>
+                        <x-admin.href href="students.show" id="{{$student->id}}">
+                            {{$student->surname}} {{ Illuminate\Support\Str::limit($student->name, 1, '') }}.{{ Illuminate\Support\Str::limit($student->patronymic, 1, '') }}.
+                        </x-admin.href><br>
+                    </td>
+                    <td>
+                        {{$student->gradebook}}
+                    </td>
+                </tr>
+            @endforeach
+        </table>
     </div>
 @endsection
 

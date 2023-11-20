@@ -17,7 +17,9 @@ class StatementsRequest extends AdminRequest
     {
         return array_merge(parent::rules(), [
             // Ваши специфічні правила валідації для цього конкретного запиту
-
+            'title' => 'nullable|string|max:255',
+            'group' => 'nullable|string|max:255',
+            'subject_id' => 'nullable|string|max:255',
 
             // ...
         ]);

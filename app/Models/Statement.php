@@ -14,6 +14,9 @@ class Statement extends Model
 
     protected $table = 'statements';
     protected $guarded = false;
+    protected $casts = [
+        'students' => 'array', // Кастуємо поле students як масив
+    ];
 
 
     public function subject()

@@ -9,6 +9,8 @@
         $nav[2][4] = ['href' => 'details', 'title' => 'Реквізити оплати за навчання'];
         $nav[2][5] = ['href' => 'reference', 'title' => 'Довідки'];
     $nav[3][0] = ['href' => 'science', 'title' => 'Наука'];
+        $nav[3][1] = ['href' => 'science', 'title' => 'Конференції'];
+        $nav[3][2] = ['href' => 'science/vsdemm', 'title' => 'ВСДЕММ'];
     $nav[4][0] = ['href' => 'contact', 'title' => 'Контакти'];
 @endphp
 

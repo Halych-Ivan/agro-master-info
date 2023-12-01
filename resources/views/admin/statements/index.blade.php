@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 @extends('admin.layout.admin')
 @php($title = 'Відомості - перегляд')
+=======
+@php
+    $title = 'Відомості - всі записи';
+@endphp
+@extends('admin.layout.admin')
+
+>>>>>>> 58af6f7927302db2e1b361a4d2d7b99e814a7c0f
 
 @section('title', $title)
 
 @section('content')
     <x-admin.action-icons resource="statements" id=""></x-admin.action-icons>
+<<<<<<< HEAD
 {{--    <div class="">--}}
 {{--        <table class="table table-bordered">--}}
 {{--            <thead>--}}
@@ -42,5 +51,10 @@
 {{--            --}}{{--        {{ $levels->links('admin.pagination') }}--}}
 {{--        </div>--}}
 {{--    </div>--}}
+=======
+    <div class="">
+
+    </div>
+>>>>>>> 58af6f7927302db2e1b361a4d2d7b99e814a7c0f
 @endsection
 

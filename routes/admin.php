@@ -36,15 +36,17 @@ Route::prefix('admin')->name('admin.')->middleware(['admin'])->group(function ()
 
 
 
+    Route::get('/statements/preload', [StatementsController::class, 'store'])->name('statements.preload'); // Попередній перегляд відомості
+
     Route::get('select/{id}', [StudentsController::class, 'select'])->name('students.select'); // Вибір дисциплін
     Route::get('update_plan/{id}', [StudentsController::class, 'update_plan'])->name('students.update_plan'); // Оновлення плану
 
-    Route::get('/student/audit', [StudentsController::class, 'audit'])->name('student.audit'); // Оновлення плану
-    Route::get('/groups/{id}/audit', [GroupsController::class, 'audit'])->name('group.audit'); // Оновлення плану
+    Route::get('/student/audit', [StudentsController::class, 'audit'])->name('student.audit'); //
+    Route::get('/groups/{id}/audit', [GroupsController::class, 'audit'])->name('group.audit'); //
 
-    Route::get('subjects/{id}/add_teacher/{teacher?}/{main?}', [SubjectsController::class, 'add_teacher'])->name('subjects.add_teacher'); // Довідки
-    Route::get('subjects/{id}/dell_teacher/{teacher}', [SubjectsController::class, 'dell_teacher'])->name('subjects.dell_teacher'); // Довідки
-    Route::get('subjects/{id}/is_active', [SubjectsController::class, 'is_active'])->name('subjects.is_active'); // Довідки
+    Route::get('subjects/{id}/add_teacher/{teacher?}/{main?}', [SubjectsController::class, 'add_teacher'])->name('subjects.add_teacher'); //
+    Route::get('subjects/{id}/dell_teacher/{teacher}', [SubjectsController::class, 'dell_teacher'])->name('subjects.dell_teacher'); //
+    Route::get('subjects/{id}/is_active', [SubjectsController::class, 'is_active'])->name('subjects.is_active'); //
 
     Route::get('import', [ImportController::class, 'import_form'])->name('import'); // Імпорт із Exel
     Route::post('import', [ImportController::class, 'import'])->name('import'); // Імпорт із Exel

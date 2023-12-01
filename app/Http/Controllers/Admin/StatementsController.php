@@ -4,11 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StatementsRequest;
+<<<<<<< HEAD
 use App\Models\Grade;
 use App\Models\Group;
 use App\Models\Program;
 use App\Models\Statement;
 use App\Models\Student;
+=======
+use App\Models\Group;
+use App\Models\Program;
+use App\Models\Statement;
+>>>>>>> 58af6f7927302db2e1b361a4d2d7b99e814a7c0f
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -17,11 +23,16 @@ class StatementsController extends Controller
 
     public function index()
     {
+<<<<<<< HEAD
         $statements = '';
+=======
+        $statements = Statement::all();
+>>>>>>> 58af6f7927302db2e1b361a4d2d7b99e814a7c0f
         return view('admin.statements.index', compact('statements'));
     }
 
 
+<<<<<<< HEAD
     public function create(Statement $statement)
     {
         $programs = Program::all();
@@ -52,6 +63,27 @@ class StatementsController extends Controller
             ->get();
 
         return view('admin.statements.form', compact('statement', 'programs', 'subjects' , 'groups'));
+=======
+    public function create(StatementsRequest $request, Statement $statement)
+    {
+        $group = false;
+        $groupID = $request->input('group') ?? session('groupID') ?? '';
+        if($groupID) {
+            session(['groupID' => $groupID]);
+            $group = Group::find($groupID);
+        }
+
+        if($request->input('semester')){
+            $semester = $request->input('semester');
+            session(['semester' => $semester]);
+        } else {
+            $semester = session('semester') ?? '';
+        }
+
+        $programs = Program::all();
+
+        return view('admin.statements.form', compact('statement', 'programs', 'group', 'semester'));
+>>>>>>> 58af6f7927302db2e1b361a4d2d7b99e814a7c0f
     }
 
 
@@ -59,6 +91,7 @@ class StatementsController extends Controller
     {
         $data = $request->validated();
 
+<<<<<<< HEAD
         $statement = new Statement([
             'group_id' => $data['group_id'],
             'subject_id' => $data['subject_id'],
@@ -66,6 +99,31 @@ class StatementsController extends Controller
         ]);
         $statement->save();
         return redirect()->route('admin.statement.index');
+=======
+        $groupID = $data['group_id'];
+        $subjectID = $data['subject_id'];
+
+
+        $group = Group::find($groupID);
+        $subject = Subject::find($subjectID);
+        if($subject->is_main){
+            $students = $group->students()->select('students.id', 'students.surname', 'students.name', 'students.patronymic', 'students.gradebook')->get();
+        } else{
+            $students = $subject->students()->select('students.id', 'students.surname', 'students.name', 'students.patronymic', 'students.gradebook')->get();
+        }
+
+
+        $statement = new Statement();
+        $statement->subject = $subject->title;
+        $statement->students = $students;
+//        $statement->save();
+
+
+
+
+
+        return view('admin.statements.preload', compact('statement'));
+>>>>>>> 58af6f7927302db2e1b361a4d2d7b99e814a7c0f
     }
 
 

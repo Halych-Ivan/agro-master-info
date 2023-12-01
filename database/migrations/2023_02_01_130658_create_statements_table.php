@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('statements', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('subject_id')->constrained();
-            $table->foreignId('group_id')->constrained();
+            $table->foreignId('subject_id')->nullable();
+            $table->foreignId('group_id')->nullable();
             $table->foreignId('teacher_id')->nullable()->constrained(); // Припустимо, що таблиця викладачів називається "teachers"
             $table->foreignId('student_id')->nullable()->constrained(); // nullable, оскільки відомість може бути загальною для групи
-            $table->integer('grade');
-            $table->string('date');
+            $table->integer('grade')->nullable();
+            $table->string('date')->nullable();
+
+            $table->json('students')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

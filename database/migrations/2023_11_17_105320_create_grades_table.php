@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('student_id')->constrained();
-            $table->foreignId('subject_id')->constrained();
-            $table->foreignId('teacher_id')->constrained();
+            $table->foreignId('student_id');
+            $table->foreignId('subject_id');
+            $table->foreignId('teacher_id');
             $table->foreignId('statement_id')->constrained();
-            $table->string('document');
-            $table->integer('value');
-            $table->string('date');
+            $table->string('document')->nullable();
+            $table->integer('value')->nullable();
+            $table->string('date')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

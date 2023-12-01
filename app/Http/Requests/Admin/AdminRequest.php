@@ -66,6 +66,7 @@ class AdminRequest extends FormRequest
             'cathedra_id' => 'nullable|string|max:255',
             'specialty_id' => 'nullable|string|max:3',
             'group_id' => 'nullable|string|max:3',
+            'subject_id' => 'nullable|string|max:3',
 
 
             'documents.*'  => 'nullable|mimes:png,jpg,jpeg,webp,csv,txt,xlx,xls,xlsx,pdf,doc,docx,webp|max:2048',

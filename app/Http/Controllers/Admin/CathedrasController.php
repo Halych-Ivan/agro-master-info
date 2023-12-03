@@ -34,7 +34,9 @@ class CathedrasController extends Controller
 
     public function show($id)
     {
-        $cathedra = Cathedra::with(['teachers' => function ($query){$query->orderBy('name', 'asc');}])
+        $cathedra = Cathedra::with(['teachers' => function ($query) {
+            $query->orderBy('name', 'asc');
+        }])
             ->find($id);
         return view('admin.cathedras.show', compact('cathedra'));
     }

@@ -31,7 +31,9 @@ Route::view('/lists','agromaster.lists')->name('lists'); // Списки гру�
 Route::view('/details','agromaster.details')->name('details'); // Реквізити
 Route::view('/reference','agromaster.reference')->name('reference'); // Довідки
 
+
 Route::view('/22884db148f0ffb0d830ba431102b0b5','agromaster.module')->name('module'); // Довідки
+Route::get('/tolerances','\App\Http\Controllers\Main\TolerancesController@index')->name('tolerances'); // Допуски
 
 
 

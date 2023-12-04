@@ -8,120 +8,77 @@
 
 
 @section('content')
+    @php
+        $groups[] = ['1k', '11М', '208-23б-01'];
+        $groups[] = ['1k', '12М', '208-23б-02'];
+        $groups[] = ['1k', '13М', '208-23б-03'];
+        $groups[] = ['2k', '21М', '208-22б-01'];
+        $groups[] = ['2k', '22М', '208-22б-02'];
+        $groups[] = ['2k', '23М', '208-22б-03'];
+        $groups[] = ['2k', '24Мпр', '208-23б-стн-01'];
+        $groups[] = ['2k', '25Мпр', '208-23б-стн-02'];
+        $groups[] = ['2k', '26Мпр', '208-23б-стн-03'];
+        $groups[] = ['3k', '31М', '208-21б-01'];
+        $groups[] = ['3k', '32М', '208-21б-02'];
+        $groups[] = ['3k', '33М', '208-21б-03'];
+        $groups[] = ['3k', '35М', '208-21б-04'];
+        $groups[] = ['3k', '36Мпр', '208-22б-стн-01'];
+        $groups[] = ['4k', '41М', '208-20б-01'];
+        $groups[] = ['4k', '42М', '208-20б-02'];
+        $groups[] = ['4k', '43М', '208-20б-03'];
+        $groups[] = ['4k', '44Мпр', '208-21б-стн-01'];
+        $groups[] = ['4k', '45Мпр', '208-21б-стн-02'];
+        $groups[] = ['4k', '46Мпр', '208-21б-стн-03'];
+        $groups[] = ['4k', '48М', '208-20б-04'];
+        $groups[] = ['4k', '48Мпр', '208-21б-стн-04'];
+        $groups[] = ['5k', '51М', '208-23м-01'];
+        $groups[] = ['5k', '52М', '208-23м-02'];
+        $groups[] = ['5k', '53М', '208-23м-03'];
+        $groups[] = ['5k', '54М', '208-23м-04'];
+        $groups[] = ['6k', '61М', '208-22м-01'];
+        $groups[] = ['6k', '62М', '208-22м-02'];
+        $groups[] = ['6k', '63М', '208-22м-03'];
+        $groups[] = ['6k', '64М', '208-22м-04'];
+        $groups[] = ['6k', '65М', '208-22м-05'];
+    @endphp
+
 
 
     <section class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="event-menu pt-20 text-center">
                     <ul class="menu-items">
-                        <li data-filter="*" class="active">1 курс</li>
-                        <li data-filter=".11М">11 курс</li>
-                        <li data-filter=".12М">12 курс</li>
-                        <li data-filter=".13М">13 курс</li>
+                        <li data-filter="*" class="">всі</li>
+                        <li data-filter=".1k" class="active">1 бак</li>
+                        <li data-filter=".2k">2 бак</li>
+                        <li data-filter=".3k">3 бак</li>
+                        <li data-filter=".4k">4 бак</li>
+                        <li data-filter=".5k">1 маг</li>
+                        <li data-filter=".6k">2 маг</li>
                     </ul>
                 </div>
             </div>
         </div>
+
+
         <div class="event-wrapper">
             <div class="row grid">
-{{--                @foreach($data[1] as $item)--}}
-{{--                    <div class=" {{$item[1]}}">--}}
 
-
-
-{{--                        <p>{{$item[3]}} {{$item[5]}}</p>--}}
-
-
-{{--                    </div>--}}
-{{--                @endforeach--}}
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-    </section>
-
-    <!--====== Product Details Start ======-->
-
-    <section class="product-details-page">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="product-details-wrapper">
-
-
-
-                        <div class="product-details-tab">
-                            <ul class="nav nav-justified" role="tablist">
-                                <li class="nav-item">
-                                    <a class="active" data-toggle="tab" href="#description" role="tab">1 курс</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a data-toggle="tab" href="#information" role="tab">2 курс</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a data-toggle="tab" href="#reviews" role="tab">3 курс</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a data-toggle="tab" href="#reviews" role="tab">4 курс</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a data-toggle="tab" href="#reviews" role="tab">5 курс</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a data-toggle="tab" href="#reviews" role="tab">6 курс</a>
-                                </li>
-                            </ul>
-
-
-
-                            <div class="tab-content">
-                                <div class="tab-pane fade show active" id="description" role="tabpanel">
-                                    <div class="product-description">
-
-                                        @php($i=0)
-                                        @foreach($data[1] as $item)
-                                            @continue($item[1] != '11М')
-
-                                                    {{$i++}} {{$item[3]}} <b>{{$item[5]}}</b><br>
-
-                                        @endforeach
-
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="information" role="tabpanel">
-                                    <div class="product-information table-responsive">
-
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="reviews" role="tabpanel">
-                                    <div class="product-reviews">
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
+                @foreach($groups as $group)
+                <div class="col-lg-3 col-sm-4 {{$group[0]}}">
+                    <div class="single-event text-center mt-15 p-3" >
+                        <span class="date"><a href="{{route('tolerances/show', $group[1])}}">{{$group[1]}}</a></span>
+                        <h4 class="event-title"><a href="{{route('tolerances/show', $group[1])}}">{{$group[2]}}</a></h4>
                     </div>
                 </div>
-
-
-
+                @endforeach
             </div>
         </div>
+
+
+
+
     </section>
 
-    <!--====== Product Details Ends ======-->
-
-
-
-
 @endsection
-

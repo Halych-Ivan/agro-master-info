@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tolerance;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -18,17 +19,19 @@ class TolerancesController extends Controller
 
     public function index()
     {
-        $file = "uploads/tolerances/123.xlsx";
 
-        dd($file);
+        return view('agromaster.tolerances');
+    }
 
-        $data = Excel::toArray([], $file);
+    public function show($group)
+    {
+        $tolerances = Tolerance::query()
+            ->where('group', 'like', '%' . $group . '%')
+            ->orderBy('group')
+            ->orderBy('title')
+            ->get();
 
-
-
-
-
-        return view('agromaster.tolerances', compact('data'));
+        return view('agromaster.tolerances_show', compact('tolerances'));
     }
 
 }

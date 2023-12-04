@@ -29,15 +29,17 @@ class TolerancesImport implements ToCollection, ToModel, WithHeadingRow
     public function model(array $row)
     {
         $data = [
-            'course' => $row['course'],
-            'group' => $row['group'],
-            'title' => $row['title'],
-            'tolerance' => $row['tolerance'],
-            'info' => $row['info'],
+            'course' => $row['2'],
+            'group' => $row['3'],
+            'title' => $row['5'],
+            'tolerance' => $row['7'],
+            'info' => $row['8'],
         ];
 
+//        dd($data);
+
         $existingData = [
-            'title' => $row['title'],
+            'title' => $row['5'],
         ];
         // Отримуємо дані за умовою
         $model = Tolerance::where($existingData)->first();

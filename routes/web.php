@@ -34,6 +34,7 @@ Route::view('/reference','agromaster.reference')->name('reference'); // Дові
 
 Route::view('/22884db148f0ffb0d830ba431102b0b5','agromaster.module')->name('module'); // Довідки
 Route::get('/tolerances','\App\Http\Controllers\Main\TolerancesController@index')->name('tolerances'); // Допуски
+Route::get('/tolerances/show/{group}','\App\Http\Controllers\Main\TolerancesController@show')->name('tolerances/show'); // Допуски
 
 
 

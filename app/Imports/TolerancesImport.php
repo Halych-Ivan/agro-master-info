@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Cathedra;
+use App\Models\Tolerance;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -28,12 +29,10 @@ class TolerancesImport implements ToCollection, ToModel, WithHeadingRow
     public function model(array $row)
     {
         $data = [
-            'abbr' => $row['abbr'],
+            'course' => $row['course'],
+            'group' => $row['group'],
             'title' => $row['title'],
-            'link' => $row['link'],
-            'image' => $row['image'],
-            'logo' => $row['logo'],
-            'content' => $row['content'],
+            'tolerance' => $row['tolerance'],
             'info' => $row['info'],
         ];
 
@@ -41,14 +40,14 @@ class TolerancesImport implements ToCollection, ToModel, WithHeadingRow
             'title' => $row['title'],
         ];
         // Отримуємо дані за умовою
-        $model = Cathedra::where($existingData)->first();
+        $model = Tolerance::where($existingData)->first();
 
 
         if ($model) {
             $model->update($data);
         } else {
             $this->importedData[] = $data;
-            $model = new Cathedra($data);
+            $model = new Tolerance($data);
         }
 
         return $model;

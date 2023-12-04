@@ -9,6 +9,7 @@ use App\Imports\ProgramsImport;
 use App\Imports\SpecialtiesImport;
 use App\Imports\SubjectsImport;
 use App\Imports\TeachersImport;
+use App\Imports\TolerancesImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\StudentsImport;
 use App\Http\Controllers\Controller;
@@ -58,6 +59,9 @@ class ImportController extends Controller
                 break;
             case 'subjects':
                 $import = new SubjectsImport();
+                break;
+            case 'tolerances':
+                $import = new TolerancesImport();
                 break;
         }
 

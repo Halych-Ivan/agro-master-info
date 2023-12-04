@@ -37,6 +37,11 @@
         <label for="subjects">subjects</label>
     </div>
 
+    <div>
+        <input id="tolerances" value="tolerances" type="radio" name="type">
+        <label for="tolerances">tolerances</label>
+    </div>
+
 
 
     <br>

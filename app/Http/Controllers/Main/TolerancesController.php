@@ -20,6 +20,8 @@ class TolerancesController extends Controller
     {
         $file = "uploads/tolerances/123.xlsx";
 
+        dd($file);
+
         $data = Excel::toArray([], $file);
 
 

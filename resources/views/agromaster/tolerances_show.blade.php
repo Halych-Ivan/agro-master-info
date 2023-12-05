@@ -22,6 +22,13 @@
 
         <div class="col-lg-9 mt-5">
             <table class="table">
+                <tr>
+                    <th>Група</th>
+                    <th>№</th>
+                    <th>Прізвище Ім'я По-батькові</th>
+                    <th>Випускова кафедра</th>
+                    <th>Допуск</th>
+                </tr>
                 @foreach($tolerances as $tolerance)
                     <tr @if($tolerance->tolerance !='допуск') class="gray-bg" @endif>
                         <td>{{$tolerance->group}}</td>

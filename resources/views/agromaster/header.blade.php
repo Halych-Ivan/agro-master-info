@@ -5,9 +5,10 @@
     $nav[2][0] = ['href' => 'home', 'title' => 'Навчання'];
         $nav[2][1] = ['href' => 'schedule', 'title' => 'Розклад занять'];
         $nav[2][2] = ['href' => 'session', 'title' => 'Розклад іспитів'];
-        $nav[2][3] = ['href' => 'lists', 'title' => 'Списки груп'];
-        $nav[2][4] = ['href' => 'details', 'title' => 'Реквізити оплати за навчання'];
-        $nav[2][5] = ['href' => 'reference', 'title' => 'Довідки'];
+        $nav[2][3] = ['href' => 'tolerances', 'title' => 'Допуски до сесії'];
+        $nav[2][4] = ['href' => 'lists', 'title' => 'Списки груп'];
+        $nav[2][5] = ['href' => 'details', 'title' => 'Реквізити оплати за навчання'];
+        $nav[2][6] = ['href' => 'reference', 'title' => 'Довідки'];
     $nav[3][0] = ['href' => 'science', 'title' => 'Наука'];
         $nav[3][1] = ['href' => 'science', 'title' => 'Конференції'];
         $nav[3][2] = ['href' => 'science/vsdemm', 'title' => 'ВСДЕММ'];

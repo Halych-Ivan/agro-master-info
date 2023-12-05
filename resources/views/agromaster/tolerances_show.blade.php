@@ -27,6 +27,7 @@
                         <td>{{$tolerance->group}}</td>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$tolerance->title}}</td>
+                        <td>{{$tolerance->info}}</td>
                         <td> <b>{{$tolerance->tolerance}}</b><br></td>
                     </tr>
                 @endforeach

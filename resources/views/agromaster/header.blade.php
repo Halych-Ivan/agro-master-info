@@ -6,7 +6,7 @@
         $nav[2][1] = ['href' => 'schedule', 'title' => 'Розклад занять'];
         $nav[2][2] = ['href' => 'session', 'title' => 'Розклад іспитів'];
 
-        $nav[2][4] = ['href' => 'lists', 'title' => 'Списки груп'];
+        $nav[2][4] = ['href' => 'home', 'title' => 'Списки груп'];
         $nav[2][5] = ['href' => 'details', 'title' => 'Реквізити оплати за навчання'];
         $nav[2][6] = ['href' => 'reference', 'title' => 'Довідки'];
     $nav[3][0] = ['href' => 'science', 'title' => 'Наука'];
